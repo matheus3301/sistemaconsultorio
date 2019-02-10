@@ -299,6 +299,7 @@ public class jfEntrada extends javax.swing.JFrame {
 
     private void btnMedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMedActionPerformed
         jfLogin login = new jfLogin();
+        login.setTipo(1);
         login.receberEntrada(1);
         login.setVisible(true);
         
@@ -307,12 +308,14 @@ public class jfEntrada extends javax.swing.JFrame {
     private void btnSecActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSecActionPerformed
         jfLogin login = new jfLogin();
         login.receberEntrada(3);
+        login.setTipo(3);
         login.setVisible(true);
     }//GEN-LAST:event_btnSecActionPerformed
 
     private void btnAdmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdmActionPerformed
         jfLogin login = new jfLogin();
         login.receberEntrada(2);
+        login.setTipo(2);
         login.setVisible(true);
     }//GEN-LAST:event_btnAdmActionPerformed
 

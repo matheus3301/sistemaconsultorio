@@ -8,7 +8,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-
+import com.consultorio.DAO.AdministradorDAO;
+import com.consultorio.DAO.Conexao;
+import com.consultorio.DAO.MedicoDAO;
+import com.consultorio.DAO.SecretariaDAO;
+import java.sql.Connection;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -24,6 +28,43 @@ public class jfLogin extends javax.swing.JFrame {
     
     private Point point = new Point();
     
+    
+    private int tipo;
+
+    public int getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(int tipo) {
+        this.tipo = tipo;
+    }
+    
+    public void limpaCampos(){
+        iptUser.setText("");
+        iptSenha.setText("");
+    }
+    
+    public void telaTremer(){
+        Point p = this.getLocation();
+        jfLogin Login = this;
+        
+        new Thread() {
+           @Override
+           public void run(){
+               try{
+                   for (int i = 0; i < 6; i++) {
+                        Login.setLocation(p.x - 10, p.y);
+                        sleep(20);
+                        Login.setLocation(p.x + 10, p.y);
+                        sleep(20);
+                   }
+                   Login.setLocation(p.x, p.y);
+               }catch (InterruptedException ex){
+                   Logger.getLogger(jfLogin.class.getName()).log(Level.SEVERE, null, ex);
+               }
+           }
+        }.start();
+    }
     /**
      * Creates new form Login
      */
@@ -249,27 +290,53 @@ public class jfLogin extends javax.swing.JFrame {
         String user = iptUser.getText();
         String senha = iptSenha.getText();
         
+        Connection con = Conexao.AbrirConexao();
         
-        Point p = this.getLocation();
-        jfLogin Login = this;
+        
+        
         
         if(user.equals("") || senha.equals("")){
-           new Thread() {
-           @Override
-           public void run(){
-               try{
-                   for (int i = 0; i < 6; i++) {
-                        Login.setLocation(p.x - 10, p.y);
-                        sleep(20);
-                        Login.setLocation(p.x + 10, p.y);
-                        sleep(20);
-                   }
-                   Login.setLocation(p.x, p.y);
-               }catch (InterruptedException ex){
-                   Logger.getLogger(jfLogin.class.getName()).log(Level.SEVERE, null, ex);
-               }
-           }
-        }.start();
+            this.telaTremer();
+           
+        }else{
+            if(this.getTipo()==1){
+                MedicoDAO sql = new MedicoDAO(con);
+                
+                if(sql.Logar(user, senha) == true){
+                    System.out.println("Logado com Sucesso como Medico!");
+                }else{
+                    this.telaTremer();
+                    this.limpaCampos();
+                    System.out.println("Erro como Medico!");
+                }
+            }
+            
+            
+            if(this.getTipo()==2){
+                AdministradorDAO sql = new AdministradorDAO(con);
+                
+                if(sql.Logar(user, senha) == true){
+                    System.out.println("Logado com Sucesso como Adm!");
+                }else{
+                    this.telaTremer();
+                    this.limpaCampos();
+                    System.out.println("Erro como Adm!");
+                }
+            }
+            
+            if(this.getTipo()==3){
+                SecretariaDAO sql = new SecretariaDAO(con);
+                
+                if(sql.Logar(user, senha) == true){
+                    System.out.println("Logado com Sucesso como Secretária!");
+                }else{
+                    this.telaTremer();
+                    this.limpaCampos();
+                    System.out.println("Erro como Secretaria!");
+                }
+                
+            }
+            
         }
         
     }//GEN-LAST:event_jButton1ActionPerformed
