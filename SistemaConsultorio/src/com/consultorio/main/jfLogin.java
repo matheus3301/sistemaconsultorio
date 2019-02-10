@@ -3,6 +3,7 @@ package com.consultorio.main;
 
 import java.awt.Color;
 import java.awt.Point;
+import static java.lang.Thread.sleep;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JPasswordField;
@@ -32,9 +33,16 @@ public class jfLogin extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
     }
     
-    public void receberEntrada(String usuario){
+    public void receberEntrada(int tipo){
         
+        switch(tipo){
+            case(1):lblUser.setText(lblUser.getText()+" Médico(a)");break;
+            case(2):lblUser.setText(lblUser.getText()+" Administrador(a)");break;
+            case(3):lblUser.setText(lblUser.getText()+" Secretário(a)");
+        }
     } 
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -48,12 +56,12 @@ public class jfLogin extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
+        lblUser = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jTextField1 = new com.consultorio.main.JTextFieldHint(new JTextField(), "user-icon", "Nome de Usuário");
+        iptUser = new com.consultorio.main.JTextFieldHint(new JTextField(), "user-icon", "Nome de Usuário");
         ;
-        jTextField2 = new JPassWordFieldHint(new JPasswordField(), "padlock", "Senha");
+        iptSenha = new JPassWordFieldHint(new JPasswordField(), "padlock", "Senha");
         ;
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -95,10 +103,10 @@ public class jfLogin extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(95, 91, 99));
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Entre com suas credênciais");
+        lblUser.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lblUser.setForeground(new java.awt.Color(95, 91, 99));
+        lblUser.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblUser.setText("Entre como");
 
         jButton1.setBackground(new java.awt.Color(58, 65, 54));
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -108,11 +116,11 @@ public class jfLogin extends javax.swing.JFrame {
         jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton1.setFocusPainted(false);
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jButton1MouseEntered(evt);
-            }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 jButton1MouseExited(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jButton1MouseEntered(evt);
             }
         });
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -129,11 +137,11 @@ public class jfLogin extends javax.swing.JFrame {
         jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton2.setFocusPainted(false);
         jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jButton2MouseEntered(evt);
-            }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 jButton2MouseExited(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jButton2MouseEntered(evt);
             }
         });
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -142,9 +150,9 @@ public class jfLogin extends javax.swing.JFrame {
             }
         });
 
-        jTextField1.setFont(new java.awt.Font("Segoe UI Symbol", 1, 14)); // NOI18N
+        iptUser.setFont(new java.awt.Font("Segoe UI Symbol", 1, 14)); // NOI18N
 
-        jTextField2.setFont(new java.awt.Font("Segoe UI Symbol", 1, 14)); // NOI18N
+        iptSenha.setFont(new java.awt.Font("Segoe UI Symbol", 1, 14)); // NOI18N
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -154,28 +162,28 @@ public class jfLogin extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(47, 47, 47)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(lblUser, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(26, 26, 26)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(iptUser, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(iptSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(14, Short.MAX_VALUE))
         );
 
-        jPanel2Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jButton1, jButton2, jTextField1, jTextField2});
+        jPanel2Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {iptSenha, iptUser, jButton1, jButton2});
 
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblUser, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(35, 35, 35)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(iptUser, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(iptSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -203,7 +211,8 @@ public class jfLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        System.exit(0);
+        dispose();
+        
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseEntered
@@ -237,9 +246,15 @@ public class jfLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_formMouseDragged
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        String user = iptUser.getText();
+        String senha = iptSenha.getText();
+        
+        
         Point p = this.getLocation();
         jfLogin Login = this;
-        new Thread() {
+        
+        if(user.equals("") || senha.equals("")){
+           new Thread() {
            @Override
            public void run(){
                try{
@@ -255,6 +270,8 @@ public class jfLogin extends javax.swing.JFrame {
                }
            }
         }.start();
+        }
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -294,13 +311,13 @@ public class jfLogin extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField iptSenha;
+    private javax.swing.JTextField iptUser;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JLabel lblUser;
     // End of variables declaration//GEN-END:variables
 }

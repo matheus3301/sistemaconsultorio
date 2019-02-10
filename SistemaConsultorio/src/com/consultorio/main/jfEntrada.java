@@ -39,9 +39,9 @@ public class jfEntrada extends javax.swing.JFrame {
         jButton8 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnAdm = new javax.swing.JButton();
+        btnSec = new javax.swing.JButton();
+        btnMed = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
 
@@ -130,43 +130,58 @@ public class jfEntrada extends javax.swing.JFrame {
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Secretário(a)");
 
-        jButton1.setBackground(new java.awt.Color(153, 153, 255));
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/consultorio/icons/adminicon.png"))); // NOI18N
-        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jButton1MouseEntered(evt);
-            }
+        btnAdm.setBackground(new java.awt.Color(153, 153, 255));
+        btnAdm.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/consultorio/icons/adminicon.png"))); // NOI18N
+        btnAdm.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnAdm.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnAdm.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                jButton1MouseExited(evt);
+                btnAdmMouseExited(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnAdmMouseEntered(evt);
+            }
+        });
+        btnAdm.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAdmActionPerformed(evt);
             }
         });
 
-        jButton6.setBackground(new java.awt.Color(153, 153, 255));
-        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/consultorio/icons/secretariaicon.png"))); // NOI18N
-        jButton6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton6.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton6.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jButton6MouseEntered(evt);
-            }
+        btnSec.setBackground(new java.awt.Color(153, 153, 255));
+        btnSec.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/consultorio/icons/secretariaicon.png"))); // NOI18N
+        btnSec.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnSec.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnSec.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                jButton6MouseExited(evt);
+                btnSecMouseExited(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnSecMouseEntered(evt);
+            }
+        });
+        btnSec.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSecActionPerformed(evt);
             }
         });
 
-        jButton2.setBackground(new java.awt.Color(153, 153, 255));
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/consultorio/icons/medicoicon.png"))); // NOI18N
-        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton2.setFocusPainted(false);
-        jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jButton2MouseEntered(evt);
-            }
+        btnMed.setBackground(new java.awt.Color(153, 153, 255));
+        btnMed.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/consultorio/icons/medicoicon.png"))); // NOI18N
+        btnMed.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnMed.setFocusPainted(false);
+        btnMed.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnMed.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                jButton2MouseExited(evt);
+                btnMedMouseExited(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnMedMouseEntered(evt);
+            }
+        });
+        btnMed.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMedActionPerformed(evt);
             }
         });
 
@@ -187,15 +202,15 @@ public class jfEntrada extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(74, 74, 74)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnMed, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(64, 64, 64)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnAdm, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnSec, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(75, 75, 75))
         );
@@ -209,9 +224,9 @@ public class jfEntrada extends javax.swing.JFrame {
                     .addComponent(jLabel4))
                 .addGap(27, 27, 27)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton6)
-                    .addComponent(jButton2)
-                    .addComponent(jButton1))
+                    .addComponent(btnSec)
+                    .addComponent(btnMed)
+                    .addComponent(btnAdm))
                 .addContainerGap(44, Short.MAX_VALUE))
         );
 
@@ -246,29 +261,29 @@ public class jfEntrada extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_jButton8ActionPerformed
 
-    private void jButton2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseEntered
-        jButton2.setBackground(new Color(204,204,255));
-    }//GEN-LAST:event_jButton2MouseEntered
+    private void btnMedMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMedMouseEntered
+        btnMed.setBackground(new Color(204,204,255));
+    }//GEN-LAST:event_btnMedMouseEntered
 
-    private void jButton2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseExited
-        jButton2.setBackground(new Color(153,153,255));
-    }//GEN-LAST:event_jButton2MouseExited
+    private void btnMedMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMedMouseExited
+        btnMed.setBackground(new Color(153,153,255));
+    }//GEN-LAST:event_btnMedMouseExited
 
-    private void jButton1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseEntered
-        jButton1.setBackground(new Color(204,204,255));
-    }//GEN-LAST:event_jButton1MouseEntered
+    private void btnAdmMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAdmMouseEntered
+        btnAdm.setBackground(new Color(204,204,255));
+    }//GEN-LAST:event_btnAdmMouseEntered
 
-    private void jButton1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseExited
-        jButton1.setBackground(new Color(153,153,255));
-    }//GEN-LAST:event_jButton1MouseExited
+    private void btnAdmMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAdmMouseExited
+        btnAdm.setBackground(new Color(153,153,255));
+    }//GEN-LAST:event_btnAdmMouseExited
 
-    private void jButton6MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton6MouseEntered
-        jButton6.setBackground(new Color(204,204,255));
-    }//GEN-LAST:event_jButton6MouseEntered
+    private void btnSecMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSecMouseEntered
+        btnSec.setBackground(new Color(204,204,255));
+    }//GEN-LAST:event_btnSecMouseEntered
 
-    private void jButton6MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton6MouseExited
-        jButton6.setBackground(new Color(153,153,255));
-    }//GEN-LAST:event_jButton6MouseExited
+    private void btnSecMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSecMouseExited
+        btnSec.setBackground(new Color(153,153,255));
+    }//GEN-LAST:event_btnSecMouseExited
 
     private void jButton9MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton9MouseEntered
         jButton9.setBackground(new Color(235,235,235));
@@ -281,6 +296,25 @@ public class jfEntrada extends javax.swing.JFrame {
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
        this.setExtendedState(JFrame.ICONIFIED);
     }//GEN-LAST:event_jButton9ActionPerformed
+
+    private void btnMedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMedActionPerformed
+        jfLogin login = new jfLogin();
+        login.receberEntrada(1);
+        login.setVisible(true);
+        
+    }//GEN-LAST:event_btnMedActionPerformed
+
+    private void btnSecActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSecActionPerformed
+        jfLogin login = new jfLogin();
+        login.receberEntrada(3);
+        login.setVisible(true);
+    }//GEN-LAST:event_btnSecActionPerformed
+
+    private void btnAdmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdmActionPerformed
+        jfLogin login = new jfLogin();
+        login.receberEntrada(2);
+        login.setVisible(true);
+    }//GEN-LAST:event_btnAdmActionPerformed
 
     /**
      * @param args the command line arguments
@@ -319,9 +353,9 @@ public class jfEntrada extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton6;
+    private javax.swing.JButton btnAdm;
+    private javax.swing.JButton btnMed;
+    private javax.swing.JButton btnSec;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
