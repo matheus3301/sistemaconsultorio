@@ -13,6 +13,8 @@ import com.consultorio.DAO.Conexao;
 import com.consultorio.DAO.MedicoDAO;
 import com.consultorio.DAO.SecretariaDAO;
 import java.sql.Connection;
+import javax.swing.JOptionPane;
+import com.consultorio.secretaria.jfMenuSec;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -64,6 +66,7 @@ public class jfLogin extends javax.swing.JFrame {
                }
            }
         }.start();
+        
     }
     /**
      * Creates new form Login
@@ -77,10 +80,12 @@ public class jfLogin extends javax.swing.JFrame {
     public void receberEntrada(int tipo){
         
         switch(tipo){
-            case(1):lblUser.setText(lblUser.getText()+" Médico(a)");break;
-            case(2):lblUser.setText(lblUser.getText()+" Administrador(a)");break;
-            case(3):lblUser.setText(lblUser.getText()+" Secretário(a)");
+            case(1):lblUser.setText(lblUser.getText()+" Médico(a)");setTipo(1);break;
+            case(2):lblUser.setText(lblUser.getText()+" Administrador(a)");setTipo(2);break;
+            case(3):lblUser.setText(lblUser.getText()+" Secretário(a)");setTipo(3);
         }
+        
+        this.setVisible(true);
     } 
     
     
@@ -120,7 +125,7 @@ public class jfLogin extends javax.swing.JFrame {
             }
         });
 
-        jPanel1.setBackground(new java.awt.Color(27, 187, 125));
+        jPanel1.setBackground(new java.awt.Color(32, 47, 90));
         jPanel1.setToolTipText("");
 
         jLabel1.setFont(new java.awt.Font("DotumChe", 1, 36)); // NOI18N
@@ -252,8 +257,8 @@ public class jfLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        new jfEntrada().setVisible(true);
         dispose();
-        
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseEntered
@@ -329,10 +334,18 @@ public class jfLogin extends javax.swing.JFrame {
                 
                 if(sql.Logar(user, senha) == true){
                     System.out.println("Logado com Sucesso como Secretária!");
+                    
+                    jfMenuSec sec = new jfMenuSec();
+                    sec.setVisible(true);
+                    
+                    dispose();
+                    
                 }else{
                     this.telaTremer();
                     this.limpaCampos();
                     System.out.println("Erro como Secretaria!");
+                    
+                    new ErrorMsg().ReceberMsg("Login ou Senha Incorretos");
                 }
                 
             }
@@ -366,6 +379,8 @@ public class jfLogin extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(jfLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
