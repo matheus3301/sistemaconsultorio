@@ -11,12 +11,12 @@ import java.awt.Color;
  *
  * @author aluno
  */
-public class bcMedico extends javax.swing.JPanel {
+public class ecMedico extends javax.swing.JPanel {
 
     /**
      * Creates new form home
      */
-    public bcMedico() {
+    public ecMedico() {
         initComponents();
     }
 
