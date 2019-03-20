@@ -21,9 +21,9 @@ public class jfMenuSec extends javax.swing.JFrame {
     public jfMenuSec() {
         initComponents();
         
-        new TrocarPanel(pnlPrincipal, new home());
+        new TrocarPanel(pnlPrincipal, new home());      
     }
-
+  
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -36,6 +36,11 @@ public class jfMenuSec extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         rSButtonIconI1 = new rojerusan.RSButtonIconI();
         rSFotoCircle1 = new rojerusan.RSFotoCircle();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        rSButtonMetro1 = new rojerusan.RSButtonMetro();
+        rSButtonMetro2 = new rojerusan.RSButtonMetro();
         jPanel3 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -53,31 +58,73 @@ public class jfMenuSec extends javax.swing.JFrame {
         rSButtonIconI1.setText("Inicio");
         rSButtonIconI1.setColorHover(new java.awt.Color(106, 118, 145));
         rSButtonIconI1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        rSButtonIconI1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rSButtonIconI1ActionPerformed(evt);
+            }
+        });
 
         rSFotoCircle1.setImagenDefault(new javax.swing.ImageIcon(getClass().getResource("/icons/secretariaicon.png"))); // NOI18N
         rSFotoCircle1.setMostrarBordePopu(false);
+
+        jLabel1.setForeground(new java.awt.Color(254, 247, 247));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Hora Atual: ");
+
+        jLabel2.setForeground(new java.awt.Color(254, 247, 247));
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("Olá, Srª. Medeiros");
+
+        jLabel3.setForeground(new java.awt.Color(254, 247, 247));
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setText("Hora de Login: ");
+
+        rSButtonMetro1.setBackground(new java.awt.Color(207, 28, 53));
+        rSButtonMetro1.setText("Sair");
+
+        rSButtonMetro2.setBackground(new java.awt.Color(0, 18, 50));
+        rSButtonMetro2.setText("Opções de Conta");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(39, 39, 39)
+                .addComponent(rSFotoCircle1, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(24, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(rSButtonIconI1, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addComponent(rSButtonIconI1, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(40, 40, 40)
-                        .addComponent(rSFotoCircle1, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(23, Short.MAX_VALUE))
+                        .addGap(12, 12, 12)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(rSButtonMetro1, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(rSButtonMetro2, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(22, 22, 22))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(36, 36, 36)
-                .addComponent(rSFotoCircle1, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33)
+                .addGap(18, 18, 18)
                 .addComponent(rSButtonIconI1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(rSFotoCircle1, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(rSButtonMetro2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(rSButtonMetro1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -146,6 +193,10 @@ public class jfMenuSec extends javax.swing.JFrame {
         this.setExtendedState(JFrame.ICONIFIED);
     }//GEN-LAST:event_jLabel23MouseClicked
 
+    private void rSButtonIconI1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonIconI1ActionPerformed
+        new TrocarPanel(pnlPrincipal, new home());
+    }//GEN-LAST:event_rSButtonIconI1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -183,7 +234,10 @@ public class jfMenuSec extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel8;
@@ -191,6 +245,8 @@ public class jfMenuSec extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel pnlPrincipal;
     private rojerusan.RSButtonIconI rSButtonIconI1;
+    private rojerusan.RSButtonMetro rSButtonMetro1;
+    private rojerusan.RSButtonMetro rSButtonMetro2;
     private rojerusan.RSFotoCircle rSFotoCircle1;
     // End of variables declaration//GEN-END:variables
 }

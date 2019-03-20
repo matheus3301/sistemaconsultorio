@@ -55,27 +55,48 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
+                  <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
+                  <Component id="rSFotoCircle1" min="-2" pref="175" max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
+              </Group>
+              <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace pref="24" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
-                          <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
-                          <Component id="rSButtonIconI1" min="-2" pref="210" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="rSButtonIconI1" pref="210" max="32767" attributes="0"/>
+                          <Component id="jLabel2" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jLabel1" max="32767" attributes="0"/>
+                          <Component id="jLabel3" alignment="0" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
-                          <Component id="rSFotoCircle1" min="-2" pref="176" max="-2" attributes="0"/>
+                          <EmptySpace min="12" pref="12" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="rSButtonMetro1" min="-2" pref="198" max="-2" attributes="0"/>
+                              <Component id="rSButtonMetro2" min="-2" pref="198" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                   </Group>
-                  <EmptySpace pref="23" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
-                  <Component id="rSFotoCircle1" min="-2" pref="148" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                   <Component id="rSButtonIconI1" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="rSFotoCircle1" min="-2" pref="175" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+                  <Component id="jLabel2" min="-2" pref="44" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jLabel1" min="-2" pref="44" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jLabel3" min="-2" pref="44" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Component id="rSButtonMetro2" min="-2" pref="37" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Component id="rSButtonMetro1" min="-2" pref="35" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -96,6 +117,9 @@
             </Property>
             <Property name="horizontalAlignment" type="int" value="0"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rSButtonIconI1ActionPerformed"/>
+          </Events>
         </Component>
         <Component class="rojerusan.RSFotoCircle" name="rSFotoCircle1">
           <Properties>
@@ -103,6 +127,49 @@
               <Image iconType="3" name="/icons/secretariaicon.png"/>
             </Property>
             <Property name="mostrarBordePopu" type="boolean" value="false"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel1">
+          <Properties>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="f7" green="f7" red="fe" type="rgb"/>
+            </Property>
+            <Property name="horizontalAlignment" type="int" value="0"/>
+            <Property name="text" type="java.lang.String" value="Hora Atual: "/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel2">
+          <Properties>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="f7" green="f7" red="fe" type="rgb"/>
+            </Property>
+            <Property name="horizontalAlignment" type="int" value="0"/>
+            <Property name="text" type="java.lang.String" value="Ol&#xe1;, Sr&#xaa;. Medeiros"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel3">
+          <Properties>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="f7" green="f7" red="fe" type="rgb"/>
+            </Property>
+            <Property name="horizontalAlignment" type="int" value="0"/>
+            <Property name="text" type="java.lang.String" value="Hora de Login: "/>
+          </Properties>
+        </Component>
+        <Component class="rojerusan.RSButtonMetro" name="rSButtonMetro1">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="35" green="1c" red="cf" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Sair"/>
+          </Properties>
+        </Component>
+        <Component class="rojerusan.RSButtonMetro" name="rSButtonMetro2">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="32" green="12" red="0" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Op&#xe7;&#xf5;es de Conta"/>
           </Properties>
         </Component>
       </SubComponents>
