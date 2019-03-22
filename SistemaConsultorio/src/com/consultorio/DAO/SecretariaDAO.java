@@ -47,4 +47,32 @@ public class SecretariaDAO extends ExecuteSQL{
         return finalResult;
     }
     
+    public Secretaria CapturarSecretariaLogin(String login, String senha){
+        
+        Secretaria a = new Secretaria();
+        try{
+            String consulta = "select login, senha, nome, idtb_secretaria from tb_secretaria "
+            + "where login = '"+login+"' and senha = '"+senha+"'";
+            
+            PreparedStatement ps = getCon().prepareStatement(consulta);
+            ResultSet rs = ps.executeQuery();
+            
+            if(rs != null){
+                while(rs.next()){
+                    
+                    a.setLogin(rs.getString(1));
+                    a.setSenha(rs.getString(2));
+                    a.setNome(rs.getString(3));
+                    a.setId(rs.getInt(4));
+                    
+                    
+                }
+            }
+        } catch(SQLException ex){
+            ex.getMessage();
+        }
+        
+        return a;
+    }
+    
 }

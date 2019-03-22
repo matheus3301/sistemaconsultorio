@@ -6,7 +6,12 @@
 package com.consultorio.secretaria;
 
 import com.consultorio.main.TrocarPanel;
+import com.consultorio.model.Secretaria;
 import java.awt.Color;
+import java.util.Date;
+import java.text.SimpleDateFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 
 /**
@@ -14,14 +19,52 @@ import javax.swing.JFrame;
  * @author Marcus
  */
 public class jfMenuSec extends javax.swing.JFrame {
-
+    
     /**
      * Creates new form Menu
      */
     public jfMenuSec() {
         initComponents();
         
-        new TrocarPanel(pnlPrincipal, new home());      
+        
+        ConfigurarHorario();
+        AtualizaHorario();
+        
+        
+        new TrocarPanel(pnlPrincipal, new home());
+        
+        
+        
+        
+        
+    }
+    
+    public void ReceberSec(Secretaria a){
+        lblNome.setText("Olá, Sr(ª) "+a.getNome());
+    }
+    
+    public void ConfigurarHorario(){
+         SimpleDateFormat hora = new SimpleDateFormat("HH:mm");
+        
+        lblLogin.setText("Hora de Acesso: "+hora.format(new Date()));
+    }
+    
+    public void AtualizaHorario(){
+        SimpleDateFormat hora = new SimpleDateFormat("HH:mm");
+        
+        new Thread() {
+                    public void run() {
+                       while(true){
+                           lblAtual.setText("Hora Atual: "+hora.format(new Date()));
+                           try {
+                               Thread.sleep(1000);
+                           } catch (Exception ex) {
+                               
+                           }
+                       }
+                    }
+
+                }.start();
     }
   
     /**
@@ -36,9 +79,9 @@ public class jfMenuSec extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         rSButtonIconI1 = new rojerusan.RSButtonIconI();
         rSFotoCircle1 = new rojerusan.RSFotoCircle();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        lblAtual = new javax.swing.JLabel();
+        lblNome = new javax.swing.JLabel();
+        lblLogin = new javax.swing.JLabel();
         rSButtonMetro1 = new rojerusan.RSButtonMetro();
         rSButtonMetro2 = new rojerusan.RSButtonMetro();
         jPanel3 = new javax.swing.JPanel();
@@ -67,17 +110,17 @@ public class jfMenuSec extends javax.swing.JFrame {
         rSFotoCircle1.setImagenDefault(new javax.swing.ImageIcon(getClass().getResource("/icons/secretariaicon.png"))); // NOI18N
         rSFotoCircle1.setMostrarBordePopu(false);
 
-        jLabel1.setForeground(new java.awt.Color(254, 247, 247));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Hora Atual: ");
+        lblAtual.setForeground(new java.awt.Color(254, 247, 247));
+        lblAtual.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblAtual.setText("Hora Atual: ");
 
-        jLabel2.setForeground(new java.awt.Color(254, 247, 247));
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Olá, Srª. Medeiros");
+        lblNome.setForeground(new java.awt.Color(254, 247, 247));
+        lblNome.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblNome.setText("Olá, Srª. Medeiros");
 
-        jLabel3.setForeground(new java.awt.Color(254, 247, 247));
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("Hora de Login: ");
+        lblLogin.setForeground(new java.awt.Color(254, 247, 247));
+        lblLogin.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblLogin.setText("Hora de Login: ");
 
         rSButtonMetro1.setBackground(new java.awt.Color(207, 28, 53));
         rSButtonMetro1.setText("Sair");
@@ -98,9 +141,9 @@ public class jfMenuSec extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(rSButtonIconI1, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(lblNome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblAtual, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblLogin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(12, 12, 12)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -116,11 +159,11 @@ public class jfMenuSec extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(rSFotoCircle1, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblNome, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblAtual, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(rSButtonMetro2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -234,15 +277,15 @@ public class jfMenuSec extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel23;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JLabel lblAtual;
+    private javax.swing.JLabel lblLogin;
+    private javax.swing.JLabel lblNome;
     private javax.swing.JPanel pnlPrincipal;
     private rojerusan.RSButtonIconI rSButtonIconI1;
     private rojerusan.RSButtonMetro rSButtonMetro1;

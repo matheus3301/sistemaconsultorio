@@ -336,6 +336,7 @@ public class jfLogin extends javax.swing.JFrame {
                     System.out.println("Logado com Sucesso como Secretária!");
                     
                     jfMenuSec sec = new jfMenuSec();
+                    sec.ReceberSec(sql.CapturarSecretariaLogin(user, senha));
                     sec.setVisible(true);
                     
                     dispose();

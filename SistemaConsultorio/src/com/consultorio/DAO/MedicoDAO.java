@@ -47,4 +47,38 @@ public class MedicoDAO extends ExecuteSQL{
         return finalResult;
     }
     
+    public boolean Cadastrar(Medico a){
+        
+        
+        String sql = "INSERT INTO tb_medico VALUES(0,?,?,?,?,?,?,?,?,?,?,?,?)";
+        
+        try{
+            PreparedStatement ps = getCon().prepareStatement(sql);
+            ps.setString(1, a.getCpf());
+            ps.setString(2, a.getNome());
+            ps.setString(3, a.getRg());
+            ps.setString(4, a.getCrm());
+            ps.setString(5, a.getTelefone());
+            ps.setString(6, a.getSexo());
+            ps.setString(7, a.getRua());
+            ps.setString(8, a.getNumero());
+            ps.setString(9, a.getBairro());
+            ps.setString(10, a.getCep());
+            ps.setString(11, a.getLogin());
+            ps.setString(12, a.getSenha());
+        
+            
+            if(ps.executeUpdate() > 0){
+                return true;
+            }else{
+                return false;
+            }
+            
+        }catch(SQLException ex){
+            return false;
+        }
+        
+        
+    }
+    
 }
