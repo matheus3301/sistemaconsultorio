@@ -10,6 +10,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import com.consultorio.model.Medico;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -79,6 +81,45 @@ public class MedicoDAO extends ExecuteSQL{
         }
         
         
+    }
+    
+    public List<Medico> ListarMedicos(String nome,String crm){
+        List<Medico> lista = new ArrayList<>();
+        
+        try{
+            String consulta = "select * from tb_medico "
+            + "where nome LIKE '%"+nome+"%' and crm LIKE '%"+crm+"%'";
+            
+            PreparedStatement ps = getCon().prepareStatement(consulta);
+            ResultSet rs = ps.executeQuery();
+            
+            if(rs != null){
+                while(rs.next()){
+                    Medico a = new Medico();
+                    
+                    a.setId(rs.getInt(1));
+                    a.setCpf(rs.getString(2));
+                    a.setNome(rs.getString(3));
+                    a.setRg(rs.getString(4));
+                    a.setCrm(rs.getString(5));
+                    a.setTelefone(rs.getString(6));
+                    a.setSexo(rs.getString(7));
+                    a.setRua(rs.getString(8));
+                    a.setNumero(rs.getString(9));
+                    a.setBairro(rs.getString(10));
+                    a.setCep(rs.getString(11));
+                    a.setLogin(rs.getString(12));
+                    a.setSenha(rs.getString(13));
+                    
+                    lista.add(a);
+                    
+                }
+            }
+        } catch(SQLException ex){
+            ex.getMessage();
+        }
+        
+        return lista;
     }
     
 }

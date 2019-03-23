@@ -6,6 +6,7 @@
 package com.consultorio.secretaria;
 
 import com.consultorio.main.TrocarPanel;
+import com.consultorio.main.jfEntrada;
 import com.consultorio.model.Secretaria;
 import java.awt.Color;
 import java.util.Date;
@@ -124,6 +125,11 @@ public class jfMenuSec extends javax.swing.JFrame {
 
         rSButtonMetro1.setBackground(new java.awt.Color(207, 28, 53));
         rSButtonMetro1.setText("Sair");
+        rSButtonMetro1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rSButtonMetro1ActionPerformed(evt);
+            }
+        });
 
         rSButtonMetro2.setBackground(new java.awt.Color(0, 18, 50));
         rSButtonMetro2.setText("Opções de Conta");
@@ -239,6 +245,11 @@ public class jfMenuSec extends javax.swing.JFrame {
     private void rSButtonIconI1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonIconI1ActionPerformed
         new TrocarPanel(pnlPrincipal, new home());
     }//GEN-LAST:event_rSButtonIconI1ActionPerformed
+
+    private void rSButtonMetro1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonMetro1ActionPerformed
+       dispose();
+       new jfEntrada().setVisible(true);
+    }//GEN-LAST:event_rSButtonMetro1ActionPerformed
 
     /**
      * @param args the command line arguments

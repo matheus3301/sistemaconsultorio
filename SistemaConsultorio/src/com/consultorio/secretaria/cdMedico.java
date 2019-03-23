@@ -380,7 +380,11 @@ public class cdMedico extends javax.swing.JPanel {
         Connection con = Conexao.AbrirConexao();
         MedicoDAO sql = new MedicoDAO(con);
 
-        if (lblNome.getText().equals("")) {
+        if (lblNome.getText().equals("") ||lblCpf.getText().equals("") || lblRg.getText().equals("") 
+        || lblCrm.getText().equals("") ||!(rdMasc.isSelected() || rdFem.isSelected())  ||lblTel.getText().equals("")
+        || lblRua.getText().equals("") || lblN.getText().equals("") || lblBairro.getText().equals("") || lblCep.getText().equals("")
+        ||lblUser.getText().equals("") || lblSenha.getText().equals("")) {
+            new ErrorMsg().ReceberMsg("Nenhum Campo Pode\n Estar Vazio!");
            
         }else{
             Medico a = new Medico();
@@ -392,11 +396,11 @@ public class cdMedico extends javax.swing.JPanel {
             a.setTelefone(lblTel.getText());
 
             if (rdMasc.isSelected()) {
-                a.setSexo("Masculino");
+                a.setSexo("M");
             }
 
             if (rdFem.isSelected()) {
-                a.setSexo("Feminino");
+                a.setSexo("F");
             }
 
             a.setRua(lblRua.getText());
