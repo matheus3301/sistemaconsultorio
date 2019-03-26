@@ -20,54 +20,48 @@ import javax.swing.JFrame;
  * @author Marcus
  */
 public class jfMenuSec extends javax.swing.JFrame {
-    
+
     /**
      * Creates new form Menu
      */
     public jfMenuSec() {
         initComponents();
-        
-        
+
         ConfigurarHorario();
         AtualizaHorario();
-        
-        
-        new TrocarPanel(pnlPrincipal, new home());
-        
-        
-        
-        
-        
-    }
-    
-    public void ReceberSec(Secretaria a){
-        lblNome.setText("Olá, Sr(ª) "+a.getNome());
-    }
-    
-    public void ConfigurarHorario(){
-         SimpleDateFormat hora = new SimpleDateFormat("HH:mm");
-        
-        lblLogin.setText("Hora de Acesso: "+hora.format(new Date()));
-    }
-    
-    public void AtualizaHorario(){
-        SimpleDateFormat hora = new SimpleDateFormat("HH:mm");
-        
-        new Thread() {
-                    public void run() {
-                       while(true){
-                           lblAtual.setText("Hora Atual: "+hora.format(new Date()));
-                           try {
-                               Thread.sleep(1000);
-                           } catch (Exception ex) {
-                               
-                           }
-                       }
-                    }
 
-                }.start();
+        new TrocarPanel(pnlPrincipal, new home());
+
     }
-  
+
+    public void ReceberSec(Secretaria a) {
+        lblNome.setText("Olá, Sr(ª) " + a.getNome());
+    }
+
+    public void ConfigurarHorario() {
+        SimpleDateFormat hora = new SimpleDateFormat("HH:mm:ss");
+
+        lblLogin.setText("Hora de Acesso: " + hora.format(new Date()));
+    }
+
+    public void AtualizaHorario() {
+        SimpleDateFormat hora = new SimpleDateFormat("HH:mm:ss");
+
+        new Thread() {
+            public void run() {
+                while (true) {
+                    lblAtual.setText("Hora Atual: " + hora.format(new Date()));
+                    try {
+                        Thread.sleep(1000);
+                    } catch (Exception ex) {
+
+                    }
+                }
+            }
+
+        }.start();
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -247,8 +241,8 @@ public class jfMenuSec extends javax.swing.JFrame {
     }//GEN-LAST:event_rSButtonIconI1ActionPerformed
 
     private void rSButtonMetro1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonMetro1ActionPerformed
-       dispose();
-       new jfEntrada().setVisible(true);
+        dispose();
+        new jfEntrada().setVisible(true);
     }//GEN-LAST:event_rSButtonMetro1ActionPerformed
 
     /**

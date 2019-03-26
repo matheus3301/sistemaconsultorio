@@ -19,7 +19,7 @@ public class home extends javax.swing.JPanel {
      */
     public home() {
         initComponents();
-       menuMedico.setVisible(false);
+        menuMedico.setVisible(false);
         menuPaciente.setVisible(false);
         menuAgenda.setVisible(false);
         
@@ -48,8 +48,8 @@ public class home extends javax.swing.JPanel {
         jLabel20 = new javax.swing.JLabel();
         bgPaciente = new javax.swing.JPanel();
         menuPaciente = new javax.swing.JPanel();
-        rSButtonMetro24 = new rojerusan.RSButtonMetro();
-        rSButtonMetro27 = new rojerusan.RSButtonMetro();
+        bncCadastrarPaciente = new rojerusan.RSButtonMetro();
+        bntConsultarPaciente = new rojerusan.RSButtonMetro();
         jLabel28 = new javax.swing.JLabel();
         jLabel29 = new javax.swing.JLabel();
         bgMedico = new javax.swing.JPanel();
@@ -155,19 +155,29 @@ public class home extends javax.swing.JPanel {
             }
         });
 
-        rSButtonMetro24.setBackground(new java.awt.Color(32, 47, 90));
-        rSButtonMetro24.setText("Cadastrar Paciente");
-        rSButtonMetro24.addMouseListener(new java.awt.event.MouseAdapter() {
+        bncCadastrarPaciente.setBackground(new java.awt.Color(32, 47, 90));
+        bncCadastrarPaciente.setText("Cadastrar Paciente");
+        bncCadastrarPaciente.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                rSButtonMetro24MouseEntered(evt);
+                bncCadastrarPacienteMouseEntered(evt);
+            }
+        });
+        bncCadastrarPaciente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bncCadastrarPacienteActionPerformed(evt);
             }
         });
 
-        rSButtonMetro27.setBackground(new java.awt.Color(32, 47, 90));
-        rSButtonMetro27.setText("Consultar Paciente");
-        rSButtonMetro27.addMouseListener(new java.awt.event.MouseAdapter() {
+        bntConsultarPaciente.setBackground(new java.awt.Color(32, 47, 90));
+        bntConsultarPaciente.setText("Consultar Paciente");
+        bntConsultarPaciente.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                rSButtonMetro27MouseEntered(evt);
+                bntConsultarPacienteMouseEntered(evt);
+            }
+        });
+        bntConsultarPaciente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bntConsultarPacienteActionPerformed(evt);
             }
         });
 
@@ -178,17 +188,17 @@ public class home extends javax.swing.JPanel {
             .addGroup(menuPacienteLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(menuPacienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(rSButtonMetro24, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE)
-                    .addComponent(rSButtonMetro27, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE))
+                    .addComponent(bncCadastrarPaciente, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE)
+                    .addComponent(bntConsultarPaciente, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE))
                 .addContainerGap())
         );
         menuPacienteLayout.setVerticalGroup(
             menuPacienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(menuPacienteLayout.createSequentialGroup()
                 .addGap(39, 39, 39)
-                .addComponent(rSButtonMetro24, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(bncCadastrarPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
-                .addComponent(rSButtonMetro27, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(bntConsultarPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(37, Short.MAX_VALUE))
         );
 
@@ -432,13 +442,13 @@ public class home extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void rSButtonMetro24MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rSButtonMetro24MouseEntered
+    private void bncCadastrarPacienteMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bncCadastrarPacienteMouseEntered
         menuPaciente.setVisible(true);
-    }//GEN-LAST:event_rSButtonMetro24MouseEntered
+    }//GEN-LAST:event_bncCadastrarPacienteMouseEntered
 
-    private void rSButtonMetro27MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rSButtonMetro27MouseEntered
+    private void bntConsultarPacienteMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bntConsultarPacienteMouseEntered
         menuPaciente.setVisible(true);
-    }//GEN-LAST:event_rSButtonMetro27MouseEntered
+    }//GEN-LAST:event_bntConsultarPacienteMouseEntered
 
     private void menuPacienteMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuPacienteMouseExited
         menuPaciente.setVisible(false);
@@ -492,6 +502,14 @@ public class home extends javax.swing.JPanel {
         new TrocarPanel(pnlPrincipal, new bcMedico());
     }//GEN-LAST:event_rSButtonMetro19ActionPerformed
 
+    private void bncCadastrarPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bncCadastrarPacienteActionPerformed
+        new TrocarPanel(pnlPrincipal, new cdPaciente());
+    }//GEN-LAST:event_bncCadastrarPacienteActionPerformed
+
+    private void bntConsultarPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntConsultarPacienteActionPerformed
+        new TrocarPanel(pnlPrincipal, new bcPaciente());
+    }//GEN-LAST:event_bntConsultarPacienteActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel BgPanel;
@@ -500,6 +518,8 @@ public class home extends javax.swing.JPanel {
     private javax.swing.JPanel bgConvenio;
     private javax.swing.JPanel bgMedico;
     private javax.swing.JPanel bgPaciente;
+    private rojerusan.RSButtonMetro bncCadastrarPaciente;
+    private rojerusan.RSButtonMetro bntConsultarPaciente;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel20;
@@ -519,9 +539,7 @@ public class home extends javax.swing.JPanel {
     private javax.swing.JPanel pnlPrincipal;
     private rojerusan.RSButtonMetro rSButtonMetro19;
     private rojerusan.RSButtonMetro rSButtonMetro21;
-    private rojerusan.RSButtonMetro rSButtonMetro24;
     private rojerusan.RSButtonMetro rSButtonMetro26;
-    private rojerusan.RSButtonMetro rSButtonMetro27;
     private rojerusan.RSButtonMetro rSButtonMetro28;
     // End of variables declaration//GEN-END:variables
 }

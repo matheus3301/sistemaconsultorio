@@ -122,4 +122,42 @@ public class MedicoDAO extends ExecuteSQL{
         return lista;
     }
     
+     public Medico CapturarMedico(int id){
+        Medico a = new Medico();
+        
+        try{
+            String consulta = "select * from tb_medico "
+            + "where idtb_medico = "+id;
+            
+            PreparedStatement ps = getCon().prepareStatement(consulta);
+            ResultSet rs = ps.executeQuery();
+            
+            if(rs != null){
+                while(rs.next()){
+                    
+                    
+                    a.setId(rs.getInt(1));
+                    a.setCpf(rs.getString(2));
+                    a.setNome(rs.getString(3));
+                    a.setRg(rs.getString(4));
+                    a.setCrm(rs.getString(5));
+                    a.setTelefone(rs.getString(6));
+                    a.setSexo(rs.getString(7));
+                    a.setRua(rs.getString(8));
+                    a.setNumero(rs.getString(9));
+                    a.setBairro(rs.getString(10));
+                    a.setCep(rs.getString(11));
+                    a.setLogin(rs.getString(12));
+                    a.setSenha(rs.getString(13));
+                    
+                    
+                    
+                }
+            }
+        } catch(SQLException ex){
+            ex.getMessage();
+        }
+        
+        return a;
+    }
 }

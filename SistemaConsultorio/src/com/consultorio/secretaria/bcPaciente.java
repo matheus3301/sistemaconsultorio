@@ -23,12 +23,12 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author aluno
  */
-public class bcMedico extends javax.swing.JPanel {
+public class bcPaciente extends javax.swing.JPanel {
 
     /**
      * Creates new form home
      */
-    public bcMedico() {
+    public bcPaciente() {
         initComponents();
         listarMedicos("", "");
         VerificaSelecao();
@@ -53,7 +53,7 @@ public class bcMedico extends javax.swing.JPanel {
                     try {
                         Thread.sleep(500);
                     } catch (InterruptedException ex) {
-                        Logger.getLogger(bcMedico.class.getName()).log(Level.SEVERE, null, ex);
+                        Logger.getLogger(bcPaciente.class.getName()).log(Level.SEVERE, null, ex);
                     }
                   
                 }
@@ -121,8 +121,6 @@ public class bcMedico extends javax.swing.JPanel {
         pnlPrincipal.setBackground(new java.awt.Color(255, 255, 255));
         pnlPrincipal.setLayout(new javax.swing.BoxLayout(pnlPrincipal, javax.swing.BoxLayout.LINE_AXIS));
 
-        Home.setPreferredSize(new java.awt.Dimension(800, 490));
-
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
         jLabel6.setText("Medical Center");
 
@@ -141,7 +139,7 @@ public class bcMedico extends javax.swing.JPanel {
         jLabel19.setFont(new java.awt.Font("Segoe UI Light", 0, 16)); // NOI18N
         jLabel19.setForeground(new java.awt.Color(204, 204, 204));
         jLabel19.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel19.setText("CRM");
+        jLabel19.setText("CPF");
 
         btnBuscar.setBackground(new java.awt.Color(241, 17, 51));
         btnBuscar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -169,11 +167,11 @@ public class bcMedico extends javax.swing.JPanel {
 
             },
             new String [] {
-                "ID", "Nome ", "CRM", "Sexo"
+                "ID", "Nome ", "CPF", "Convênio", "Sexo"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -247,9 +245,6 @@ public class bcMedico extends javax.swing.JPanel {
         HomeLayout.setHorizontalGroup(
             HomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(HomeLayout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(HomeLayout.createSequentialGroup()
                 .addGap(59, 59, 59)
                 .addGroup(HomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6)
@@ -258,22 +253,24 @@ public class bcMedico extends javax.swing.JPanel {
                         .addComponent(jLabel7)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel3)
-                .addGap(149, 149, 149))
+                .addGap(91, 91, 91))
+            .addGroup(HomeLayout.createSequentialGroup()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         HomeLayout.setVerticalGroup(
             HomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(HomeLayout.createSequentialGroup()
                 .addGroup(HomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(HomeLayout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addComponent(jLabel3))
+                    .addGroup(HomeLayout.createSequentialGroup()
                         .addGap(41, 41, 41)
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel7)
-                        .addGap(33, 33, 33))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, HomeLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
+                        .addComponent(jLabel7)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 

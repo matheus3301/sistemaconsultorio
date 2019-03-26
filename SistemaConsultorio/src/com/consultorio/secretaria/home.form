@@ -320,8 +320,8 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="rSButtonMetro24" alignment="0" pref="189" max="32767" attributes="0"/>
-                                      <Component id="rSButtonMetro27" alignment="1" pref="189" max="32767" attributes="0"/>
+                                      <Component id="bncCadastrarPaciente" alignment="0" pref="189" max="32767" attributes="0"/>
+                                      <Component id="bntConsultarPaciente" alignment="1" pref="189" max="32767" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                               </Group>
@@ -331,16 +331,16 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
-                                  <Component id="rSButtonMetro24" min="-2" pref="44" max="-2" attributes="0"/>
+                                  <Component id="bncCadastrarPaciente" min="-2" pref="44" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
-                                  <Component id="rSButtonMetro27" min="-2" pref="44" max="-2" attributes="0"/>
+                                  <Component id="bntConsultarPaciente" min="-2" pref="44" max="-2" attributes="0"/>
                                   <EmptySpace pref="37" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
                       </Layout>
                       <SubComponents>
-                        <Component class="rojerusan.RSButtonMetro" name="rSButtonMetro24">
+                        <Component class="rojerusan.RSButtonMetro" name="bncCadastrarPaciente">
                           <Properties>
                             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                               <Color blue="5a" green="2f" red="20" type="rgb"/>
@@ -348,10 +348,11 @@
                             <Property name="text" type="java.lang.String" value="Cadastrar Paciente"/>
                           </Properties>
                           <Events>
-                            <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="rSButtonMetro24MouseEntered"/>
+                            <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="bncCadastrarPacienteMouseEntered"/>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bncCadastrarPacienteActionPerformed"/>
                           </Events>
                         </Component>
-                        <Component class="rojerusan.RSButtonMetro" name="rSButtonMetro27">
+                        <Component class="rojerusan.RSButtonMetro" name="bntConsultarPaciente">
                           <Properties>
                             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                               <Color blue="5a" green="2f" red="20" type="rgb"/>
@@ -359,7 +360,8 @@
                             <Property name="text" type="java.lang.String" value="Consultar Paciente"/>
                           </Properties>
                           <Events>
-                            <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="rSButtonMetro27MouseEntered"/>
+                            <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="bntConsultarPacienteMouseEntered"/>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bntConsultarPacienteActionPerformed"/>
                           </Events>
                         </Component>
                       </SubComponents>
