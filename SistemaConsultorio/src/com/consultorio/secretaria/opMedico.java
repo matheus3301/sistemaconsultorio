@@ -12,7 +12,10 @@ import com.consultorio.main.ErrorMsg;
 import com.consultorio.main.RightMsg;
 import com.consultorio.model.Medico;
 import java.awt.Color;
+import static java.lang.Thread.sleep;
 import java.sql.Connection;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ButtonGroup;
 
 /**
@@ -30,7 +33,7 @@ public class opMedico extends javax.swing.JPanel {
         ButtonGroup sexo = new ButtonGroup();
         sexo.add(rdMasc);
         sexo.add(rdFem);
-        lblId.setText(a.getId()+"");
+        lblId.setText(a.getId() + "");
         lblNome.setText(a.getNome());
         lblCpf.setText(a.getCpf());
         lblRg.setText(a.getRg());
@@ -40,19 +43,17 @@ public class opMedico extends javax.swing.JPanel {
         lblBairro.setText(a.getBairro());
         lblCep.setText(a.getCep());
         lblN.setText(a.getNumero());
-        
+
         if (a.getSexo().equals("M")) {
             rdMasc.setSelected(true);
-        }else{
+        } else {
             rdFem.setSelected(true);
         }
-        
+
         lblUser.setText(a.getLogin());
         lblSenha.setText(a.getSenha());
 
     }
-    
-   
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -467,7 +468,7 @@ public class opMedico extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnConsultarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnConsultarMouseExited
-        btnConsultar.setBackground(new Color(230,235,97));
+        btnConsultar.setBackground(new Color(230, 235, 97));
         btnConsultar.setForeground(Color.WHITE);
     }//GEN-LAST:event_btnConsultarMouseExited
 
@@ -491,11 +492,69 @@ public class opMedico extends javax.swing.JPanel {
     }//GEN-LAST:event_btnSalvarMouseEntered
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-        
+        Connection con = Conexao.AbrirConexao();
+        MedicoDAO sql = new MedicoDAO(con);
+
+        if (lblNome.getText().equals("") || lblCpf.getText().equals("") || lblRg.getText().equals("")
+                || lblCrm.getText().equals("") || !(rdMasc.isSelected() || rdFem.isSelected()) || lblTel.getText().equals("")
+                || lblRua.getText().equals("") || lblN.getText().equals("") || lblBairro.getText().equals("") || lblCep.getText().equals("")
+                || lblUser.getText().equals("") || lblSenha.getText().equals("")) {
+            new ErrorMsg().ReceberMsg("Nenhum Campo Pode\n Estar Vazio!");
+
+        } else {
+            Medico a = new Medico();
+
+            a.setId(Integer.parseInt(lblId.getText()));
+            a.setNome(lblNome.getText());
+            a.setCpf(lblCpf.getText());
+            a.setRg(lblRg.getText());
+            a.setCrm(lblCrm.getText());
+            a.setTelefone(lblTel.getText());
+
+            if (rdMasc.isSelected()) {
+                a.setSexo("M");
+            }
+
+            if (rdFem.isSelected()) {
+                a.setSexo("F");
+            }
+
+            a.setRua(lblRua.getText());
+            a.setNumero(lblN.getText());
+            a.setBairro(lblBairro.getText());
+            a.setCep(lblCep.getText());
+            a.setLogin(lblUser.getText());
+            a.setSenha(lblSenha.getText());
+
+            boolean resultado = sql.Alterar(a);
+
+            if (resultado) {
+                System.out.println("Alterado com sucesso");
+                new RightMsg().ReceberMsg("Médico Alterado com Sucesso!");
+                lblNome.setText("");
+                lblCpf.setText("");
+                lblRg.setText("");
+                lblCrm.setText("");
+                lblTel.setText("");
+                lblRua.setText("");
+                lblBairro.setText("");
+                lblN.setText("");
+                lblCep.setText("");
+                rdMasc.setSelected(false);
+                rdFem.setSelected(false);
+                lblUser.setText("");
+                lblSenha.setText("");
+                new TrocarPanel(pnlPrincipal, new bcMedico());
+
+            } else {
+                System.out.println("Erro ao Alterar");
+                new ErrorMsg().ReceberMsg("Erro ao Alterar Médico");
+            }
+        }
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnExcluirMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExcluirMouseExited
-        btnExcluir.setBackground(new Color(223,57,51));
+        btnExcluir.setBackground(new Color(223, 57, 51));
         btnExcluir.setForeground(Color.WHITE);
     }//GEN-LAST:event_btnExcluirMouseExited
 
@@ -505,7 +564,9 @@ public class opMedico extends javax.swing.JPanel {
     }//GEN-LAST:event_btnExcluirMouseEntered
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
-        // TODO add your handling code here:
+        boolean resultado = ConfirmarExclusao.Perguntar();
+        System.out.println(resultado);
+       
     }//GEN-LAST:event_btnExcluirActionPerformed
 
 

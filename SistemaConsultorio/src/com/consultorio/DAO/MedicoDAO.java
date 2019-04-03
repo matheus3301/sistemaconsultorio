@@ -17,44 +17,43 @@ import java.util.List;
  *
  * @author matheus
  */
-public class MedicoDAO extends ExecuteSQL{
-    
+public class MedicoDAO extends ExecuteSQL {
+
     public MedicoDAO(Connection con) {
         super(con);
     }
-    
-    public boolean Logar(String login,String senha){
+
+    public boolean Logar(String login, String senha) {
         boolean finalResult = false;
-        
-        try{
+
+        try {
             String consulta = "select login, senha from tb_medico "
-            + "where login = '"+login+"' and senha = '"+senha+"'";
-            
+                    + "where login = '" + login + "' and senha = '" + senha + "'";
+
             PreparedStatement ps = getCon().prepareStatement(consulta);
             ResultSet rs = ps.executeQuery();
-            
-            if(rs != null){
-                while(rs.next()){
+
+            if (rs != null) {
+                while (rs.next()) {
                     Medico a = new Medico();
                     a.setLogin(rs.getString(1));
                     a.setSenha(rs.getString(2));
-                    
+
                     finalResult = true;
                 }
             }
-        } catch(SQLException ex){
+        } catch (SQLException ex) {
             ex.getMessage();
         }
-        
+
         return finalResult;
     }
-    
-    public boolean Cadastrar(Medico a){
-        
-        
+
+    public boolean Cadastrar(Medico a) {
+
         String sql = "INSERT INTO tb_medico VALUES(0,?,?,?,?,?,?,?,?,?,?,?,?)";
-        
-        try{
+
+        try {
             PreparedStatement ps = getCon().prepareStatement(sql);
             ps.setString(1, a.getCpf());
             ps.setString(2, a.getNome());
@@ -68,35 +67,33 @@ public class MedicoDAO extends ExecuteSQL{
             ps.setString(10, a.getCep());
             ps.setString(11, a.getLogin());
             ps.setString(12, a.getSenha());
-        
-            
-            if(ps.executeUpdate() > 0){
+
+            if (ps.executeUpdate() > 0) {
                 return true;
-            }else{
+            } else {
                 return false;
             }
-            
-        }catch(SQLException ex){
+
+        } catch (SQLException ex) {
             return false;
         }
-        
-        
+
     }
-    
-    public List<Medico> ListarMedicos(String nome,String crm){
+
+    public List<Medico> ListarMedicos(String nome, String crm) {
         List<Medico> lista = new ArrayList<>();
-        
-        try{
+
+        try {
             String consulta = "select * from tb_medico "
-            + "where nome LIKE '%"+nome+"%' and crm LIKE '%"+crm+"%'";
-            
+                    + "where nome LIKE '%" + nome + "%' and crm LIKE '%" + crm + "%'";
+
             PreparedStatement ps = getCon().prepareStatement(consulta);
             ResultSet rs = ps.executeQuery();
-            
-            if(rs != null){
-                while(rs.next()){
+
+            if (rs != null) {
+                while (rs.next()) {
                     Medico a = new Medico();
-                    
+
                     a.setId(rs.getInt(1));
                     a.setCpf(rs.getString(2));
                     a.setNome(rs.getString(3));
@@ -110,32 +107,31 @@ public class MedicoDAO extends ExecuteSQL{
                     a.setCep(rs.getString(11));
                     a.setLogin(rs.getString(12));
                     a.setSenha(rs.getString(13));
-                    
+
                     lista.add(a);
-                    
+
                 }
             }
-        } catch(SQLException ex){
+        } catch (SQLException ex) {
             ex.getMessage();
         }
-        
+
         return lista;
     }
-    
-     public Medico CapturarMedico(int id){
+
+    public Medico CapturarMedico(int id) {
         Medico a = new Medico();
-        
-        try{
+
+        try {
             String consulta = "select * from tb_medico "
-            + "where idtb_medico = "+id;
-            
+                    + "where idtb_medico = " + id;
+
             PreparedStatement ps = getCon().prepareStatement(consulta);
             ResultSet rs = ps.executeQuery();
-            
-            if(rs != null){
-                while(rs.next()){
-                    
-                    
+
+            if (rs != null) {
+                while (rs.next()) {
+
                     a.setId(rs.getInt(1));
                     a.setCpf(rs.getString(2));
                     a.setNome(rs.getString(3));
@@ -149,15 +145,66 @@ public class MedicoDAO extends ExecuteSQL{
                     a.setCep(rs.getString(11));
                     a.setLogin(rs.getString(12));
                     a.setSenha(rs.getString(13));
-                    
-                    
-                    
+
                 }
             }
-        } catch(SQLException ex){
+        } catch (SQLException ex) {
             ex.getMessage();
         }
-        
+
         return a;
+    }
+
+    public boolean Alterar(Medico a) {
+
+        String sql = "UPDATE tb_medico SET cpf = ?, nome = ?, rg = ?, crm = ?, telefone = ?, sexo = ?, rua = ?, numero = ?, bairro = ?, cep = ?, login = ?, senha = ? WHERE idtb_medico = ?";
+
+        try {
+            PreparedStatement ps = getCon().prepareStatement(sql);
+            ps.setString(1, a.getCpf());
+            ps.setString(2, a.getNome());
+            ps.setString(3, a.getRg());
+            ps.setString(4, a.getCrm());
+            ps.setString(5, a.getTelefone());
+            ps.setString(6, a.getSexo());
+            ps.setString(7, a.getRua());
+            ps.setString(8, a.getNumero());
+            ps.setString(9, a.getBairro());
+            ps.setString(10, a.getCep());
+            ps.setString(11, a.getLogin());
+            ps.setString(12, a.getSenha());
+            ps.setInt(13, a.getId());
+
+            if (ps.executeUpdate() > 0) {
+                return true;
+            } else {
+                return false;
+            }
+
+        } catch (SQLException ex) {
+            return false;
+        }
+
+    }
+    
+    public boolean Excluir(int id) {
+
+        String sql = "DELETE FROM tb_medico WHERE idtb_medico = ?";
+
+        try {
+            PreparedStatement ps = getCon().prepareStatement(sql);
+            ps.setInt(1, id);
+           
+
+            if (ps.executeUpdate() > 0) {
+                return true;
+            } else {
+                return false;
+            }
+
+        } catch (SQLException ex) {
+            return false;
+        }
+
     }
 }
