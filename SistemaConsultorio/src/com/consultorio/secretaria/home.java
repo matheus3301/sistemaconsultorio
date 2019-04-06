@@ -74,7 +74,7 @@ public class home extends javax.swing.JPanel {
         jLabel6.setText("Medical Center");
 
         jLabel7.setFont(new java.awt.Font("Segoe UI Light", 0, 12)); // NOI18N
-        jLabel7.setText("A sua melhor escolha de consultórios mêdicos");
+        jLabel7.setText("A sua melhor escolha de consultórios médicos");
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/fullsize_1.png"))); // NOI18N
 

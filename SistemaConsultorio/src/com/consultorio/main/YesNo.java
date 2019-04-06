@@ -5,24 +5,43 @@
  */
 package com.consultorio.main;
 
-
 import java.awt.Color;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.WindowEvent;
+import javax.swing.border.LineBorder;
+
 /**
  *
  * @author aluno
  */
 public class YesNo extends javax.swing.JFrame {
 
+    private boolean confirm;
+
+    public boolean isConfirm() {
+        return confirm;
+    }
+
+    public void setConfirm(boolean confirm) {
+        this.confirm = confirm;
+    }
+
     /**
      * Creates new form ErrorMsg
      */
     public YesNo() {
         initComponents();
+        
     }
-    
-    public void Perguntar(String msg){
-        lblUser.setText(msg);
-        this.setVisible(true);
+
+    public static boolean Perguntar(String msg) {
+
+        YesNo a = new YesNo();
+        a.setVisible(true);
+        return a.isConfirm();
     }
 
     /**
@@ -38,9 +57,9 @@ public class YesNo extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        jb2 = new javax.swing.JButton();
         lblUser = new javax.swing.JLabel();
-        jButton3 = new javax.swing.JButton();
+        jb1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -65,24 +84,24 @@ public class YesNo extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(254, 254, 254));
 
-        jButton2.setBackground(new java.awt.Color(57, 217, 51));
-        jButton2.setFont(new java.awt.Font("Serif", 1, 14)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(254, 254, 254));
-        jButton2.setText("Não");
-        jButton2.setBorderPainted(false);
-        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton2.setFocusPainted(false);
-        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+        jb2.setBackground(new java.awt.Color(57, 217, 51));
+        jb2.setFont(new java.awt.Font("Serif", 1, 14)); // NOI18N
+        jb2.setForeground(new java.awt.Color(254, 254, 254));
+        jb2.setText("Não");
+        jb2.setBorderPainted(false);
+        jb2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jb2.setFocusPainted(false);
+        jb2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                jButton2MouseExited(evt);
+                jb2MouseExited(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jButton2MouseEntered(evt);
+                jb2MouseEntered(evt);
             }
         });
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jb2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jb2ActionPerformed(evt);
             }
         });
 
@@ -91,24 +110,24 @@ public class YesNo extends javax.swing.JFrame {
         lblUser.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblUser.setText("Pergunta");
 
-        jButton3.setBackground(new java.awt.Color(57, 217, 51));
-        jButton3.setFont(new java.awt.Font("Serif", 1, 14)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(254, 254, 254));
-        jButton3.setText("Sim");
-        jButton3.setBorderPainted(false);
-        jButton3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton3.setFocusPainted(false);
-        jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
+        jb1.setBackground(new java.awt.Color(57, 217, 51));
+        jb1.setFont(new java.awt.Font("Serif", 1, 14)); // NOI18N
+        jb1.setForeground(new java.awt.Color(254, 254, 254));
+        jb1.setText("Sim");
+        jb1.setBorderPainted(false);
+        jb1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jb1.setFocusPainted(false);
+        jb1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                jButton3MouseExited(evt);
+                jb1MouseExited(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jButton3MouseEntered(evt);
+                jb1MouseEntered(evt);
             }
         });
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        jb1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                jb1ActionPerformed(evt);
             }
         });
 
@@ -124,9 +143,9 @@ public class YesNo extends javax.swing.JFrame {
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addGap(57, 57, 57)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jb1, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jb2, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(68, 68, 68))
         );
         jPanel2Layout.setVerticalGroup(
@@ -139,8 +158,8 @@ public class YesNo extends javax.swing.JFrame {
                     .addComponent(lblUser, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(23, 23, 23)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton3)
-                    .addComponent(jButton2))
+                    .addComponent(jb1)
+                    .addComponent(jb2))
                 .addContainerGap(36, Short.MAX_VALUE))
         );
 
@@ -163,31 +182,31 @@ public class YesNo extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseEntered
-        jButton2.setBackground(new Color(235,235,235));
-        jButton2.setForeground(new Color(217,81,51));
-    }//GEN-LAST:event_jButton2MouseEntered
+    private void jb2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb2MouseEntered
+        jb2.setBackground(new Color(235, 235, 235));
+        jb2.setForeground(new Color(217, 81, 51));
+    }//GEN-LAST:event_jb2MouseEntered
 
-    private void jButton2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseExited
-        jButton2.setBackground(new Color(217,81,51));
-        jButton2.setForeground(Color.WHITE);
-    }//GEN-LAST:event_jButton2MouseExited
+    private void jb2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb2MouseExited
+        jb2.setBackground(new Color(217, 81, 51));
+        jb2.setForeground(Color.WHITE);
+    }//GEN-LAST:event_jb2MouseExited
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        dispose();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void jb2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb2ActionPerformed
+        this.setConfirm(false);
+    }//GEN-LAST:event_jb2ActionPerformed
 
-    private void jButton3MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseExited
+    private void jb1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb1MouseExited
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3MouseExited
+    }//GEN-LAST:event_jb1MouseExited
 
-    private void jButton3MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseEntered
+    private void jb1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb1MouseEntered
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3MouseEntered
+    }//GEN-LAST:event_jb1MouseEntered
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    private void jb1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb1ActionPerformed
+        this.setConfirm(true);
+    }//GEN-LAST:event_jb1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -232,12 +251,12 @@ public class YesNo extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JButton jb1;
+    private javax.swing.JButton jb2;
     private javax.swing.JLabel lblUser;
     // End of variables declaration//GEN-END:variables
 }

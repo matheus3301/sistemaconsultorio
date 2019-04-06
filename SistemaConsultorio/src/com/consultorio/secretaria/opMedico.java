@@ -17,6 +17,7 @@ import java.sql.Connection;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ButtonGroup;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -564,9 +565,24 @@ public class opMedico extends javax.swing.JPanel {
     }//GEN-LAST:event_btnExcluirMouseEntered
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
-        boolean resultado = ConfirmarExclusao.Perguntar();
-        System.out.println(resultado);
-       
+        int res = JOptionPane.showConfirmDialog(null, "Tem Certeza que deseja excluir?","Consultório",  JOptionPane.YES_NO_OPTION);
+        System.out.println(res);
+        
+        Connection con = Conexao.AbrirConexao();
+        MedicoDAO sql = new MedicoDAO(con);
+        if (res == 0) {
+            System.out.println("Apagar");
+            
+            if (sql.Excluir(Integer.parseInt(lblId.getText()))) {
+                new RightMsg().ReceberMsg("Apagado com sucesso!");
+                new TrocarPanel(pnlPrincipal, new bcMedico());
+            }else{
+                new ErrorMsg().ReceberMsg("Erro ao apagar!");
+            }
+            
+        }else{
+            System.out.println("Cancelar");
+        }
     }//GEN-LAST:event_btnExcluirActionPerformed
 
 
