@@ -87,12 +87,22 @@ public class home extends javax.swing.JPanel {
         jLabel12.setForeground(new java.awt.Color(204, 204, 204));
         jLabel12.setText("Buscar Convênios");
         jLabel12.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel12.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel12MouseClicked(evt);
+            }
+        });
 
         jLabel24.setBackground(new java.awt.Color(204, 204, 204));
         jLabel24.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
         jLabel24.setForeground(new java.awt.Color(204, 204, 204));
         jLabel24.setText("Cadastrar Convênios");
         jLabel24.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel24.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel24MouseClicked(evt);
+            }
+        });
 
         jLabel19.setBackground(new java.awt.Color(204, 204, 204));
         jLabel19.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
@@ -509,6 +519,14 @@ public class home extends javax.swing.JPanel {
     private void bntConsultarPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntConsultarPacienteActionPerformed
         new TrocarPanel(pnlPrincipal, new bcPaciente());
     }//GEN-LAST:event_bntConsultarPacienteActionPerformed
+
+    private void jLabel24MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel24MouseClicked
+        new TrocarPanel(pnlPrincipal, new cdConvenio());
+    }//GEN-LAST:event_jLabel24MouseClicked
+
+    private void jLabel12MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel12MouseClicked
+        new TrocarPanel(pnlPrincipal, new bcConvenio());
+    }//GEN-LAST:event_jLabel12MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

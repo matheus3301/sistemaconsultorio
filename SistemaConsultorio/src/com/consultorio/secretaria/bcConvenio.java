@@ -23,12 +23,12 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author aluno
  */
-public class bcPaciente extends javax.swing.JPanel {
+public class bcConvenio extends javax.swing.JPanel {
 
     /**
      * Creates new form home
      */
-    public bcPaciente() {
+    public bcConvenio() {
         initComponents();
         listarMedicos("", "");
         VerificaSelecao();
@@ -53,7 +53,7 @@ public class bcPaciente extends javax.swing.JPanel {
                     try {
                         Thread.sleep(500);
                     } catch (InterruptedException ex) {
-                        Logger.getLogger(bcPaciente.class.getName()).log(Level.SEVERE, null, ex);
+                        Logger.getLogger(bcConvenio.class.getName()).log(Level.SEVERE, null, ex);
                     }
                   
                 }
@@ -120,8 +120,10 @@ public class bcPaciente extends javax.swing.JPanel {
         pnlPrincipal.setBackground(new java.awt.Color(255, 255, 255));
         pnlPrincipal.setLayout(new javax.swing.BoxLayout(pnlPrincipal, javax.swing.BoxLayout.LINE_AXIS));
 
+        Home.setPreferredSize(new java.awt.Dimension(800, 490));
+
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
-        jLabel6.setText("Buscar Paciente");
+        jLabel6.setText("Buscar Convênio");
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/fullsize_1.png"))); // NOI18N
 
@@ -135,7 +137,7 @@ public class bcPaciente extends javax.swing.JPanel {
         jLabel19.setFont(new java.awt.Font("Segoe UI Light", 0, 16)); // NOI18N
         jLabel19.setForeground(new java.awt.Color(204, 204, 204));
         jLabel19.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel19.setText("CPF");
+        jLabel19.setText("CPNJ");
 
         btnBuscar.setBackground(new java.awt.Color(241, 17, 51));
         btnBuscar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -163,11 +165,11 @@ public class bcPaciente extends javax.swing.JPanel {
 
             },
             new String [] {
-                "ID", "Nome ", "CPF", "Convênio", "Sexo"
+                "ID", "Nome ", "CNPJ", "Bairro"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -233,7 +235,7 @@ public class bcPaciente extends javax.swing.JPanel {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnBuscar1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap(38, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout HomeLayout = new javax.swing.GroupLayout(Home);
@@ -241,27 +243,27 @@ public class bcPaciente extends javax.swing.JPanel {
         HomeLayout.setHorizontalGroup(
             HomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(HomeLayout.createSequentialGroup()
-                .addGap(74, 74, 74)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(HomeLayout.createSequentialGroup()
+                .addGap(71, 71, 71)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel3)
-                .addGap(91, 91, 91))
-            .addGroup(HomeLayout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(149, 149, 149))
         );
         HomeLayout.setVerticalGroup(
             HomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(HomeLayout.createSequentialGroup()
                 .addGroup(HomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(HomeLayout.createSequentialGroup()
-                        .addGap(26, 26, 26)
+                        .addGap(6, 6, 6)
                         .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, HomeLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel6)
-                        .addGap(47, 47, 47)))
+                        .addGap(39, 39, 39)))
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 

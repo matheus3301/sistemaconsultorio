@@ -68,7 +68,6 @@ public class opMedico extends javax.swing.JPanel {
         pnlPrincipal = new javax.swing.JPanel();
         Home = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         BgPanel = new javax.swing.JPanel();
         lblId = new javax.swing.JTextField();
@@ -92,7 +91,6 @@ public class opMedico extends javax.swing.JPanel {
         rdFem = new javax.swing.JRadioButton();
         lblN = new javax.swing.JTextField();
         jLabel25 = new javax.swing.JLabel();
-        lblCep = new javax.swing.JTextField();
         jLabel24 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
         lblBairro = new javax.swing.JTextField();
@@ -101,17 +99,15 @@ public class opMedico extends javax.swing.JPanel {
         btnConsultar = new javax.swing.JButton();
         btnSalvar = new javax.swing.JButton();
         btnExcluir = new javax.swing.JButton();
+        lblCep = new javax.swing.JFormattedTextField();
 
         setPreferredSize(new java.awt.Dimension(880, 470));
 
         pnlPrincipal.setBackground(new java.awt.Color(255, 255, 255));
         pnlPrincipal.setLayout(new javax.swing.BoxLayout(pnlPrincipal, javax.swing.BoxLayout.LINE_AXIS));
 
-        jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
-        jLabel6.setText("Medical Center");
-
-        jLabel7.setFont(new java.awt.Font("Segoe UI Light", 0, 12)); // NOI18N
-        jLabel7.setText("A sua melhor escolha de consultórios mêdicos");
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        jLabel6.setText("Alterar Médico");
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/fullsize_1.png"))); // NOI18N
 
@@ -274,6 +270,12 @@ public class opMedico extends javax.swing.JPanel {
             }
         });
 
+        try {
+            lblCep.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#####-###")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
         javax.swing.GroupLayout BgPanelLayout = new javax.swing.GroupLayout(BgPanel);
         BgPanel.setLayout(BgPanelLayout);
         BgPanelLayout.setHorizontalGroup(
@@ -326,8 +328,8 @@ public class opMedico extends javax.swing.JPanel {
                                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, BgPanelLayout.createSequentialGroup()
                                         .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(lblCep, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(lblCep)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, BgPanelLayout.createSequentialGroup()
                                         .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -367,10 +369,10 @@ public class opMedico extends javax.swing.JPanel {
                             .addComponent(jLabel23))
                         .addGap(18, 18, 18)
                         .addGroup(BgPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblCep, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel24)
                             .addComponent(jLabel25)
-                            .addComponent(lblN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(lblN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblCep, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(BgPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel22)
@@ -417,14 +419,9 @@ public class opMedico extends javax.swing.JPanel {
         HomeLayout.setHorizontalGroup(
             HomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(HomeLayout.createSequentialGroup()
-                .addGroup(HomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(HomeLayout.createSequentialGroup()
-                        .addGap(52, 52, 52)
-                        .addComponent(jLabel6))
-                    .addGroup(HomeLayout.createSequentialGroup()
-                        .addGap(76, 76, 76)
-                        .addComponent(jLabel7)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 167, Short.MAX_VALUE)
+                .addGap(60, 60, 60)
+                .addComponent(jLabel6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel3)
                 .addGap(91, 91, 91))
             .addComponent(BgPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -434,13 +431,12 @@ public class opMedico extends javax.swing.JPanel {
             .addGroup(HomeLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(HomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
                     .addGroup(HomeLayout.createSequentialGroup()
-                        .addGap(11, 11, 11)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, HomeLayout.createSequentialGroup()
                         .addComponent(jLabel6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel7)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(37, 37, 37)))
                 .addComponent(BgPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -606,10 +602,9 @@ public class opMedico extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel labell;
     private javax.swing.JTextField lblBairro;
-    private javax.swing.JTextField lblCep;
+    private javax.swing.JFormattedTextField lblCep;
     private javax.swing.JFormattedTextField lblCpf;
     private javax.swing.JTextField lblCrm;
     private javax.swing.JTextField lblId;

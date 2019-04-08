@@ -42,13 +42,12 @@ public class cdMedico extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         lblNome = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
-        lblCpf = new javax.swing.JFormattedTextField();
+        lblCep = new javax.swing.JFormattedTextField();
         jLabel18 = new javax.swing.JLabel();
         lblRg = new javax.swing.JFormattedTextField();
         jLabel19 = new javax.swing.JLabel();
@@ -62,7 +61,6 @@ public class cdMedico extends javax.swing.JPanel {
         rdMasc = new javax.swing.JRadioButton();
         lblBairro = new javax.swing.JTextField();
         jLabel23 = new javax.swing.JLabel();
-        lblCep = new javax.swing.JTextField();
         jLabel24 = new javax.swing.JLabel();
         lblN = new javax.swing.JTextField();
         jLabel25 = new javax.swing.JLabel();
@@ -73,14 +71,12 @@ public class cdMedico extends javax.swing.JPanel {
         iptId = new javax.swing.JTextField();
         jLabel27 = new javax.swing.JLabel();
         lblSenha = new javax.swing.JTextField();
+        lblCpf = new javax.swing.JFormattedTextField();
 
         setPreferredSize(new java.awt.Dimension(880, 470));
 
-        jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
-        jLabel6.setText("Medical Center");
-
-        jLabel7.setFont(new java.awt.Font("Segoe UI Light", 0, 12)); // NOI18N
-        jLabel7.setText("A sua melhor escolha de consultórios mêdicos");
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        jLabel6.setText("Cadastrar Médico");
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/fullsize_1.png"))); // NOI18N
 
@@ -98,7 +94,7 @@ public class cdMedico extends javax.swing.JPanel {
         jLabel17.setText("CPF");
 
         try {
-            lblCpf.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
+            lblCep.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#####-###")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
@@ -202,6 +198,12 @@ public class cdMedico extends javax.swing.JPanel {
         jLabel27.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel27.setText("Senha");
 
+        try {
+            lblCpf.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -255,8 +257,8 @@ public class cdMedico extends javax.swing.JPanel {
                                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
                                         .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(lblCep, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(lblCep)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
                                         .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -264,7 +266,7 @@ public class cdMedico extends javax.swing.JPanel {
                                         .addComponent(rdMasc)
                                         .addGap(53, 53, 53)
                                         .addComponent(rdFem)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
                                 .addComponent(lblN, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel27, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -289,10 +291,10 @@ public class cdMedico extends javax.swing.JPanel {
                             .addComponent(jLabel23))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblCep, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel24)
                             .addComponent(jLabel25)
-                            .addComponent(lblN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(lblN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblCep, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel22)
@@ -311,7 +313,7 @@ public class cdMedico extends javax.swing.JPanel {
                             .addComponent(lblNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel16))
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel17)
                             .addComponent(lblCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
@@ -336,13 +338,9 @@ public class cdMedico extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(51, 51, 51)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel6)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addComponent(jLabel7)))
-                .addGap(119, 119, 119)
+                .addGap(66, 66, 66)
+                .addComponent(jLabel6)
+                .addGap(104, 104, 104)
                 .addComponent(jLabel3)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
@@ -352,15 +350,15 @@ public class cdMedico extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel7)
-                        .addGap(27, 27, 27)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(37, 37, 37)))
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 362, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -379,7 +377,7 @@ public class cdMedico extends javax.swing.JPanel {
         Connection con = Conexao.AbrirConexao();
         MedicoDAO sql = new MedicoDAO(con);
 
-        if (lblNome.getText().equals("") ||lblCpf.getText().equals("") || lblRg.getText().equals("") 
+        if (lblNome.getText().equals("") ||lblCep.getText().equals("") || lblRg.getText().equals("") 
         || lblCrm.getText().equals("") ||!(rdMasc.isSelected() || rdFem.isSelected())  ||lblTel.getText().equals("")
         || lblRua.getText().equals("") || lblN.getText().equals("") || lblBairro.getText().equals("") || lblCep.getText().equals("")
         ||lblUser.getText().equals("") || lblSenha.getText().equals("")) {
@@ -389,7 +387,7 @@ public class cdMedico extends javax.swing.JPanel {
             Medico a = new Medico();
 
             a.setNome(lblNome.getText());
-            a.setCpf(lblCpf.getText());
+            a.setCpf(lblCep.getText());
             a.setRg(lblRg.getText());
             a.setCrm(lblCrm.getText());
             a.setTelefone(lblTel.getText());
@@ -415,7 +413,7 @@ public class cdMedico extends javax.swing.JPanel {
                 System.out.println("Cadastrado com sucesso");
                 new RightMsg().ReceberMsg("Médico Cadastrado com Sucesso!");
                 lblNome.setText("");
-                lblCpf.setText("");
+                lblCep.setText("");
                 lblRg.setText("");
                 lblCrm.setText("");
                 lblTel.setText("");
@@ -456,10 +454,9 @@ public class cdMedico extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JTextField lblBairro;
-    private javax.swing.JTextField lblCep;
+    private javax.swing.JFormattedTextField lblCep;
     private javax.swing.JFormattedTextField lblCpf;
     private javax.swing.JTextField lblCrm;
     private javax.swing.JLabel lblId;
