@@ -6,12 +6,17 @@
 package com.consultorio.secretaria;
 
 import com.consultorio.DAO.Conexao;
+import com.consultorio.DAO.ConvenioDAO;
 import com.consultorio.DAO.MedicoDAO;
 import com.consultorio.main.ErrorMsg;
 import com.consultorio.main.RightMsg;
+import com.consultorio.model.Convenio;
 import com.consultorio.model.Medico;
+import com.consultorio.model.Plano;
 import java.awt.Color;
 import java.sql.Connection;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.ButtonGroup;
 import javax.swing.table.DefaultTableModel;
 
@@ -23,6 +28,24 @@ public class cdConvenio extends javax.swing.JPanel {
 
     DefaultTableModel tbm;
     int i;
+
+    public boolean VerificarCampos() {
+        if (lblNome.getText().equals("") || lblCNPJ.getText().equals("") || lblCep.getText().equals("")
+                || lblBairro.getText().equals("") || lblN.getText().equals("") || lblTelefone.getText().equals("") || lblRua.getText().equals("")) {
+            new ErrorMsg().ReceberMsg("Nenhum Campo pode estar vazio!");
+            return false;
+        } else {
+            if (tbPlanos.getRowCount() == 0) {
+                new ErrorMsg().ReceberMsg("Insira Algum Plano!");
+                return false;
+            } else {
+
+                return true;
+
+            }
+
+        }
+    }
 
     /**
      * Creates new form home
@@ -51,12 +74,12 @@ public class cdConvenio extends javax.swing.JPanel {
         jLabel17 = new javax.swing.JLabel();
         lblTelefone = new javax.swing.JFormattedTextField();
         jLabel18 = new javax.swing.JLabel();
-        lblCPNJ = new javax.swing.JFormattedTextField();
+        lblCNPJ = new javax.swing.JFormattedTextField();
         jLabel19 = new javax.swing.JLabel();
-        lblCrm = new javax.swing.JTextField();
+        lblRua = new javax.swing.JTextField();
         jLabel20 = new javax.swing.JLabel();
-        lblTel = new javax.swing.JFormattedTextField();
-        lblCep = new javax.swing.JTextField();
+        lblCep = new javax.swing.JFormattedTextField();
+        lblBairro = new javax.swing.JTextField();
         jLabel24 = new javax.swing.JLabel();
         lblN = new javax.swing.JTextField();
         jLabel25 = new javax.swing.JLabel();
@@ -102,10 +125,10 @@ public class cdConvenio extends javax.swing.JPanel {
         jLabel18.setFont(new java.awt.Font("Segoe UI Light", 0, 16)); // NOI18N
         jLabel18.setForeground(new java.awt.Color(204, 204, 204));
         jLabel18.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel18.setText("CPNJ");
+        jLabel18.setText("CNPJ");
 
         try {
-            lblCPNJ.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##.##-#-##")));
+            lblCNPJ.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##.##-#-##")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
@@ -121,7 +144,7 @@ public class cdConvenio extends javax.swing.JPanel {
         jLabel20.setText("CEP");
 
         try {
-            lblTel.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#####-###")));
+            lblCep.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#####-###")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
@@ -228,7 +251,7 @@ public class cdConvenio extends javax.swing.JPanel {
                         .addGap(22, 22, 22)
                         .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(28, 28, 28)
-                        .addComponent(lblCrm))
+                        .addComponent(lblRua))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
                         .addComponent(lblId, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -240,7 +263,7 @@ public class cdConvenio extends javax.swing.JPanel {
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblCPNJ))
+                        .addComponent(lblCNPJ))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
                         .addGap(12, 12, 12)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -253,9 +276,9 @@ public class cdConvenio extends javax.swing.JPanel {
                         .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblTel)
+                            .addComponent(lblCep)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(lblCep, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(lblBairro, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
@@ -288,14 +311,14 @@ public class cdConvenio extends javax.swing.JPanel {
                         .addGap(20, 20, 20)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel18)
-                            .addComponent(lblCPNJ, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(lblCNPJ, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel20)
-                            .addComponent(lblTel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(lblCep, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblCep, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblBairro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel24)
                             .addComponent(jLabel25)
                             .addComponent(lblN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -311,7 +334,7 @@ public class cdConvenio extends javax.swing.JPanel {
                 .addGap(11, 11, 11)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel19)
-                    .addComponent(lblCrm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblRua, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -356,6 +379,49 @@ public class cdConvenio extends javax.swing.JPanel {
     }//GEN-LAST:event_btnCadastrarMouseEntered
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
+        if (VerificarCampos()) {
+            Connection con = Conexao.AbrirConexao();
+            ConvenioDAO sql = new ConvenioDAO(con);
+
+            Convenio a = new Convenio();
+            a.setNome(lblNome.getText());
+            a.setBairro(lblBairro.getText());
+            a.setCep(lblCep.getText());
+            a.setCnpj(lblCNPJ.getText());
+            a.setNumero(lblN.getText());
+            a.setRua(lblRua.getText());
+            a.setTelefone(lblTelefone.getText());
+
+            int id = sql.Cadastrar(a);
+
+            if (id != -1) {
+                System.out.println("Deu certo!");
+                System.out.println(id);
+                
+                List<Plano> planos = new ArrayList<>();
+                
+                for (int j = 0; j < tbPlanos.getRowCount(); j++) {
+                    Plano b = new Plano();
+                    b.setId_convenio(id);
+                    b.setNome(tbPlanos.getModel().getValueAt(j, 0).toString());
+                    b.setDescricao(tbPlanos.getModel().getValueAt(j, 1).toString());
+                    
+                    planos.add(b);
+                    
+                }
+                
+                for(Plano c : planos){
+                    System.out.println("Plano: "+c.getNome()+"  Descricao: "+c.getDescricao()+"  do Convenio: "+c.getId_convenio());
+                }         
+                
+                
+                
+                
+                
+            } else {
+                new ErrorMsg().ReceberMsg("Erro ao Cadastrar");
+            }
+        }
 
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
@@ -390,7 +456,7 @@ public class cdConvenio extends javax.swing.JPanel {
 
     private void btnExcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcActionPerformed
         tbm = (DefaultTableModel) tbPlanos.getModel();
-        tbm.removeRow(i-1);
+        tbm.removeRow(i - 1);
         i--;
     }//GEN-LAST:event_btnExcActionPerformed
 
@@ -411,13 +477,13 @@ public class cdConvenio extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JFormattedTextField lblCPNJ;
-    private javax.swing.JTextField lblCep;
-    private javax.swing.JTextField lblCrm;
+    private javax.swing.JTextField lblBairro;
+    private javax.swing.JFormattedTextField lblCNPJ;
+    private javax.swing.JFormattedTextField lblCep;
     private javax.swing.JLabel lblId;
     private javax.swing.JTextField lblN;
     private javax.swing.JTextField lblNome;
-    private javax.swing.JFormattedTextField lblTel;
+    private javax.swing.JTextField lblRua;
     private javax.swing.JFormattedTextField lblTelefone;
     private javax.swing.JTable tbPlanos;
     // End of variables declaration//GEN-END:variables

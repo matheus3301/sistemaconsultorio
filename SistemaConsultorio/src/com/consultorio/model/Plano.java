@@ -12,8 +12,18 @@ package com.consultorio.model;
 public class Plano {
     private int id;
     private int id_convenio;
+    private String nome;
     private String descricao;
 
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    
     public int getId() {
         return id;
     }

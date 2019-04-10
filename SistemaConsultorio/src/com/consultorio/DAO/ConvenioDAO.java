@@ -17,7 +17,9 @@ public class ConvenioDAO extends ExecuteSQL {
     public ConvenioDAO(Connection con) {
         super(con);
     }
-    public boolean Cadastrar(Convenio a) {
+    public int Cadastrar(Convenio a) {
+        
+        int id = -1;
 
         String sql = "INSERT INTO tb_convenio VALUES(0,?,?,?,?,?,?,?)";
 
@@ -34,15 +36,24 @@ public class ConvenioDAO extends ExecuteSQL {
             
 
             if (ps.executeUpdate() > 0) {
-                return true;
+                String consulta = "SELECT idtb_convenio FROM tb_convenio WHERE nome = ?";
+                PreparedStatement ps1 = getCon().prepareStatement(consulta);
+                ps1.setString(1, a.getNome());
+                
+                ResultSet rs = ps1.executeQuery();
+                
+                while(rs.next()){
+                    id = rs.getInt(1);
+                }
+                
             } else {
-                return false;
+                return id;
             }
 
         } catch (SQLException ex) {
-            return false;
+            return id;
         }
-
+        return id;
     }
     
     
