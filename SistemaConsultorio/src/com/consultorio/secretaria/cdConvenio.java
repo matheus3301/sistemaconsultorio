@@ -8,8 +8,10 @@ package com.consultorio.secretaria;
 import com.consultorio.DAO.Conexao;
 import com.consultorio.DAO.ConvenioDAO;
 import com.consultorio.DAO.MedicoDAO;
+import com.consultorio.DAO.PlanosDAO;
 import com.consultorio.main.ErrorMsg;
 import com.consultorio.main.RightMsg;
+import com.consultorio.main.TrocarPanel;
 import com.consultorio.model.Convenio;
 import com.consultorio.model.Medico;
 import com.consultorio.model.Plano;
@@ -46,7 +48,23 @@ public class cdConvenio extends javax.swing.JPanel {
 
         }
     }
-
+    
+    public void LimparCampos(){
+        lblNome.setText("");
+        lblCNPJ.setText("");
+        lblCep.setText("");
+        lblBairro.setText("");
+        lblN.setText("");
+        lblTelefone.setText("");
+        lblRua.setText("");
+        
+        tbm =  (DefaultTableModel) tbPlanos.getModel();
+        
+        while(tbm.getRowCount() > 0){
+            tbm.removeRow(0);
+        }
+        
+    }
     /**
      * Creates new form home
      */
@@ -90,6 +108,7 @@ public class cdConvenio extends javax.swing.JPanel {
         tbPlanos = new javax.swing.JTable();
         btnAdc = new javax.swing.JButton();
         btnExc = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setPreferredSize(new java.awt.Dimension(880, 470));
 
@@ -164,7 +183,7 @@ public class cdConvenio extends javax.swing.JPanel {
         btnCadastrar.setForeground(new java.awt.Color(255, 255, 255));
         btnCadastrar.setText("Cadastrar");
         btnCadastrar.setBorderPainted(false);
-        btnCadastrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCadastrar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnCadastrar.setFocusPainted(false);
         btnCadastrar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseExited(java.awt.event.MouseEvent evt) {
@@ -203,7 +222,7 @@ public class cdConvenio extends javax.swing.JPanel {
         btnAdc.setForeground(new java.awt.Color(255, 255, 255));
         btnAdc.setText("+");
         btnAdc.setBorderPainted(false);
-        btnAdc.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnAdc.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnAdc.setFocusPainted(false);
         btnAdc.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseExited(java.awt.event.MouseEvent evt) {
@@ -224,7 +243,7 @@ public class cdConvenio extends javax.swing.JPanel {
         btnExc.setForeground(new java.awt.Color(255, 255, 255));
         btnExc.setText("-");
         btnExc.setBorderPainted(false);
-        btnExc.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnExc.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnExc.setFocusPainted(false);
         btnExc.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseExited(java.awt.event.MouseEvent evt) {
@@ -239,6 +258,10 @@ public class cdConvenio extends javax.swing.JPanel {
                 btnExcActionPerformed(evt);
             }
         });
+
+        jLabel1.setFont(new java.awt.Font("Noto Sans", 1, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(254, 254, 254));
+        jLabel1.setText("Planos");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -284,27 +307,37 @@ public class cdConvenio extends javax.swing.JPanel {
                                 .addGap(18, 18, 18)
                                 .addComponent(lblN, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE)))))
-                .addGap(34, 34, 34)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                        .addComponent(btnCadastrar, javax.swing.GroupLayout.DEFAULT_SIZE, 309, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(btnExc, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnAdc, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(34, 34, 34)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                                .addComponent(btnCadastrar, javax.swing.GroupLayout.DEFAULT_SIZE, 309, Short.MAX_VALUE))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(btnExc, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnAdc, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(166, 166, 166)
+                        .addComponent(jLabel1)))
                 .addGap(47, 47, 47))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel1)
+                        .addGap(21, 21, 21))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(iptId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblId))
-                        .addGap(18, 18, 18)
+                            .addComponent(lblId, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel16))
@@ -321,11 +354,9 @@ public class cdConvenio extends javax.swing.JPanel {
                             .addComponent(lblBairro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel24)
                             .addComponent(jLabel25)
-                            .addComponent(lblN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                        .addGap(7, 7, 7)))
+                            .addComponent(lblN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel17)
                     .addComponent(lblTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -364,19 +395,39 @@ public class cdConvenio extends javax.swing.JPanel {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel6)
                         .addGap(41, 41, 41)))
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 332, Short.MAX_VALUE))
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 334, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnCadastrarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCadastrarMouseExited
-        btnCadastrar.setBackground(new Color(223, 57, 51));
-        btnCadastrar.setForeground(Color.WHITE);
-    }//GEN-LAST:event_btnCadastrarMouseExited
+    private void btnExcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcActionPerformed
+        tbm = (DefaultTableModel) tbPlanos.getModel();
+        tbm.removeRow(i - 1);
+        i--;
+    }//GEN-LAST:event_btnExcActionPerformed
 
-    private void btnCadastrarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCadastrarMouseEntered
-        btnCadastrar.setBackground(new Color(235, 235, 235));
-        btnCadastrar.setForeground(new Color(58, 65, 84));
-    }//GEN-LAST:event_btnCadastrarMouseEntered
+    private void btnExcMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExcMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnExcMouseEntered
+
+    private void btnExcMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExcMouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnExcMouseExited
+
+    private void btnAdcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdcActionPerformed
+
+        tbm = (DefaultTableModel) tbPlanos.getModel();
+        tbm.addRow(new String[i]);
+        i++;
+
+    }//GEN-LAST:event_btnAdcActionPerformed
+
+    private void btnAdcMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAdcMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAdcMouseEntered
+
+    private void btnAdcMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAdcMouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAdcMouseExited
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
         if (VerificarCampos()) {
@@ -397,68 +448,47 @@ public class cdConvenio extends javax.swing.JPanel {
             if (id != -1) {
                 System.out.println("Deu certo!");
                 System.out.println(id);
-                
-                List<Plano> planos = new ArrayList<>();
-                
-                for (int j = 0; j < tbPlanos.getRowCount(); j++) {
-                    Plano b = new Plano();
-                    b.setId_convenio(id);
-                    b.setNome(tbPlanos.getModel().getValueAt(j, 0).toString());
-                    b.setDescricao(tbPlanos.getModel().getValueAt(j, 1).toString());
-                    
-                    planos.add(b);
-                    
+
+                PlanosDAO sqlp = new PlanosDAO(con);
+
+                for (int row = 0; row < tbPlanos.getRowCount(); row++) {
+                    Plano atual = new Plano();
+
+                    atual.setId_convenio(id);
+                    atual.setNome(tbPlanos.getValueAt(row, 0).toString());
+                    atual.setDescricao(tbPlanos.getValueAt(row, 1).toString());
+
+                    if (sqlp.Cadastrar(atual)) {
+                        System.out.println("Showww!");
+                    }else{
+                        System.out.println("Erro! :(");
+                    }
+
                 }
+
+                new RightMsg().ReceberMsg("Cadastro de Convênio Feito com Sucesso!");
+                LimparCampos();
                 
-                for(Plano c : planos){
-                    System.out.println("Plano: "+c.getNome()+"  Descricao: "+c.getDescricao()+"  do Convenio: "+c.getId_convenio());
-                }         
-                
-                
-                
-                
-                
+
             } else {
                 new ErrorMsg().ReceberMsg("Erro ao Cadastrar");
             }
         }
-
     }//GEN-LAST:event_btnCadastrarActionPerformed
+
+    private void btnCadastrarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCadastrarMouseEntered
+        btnCadastrar.setBackground(new Color(235, 235, 235));
+        btnCadastrar.setForeground(new Color(58, 65, 84));
+    }//GEN-LAST:event_btnCadastrarMouseEntered
+
+    private void btnCadastrarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCadastrarMouseExited
+        btnCadastrar.setBackground(new Color(223, 57, 51));
+        btnCadastrar.setForeground(Color.WHITE);
+    }//GEN-LAST:event_btnCadastrarMouseExited
 
     private void lblTelefoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lblTelefoneActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_lblTelefoneActionPerformed
-
-    private void btnAdcMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAdcMouseExited
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnAdcMouseExited
-
-    private void btnAdcMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAdcMouseEntered
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnAdcMouseEntered
-
-    private void btnAdcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdcActionPerformed
-
-        tbm = (DefaultTableModel) tbPlanos.getModel();
-        tbm.addRow(new String[i]);
-        i++;
-
-
-    }//GEN-LAST:event_btnAdcActionPerformed
-
-    private void btnExcMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExcMouseExited
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnExcMouseExited
-
-    private void btnExcMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExcMouseEntered
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnExcMouseEntered
-
-    private void btnExcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcActionPerformed
-        tbm = (DefaultTableModel) tbPlanos.getModel();
-        tbm.removeRow(i - 1);
-        i--;
-    }//GEN-LAST:event_btnExcActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -466,6 +496,7 @@ public class cdConvenio extends javax.swing.JPanel {
     private javax.swing.JButton btnCadastrar;
     private javax.swing.JButton btnExc;
     private javax.swing.JTextField iptId;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
