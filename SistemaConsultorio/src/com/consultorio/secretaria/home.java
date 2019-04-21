@@ -86,7 +86,7 @@ public class home extends javax.swing.JPanel {
         jLabel12.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(204, 204, 204));
         jLabel12.setText("Buscar Convênios");
-        jLabel12.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel12.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jLabel12.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel12MouseClicked(evt);
@@ -97,7 +97,7 @@ public class home extends javax.swing.JPanel {
         jLabel24.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
         jLabel24.setForeground(new java.awt.Color(204, 204, 204));
         jLabel24.setText("Cadastrar Convênios");
-        jLabel24.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel24.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jLabel24.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel24MouseClicked(evt);
@@ -108,13 +108,13 @@ public class home extends javax.swing.JPanel {
         jLabel19.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
         jLabel19.setForeground(new java.awt.Color(204, 204, 204));
         jLabel19.setText("Cadastrar Consultas");
-        jLabel19.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel19.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         jLabel20.setBackground(new java.awt.Color(204, 204, 204));
         jLabel20.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
         jLabel20.setForeground(new java.awt.Color(204, 204, 204));
         jLabel20.setText("Buscar Consultas");
-        jLabel20.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel20.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         javax.swing.GroupLayout bgConvenioLayout = new javax.swing.GroupLayout(bgConvenio);
         bgConvenio.setLayout(bgConvenioLayout);
@@ -144,7 +144,7 @@ public class home extends javax.swing.JPanel {
         );
 
         bgPaciente.setBackground(new java.awt.Color(106, 116, 145));
-        bgPaciente.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        bgPaciente.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         bgPaciente.setPreferredSize(new java.awt.Dimension(213, 189));
         bgPaciente.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -154,7 +154,7 @@ public class home extends javax.swing.JPanel {
         bgPaciente.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         menuPaciente.setBackground(new java.awt.Color(106, 116, 145));
-        menuPaciente.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        menuPaciente.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         menuPaciente.setPreferredSize(new java.awt.Dimension(213, 197));
         menuPaciente.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseExited(java.awt.event.MouseEvent evt) {
@@ -224,7 +224,7 @@ public class home extends javax.swing.JPanel {
         bgPaciente.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, 128, -1));
 
         bgMedico.setBackground(new java.awt.Color(106, 116, 145));
-        bgMedico.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        bgMedico.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         bgMedico.setPreferredSize(new java.awt.Dimension(213, 189));
         bgMedico.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -234,7 +234,7 @@ public class home extends javax.swing.JPanel {
         bgMedico.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         menuMedico.setBackground(new java.awt.Color(106, 116, 145));
-        menuMedico.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        menuMedico.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         menuMedico.setPreferredSize(new java.awt.Dimension(213, 197));
         menuMedico.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseExited(java.awt.event.MouseEvent evt) {
@@ -301,7 +301,7 @@ public class home extends javax.swing.JPanel {
         bgMedico.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, -1, -1));
 
         bgAgenda.setBackground(new java.awt.Color(106, 116, 145));
-        bgAgenda.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        bgAgenda.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         bgAgenda.setPreferredSize(new java.awt.Dimension(213, 189));
         bgAgenda.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -311,7 +311,7 @@ public class home extends javax.swing.JPanel {
         bgAgenda.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         menuAgenda.setBackground(new java.awt.Color(106, 116, 145));
-        menuAgenda.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        menuAgenda.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         menuAgenda.setPreferredSize(new java.awt.Dimension(213, 197));
         menuAgenda.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseExited(java.awt.event.MouseEvent evt) {
@@ -320,7 +320,7 @@ public class home extends javax.swing.JPanel {
         });
 
         rSButtonMetro26.setBackground(new java.awt.Color(32, 47, 90));
-        rSButtonMetro26.setText("Agenda Compromissos");
+        rSButtonMetro26.setText("Agendar Compromisso");
         rSButtonMetro26.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 rSButtonMetro26MouseEntered(evt);

@@ -5,10 +5,14 @@
  */
 package com.consultorio.DAO;
 
+import com.consultorio.model.Convenio;
 import com.consultorio.model.Plano;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -44,4 +48,111 @@ public class PlanosDAO extends ExecuteSQL{
         
     }
     
+    public List<Plano> ListarPlanos(int idconvenio) {
+        List<Plano> lista = new ArrayList<>();
+
+        try {
+            String consulta = "select * from tb_planos "
+                    + "where tb_convenio_idtb_convenio = "+idconvenio;
+
+            PreparedStatement ps = getCon().prepareStatement(consulta);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs != null) {
+                while (rs.next()) {
+                   Plano a = new Plano();
+                   
+                   a.setId(rs.getInt(1));
+                   a.setId_convenio(rs.getInt(2));
+                   a.setNome(rs.getString(3));
+                   a.setDescricao(rs.getString(4));
+                   
+                   lista.add(a);
+
+                }
+            }
+        } catch (SQLException ex) {
+            ex.getMessage();
+        }
+
+        return lista;
+    }
+    
+    public boolean Excluir(int id){
+        String sql = "DELETE FROM tb_planos WHERE idtb_planos = "+id;
+        
+        
+        try {
+            PreparedStatement ps = getCon().prepareStatement(sql);
+            return ps.execute();
+        } catch (SQLException ex) {
+           return false;
+        }    
+        
+        
+        
+    }
+    
+    public boolean Alterar(Plano a){
+        String sql = "UPDATE tb_planos SET nome = ?, descricao = ? WHERE idtb_planos = ?";
+        
+        
+        try {
+            PreparedStatement ps = getCon().prepareStatement(sql);
+            ps.setString(1, a.getNome());
+            ps.setString(2, a.getDescricao());
+            ps.setInt(3, a.getId());
+            
+            
+            
+            return ps.execute();
+        } catch (SQLException ex) {
+           return false;
+        }    
+        
+        
+        
+    }
+    
+    public boolean ExcluirTodos(int idconvenio){
+        String sql = "DELETE FROM tb_planos WHERE tb_convenio_idtb_convenio = "+idconvenio;
+        
+        
+        try {
+            PreparedStatement ps = getCon().prepareStatement(sql);
+            ps.execute();
+            return true;
+        } catch (SQLException ex) {
+           return false;
+        }    
+        
+        
+        
+    }
+    
+    public List<Plano> ListarComboPorConvenio(int idConv){
+        String sql = "select nome from tb_planos WHERE tb_convenio_idtb_convenio = ? order by nome";
+        List<Plano> lista = new ArrayList<>();
+        try{
+            PreparedStatement ps = getCon().prepareStatement(sql);
+            ps.setInt(1, idConv);
+            
+            ResultSet rs = ps.executeQuery();
+            
+            
+            if(rs != null){
+                while(rs.next()){
+                    Plano a = new Plano();
+                    a.setNome(rs.getString(1));
+                    lista.add(a);
+                }
+                
+                return lista;
+            }else{
+                return lista;
+            }
+        }catch(SQLException e){
+            return null;
+        }
+    }
 }

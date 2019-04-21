@@ -6,12 +6,18 @@
 package com.consultorio.secretaria;
 
 import com.consultorio.DAO.Conexao;
+import com.consultorio.DAO.ConvenioDAO;
 import com.consultorio.DAO.MedicoDAO;
+import com.consultorio.DAO.PlanosDAO;
 import com.consultorio.main.ErrorMsg;
 import com.consultorio.main.RightMsg;
+import com.consultorio.model.Convenio;
 import com.consultorio.model.Medico;
+import com.consultorio.model.Plano;
 import java.awt.Color;
 import java.sql.Connection;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.ButtonGroup;
 
 /**
@@ -29,7 +35,43 @@ public class cdPaciente extends javax.swing.JPanel {
         ButtonGroup sexo = new ButtonGroup();
         sexo.add(rdMasc);
         sexo.add(rdFem);
+        
+        AtualizaComboConvenio();
 
+    }
+    
+    private void AtualizaComboPlanos(int convenio) {
+        comboPlano.removeAllItems();
+        
+        
+        Connection con = Conexao.AbrirConexao();
+        PlanosDAO sql = new PlanosDAO(con);
+        List<Plano> lista = new ArrayList<>();
+        lista = sql.ListarComboPorConvenio(convenio);
+        comboPlano.addItem("Selecione...");
+
+        for (Plano b : lista) {
+            comboPlano.addItem(b.getNome());
+        }
+
+        Conexao.FecharConexao(con);
+    }
+    
+    private void AtualizaComboConvenio() {
+        
+        
+        
+        Connection con = Conexao.AbrirConexao();
+        ConvenioDAO sql = new ConvenioDAO(con);
+        List<Convenio> lista = new ArrayList<>();
+        lista = sql.ListarCombo();
+        comboConvenio.addItem("Selecione...");
+
+        for (Convenio b : lista) {
+            comboConvenio.addItem(b.getNome());
+        }
+
+        Conexao.FecharConexao(con);
     }
 
     /**
@@ -65,9 +107,9 @@ public class cdPaciente extends javax.swing.JPanel {
         lblN = new javax.swing.JTextField();
         jLabel25 = new javax.swing.JLabel();
         btnCadastrar = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        comboConvenio = new javax.swing.JComboBox<>();
         jLabel28 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        comboPlano = new javax.swing.JComboBox<>();
 
         setPreferredSize(new java.awt.Dimension(880, 470));
 
@@ -159,7 +201,7 @@ public class cdPaciente extends javax.swing.JPanel {
         btnCadastrar.setForeground(new java.awt.Color(255, 255, 255));
         btnCadastrar.setText("Cadastrar");
         btnCadastrar.setBorderPainted(false);
-        btnCadastrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCadastrar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnCadastrar.setFocusPainted(false);
         btnCadastrar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseExited(java.awt.event.MouseEvent evt) {
@@ -175,10 +217,27 @@ public class cdPaciente extends javax.swing.JPanel {
             }
         });
 
+        comboConvenio.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                comboConvenioItemStateChanged(evt);
+            }
+        });
+        comboConvenio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboConvenioActionPerformed(evt);
+            }
+        });
+
         jLabel28.setFont(new java.awt.Font("Segoe UI Light", 0, 16)); // NOI18N
         jLabel28.setForeground(new java.awt.Color(204, 204, 204));
         jLabel28.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel28.setText("Plano");
+
+        comboPlano.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                comboPlanoItemStateChanged(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -193,7 +252,7 @@ public class cdPaciente extends javax.swing.JPanel {
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
                                     .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(comboConvenio, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
                                     .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -209,7 +268,7 @@ public class cdPaciente extends javax.swing.JPanel {
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel28, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(comboPlano, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(40, 40, 40)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
@@ -265,10 +324,10 @@ public class cdPaciente extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel19)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(comboConvenio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(comboPlano, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel28)
                             .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblTel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -336,11 +395,33 @@ public class cdPaciente extends javax.swing.JPanel {
       
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
+    private void comboConvenioItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboConvenioItemStateChanged
+        System.out.println("É isso");
+        Connection con = Conexao.AbrirConexao();
+        ConvenioDAO sql = new ConvenioDAO(con);
+        int idConv = sql.Capturar(comboConvenio.getSelectedItem().toString());
+        System.out.println(idConv);
+        
+        AtualizaComboPlanos(idConv);
+        
+        
+        
+        
+    }//GEN-LAST:event_comboConvenioItemStateChanged
+
+    private void comboConvenioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboConvenioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboConvenioActionPerformed
+
+    private void comboPlanoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboPlanoItemStateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboPlanoItemStateChanged
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCadastrar;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JComboBox<String> comboConvenio;
+    private javax.swing.JComboBox<String> comboPlano;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;

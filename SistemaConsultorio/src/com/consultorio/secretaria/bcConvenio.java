@@ -6,8 +6,10 @@
 package com.consultorio.secretaria;
 
 import com.consultorio.DAO.Conexao;
+import com.consultorio.DAO.ConvenioDAO;
 import com.consultorio.DAO.MedicoDAO;
 import com.consultorio.main.TrocarPanel;
+import com.consultorio.model.Convenio;
 import com.consultorio.model.Medico;
 import java.awt.Color;
 import java.sql.Connection;
@@ -30,7 +32,7 @@ public class bcConvenio extends javax.swing.JPanel {
      */
     public bcConvenio() {
         initComponents();
-        listarMedicos("", "");
+        listarConvenios("", "");
         VerificaSelecao();
     }
     
@@ -44,7 +46,7 @@ public class bcConvenio extends javax.swing.JPanel {
                 while (true) {
                     System.out.println("Verificando");
                             
-                    if(tbMedicos.getSelectedRow() != -1){
+                    if(tbConvenios.getSelectedRow() != -1){
                         btnBuscar1.setEnabled(true);
                     }else{
                         btnBuscar1.setEnabled(false);
@@ -64,26 +66,26 @@ public class bcConvenio extends javax.swing.JPanel {
     
     
 
-    public void listarMedicos(String nome, String crm) {
+    public void listarConvenios(String nome, String cnpj) {
         Connection con = Conexao.AbrirConexao();
-        MedicoDAO sql = new MedicoDAO(con);
+        ConvenioDAO sql = new ConvenioDAO(con);
 
-        List<Medico> lista = new ArrayList<>();
-        lista = sql.ListarMedicos(nome, crm);
+        List<Convenio> lista = new ArrayList<>();
+        lista = sql.ListarConvenios(nome, cnpj);
         
-         DefaultTableModel tbm =  (DefaultTableModel) tbMedicos.getModel();
+         DefaultTableModel tbm =  (DefaultTableModel) tbConvenios.getModel();
         
         while(tbm.getRowCount() > 0){
             tbm.removeRow(0);
         }
         
         int i = 0;
-        for (Medico atual : lista) {
+        for (Convenio atual : lista) {
             tbm.addRow(new String[i]);
-            tbMedicos.setValueAt(atual.getId(), i, 0);
-            tbMedicos.setValueAt(atual.getNome(), i, 1);
-            tbMedicos.setValueAt(atual.getCrm(), i, 2);
-            tbMedicos.setValueAt(atual.getSexo(), i, 3);
+            tbConvenios.setValueAt(atual.getId(), i, 0);
+            tbConvenios.setValueAt(atual.getNome(), i, 1);
+            tbConvenios.setValueAt(atual.getCnpj(), i, 2);
+            tbConvenios.setValueAt(atual.getBairro(), i, 3);
 
             i++;
 
@@ -112,7 +114,7 @@ public class bcConvenio extends javax.swing.JPanel {
         iptCrm = new javax.swing.JTextField();
         btnBuscar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tbMedicos = new javax.swing.JTable();
+        tbConvenios = new javax.swing.JTable();
         btnBuscar1 = new javax.swing.JButton();
 
         setPreferredSize(new java.awt.Dimension(790, 470));
@@ -144,7 +146,7 @@ public class bcConvenio extends javax.swing.JPanel {
         btnBuscar.setForeground(new java.awt.Color(255, 255, 255));
         btnBuscar.setText("Buscar");
         btnBuscar.setBorderPainted(false);
-        btnBuscar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnBuscar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnBuscar.setFocusPainted(false);
         btnBuscar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseExited(java.awt.event.MouseEvent evt) {
@@ -160,7 +162,7 @@ public class bcConvenio extends javax.swing.JPanel {
             }
         });
 
-        tbMedicos.setModel(new javax.swing.table.DefaultTableModel(
+        tbConvenios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -176,14 +178,14 @@ public class bcConvenio extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(tbMedicos);
+        jScrollPane1.setViewportView(tbConvenios);
 
         btnBuscar1.setBackground(new java.awt.Color(14, 196, 10));
         btnBuscar1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnBuscar1.setForeground(new java.awt.Color(255, 255, 255));
         btnBuscar1.setText("Mais Opções...");
         btnBuscar1.setBorderPainted(false);
-        btnBuscar1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnBuscar1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnBuscar1.setFocusPainted(false);
         btnBuscar1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseExited(java.awt.event.MouseEvent evt) {
@@ -302,7 +304,7 @@ public class bcConvenio extends javax.swing.JPanel {
     }//GEN-LAST:event_btnBuscarMouseEntered
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        listarMedicos(iptNome.getText(), iptCrm.getText() );
+        listarConvenios(iptNome.getText(), iptCrm.getText() );
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnBuscar1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscar1MouseExited
@@ -315,16 +317,16 @@ public class bcConvenio extends javax.swing.JPanel {
 
     private void btnBuscar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscar1ActionPerformed
         Connection con = Conexao.AbrirConexao();
-        MedicoDAO sql = new MedicoDAO(con);
-        String id = tbMedicos.getValueAt(tbMedicos.getSelectedRow(), 0).toString();
+        ConvenioDAO sql = new ConvenioDAO(con);
+        String id = tbConvenios.getValueAt(tbConvenios.getSelectedRow(), 0).toString();
         System.out.println(id);  
         
-        Medico a = sql.CapturarMedico(Integer.parseInt(id));
+        Convenio a = sql.CapturarConvenio(Integer.parseInt(id));
                 
         
         
         
-        new TrocarPanel(pnlPrincipal, new opMedico(a));
+        new TrocarPanel(pnlPrincipal, new opConvenio(a));
     }//GEN-LAST:event_btnBuscar1ActionPerformed
 
 
@@ -341,6 +343,6 @@ public class bcConvenio extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel pnlPrincipal;
-    private javax.swing.JTable tbMedicos;
+    private javax.swing.JTable tbConvenios;
     // End of variables declaration//GEN-END:variables
 }
