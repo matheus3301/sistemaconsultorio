@@ -603,6 +603,7 @@
                           </Properties>
                           <Events>
                             <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="rSButtonMetro26MouseEntered"/>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rSButtonMetro26ActionPerformed"/>
                           </Events>
                         </Component>
                         <Component class="rojerusan.RSButtonMetro" name="rSButtonMetro28">
@@ -614,6 +615,7 @@
                           </Properties>
                           <Events>
                             <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="rSButtonMetro28MouseEntered"/>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rSButtonMetro28ActionPerformed"/>
                           </Events>
                         </Component>
                       </SubComponents>

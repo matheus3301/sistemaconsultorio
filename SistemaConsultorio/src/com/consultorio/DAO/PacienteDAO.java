@@ -174,4 +174,51 @@ public class PacienteDAO extends ExecuteSQL {
         }
 
     }
+     
+     public List<Paciente> ListarCombo(){
+        String sql = "select nome from tb_paciente order by nome";
+        List<Paciente> lista = new ArrayList<>();
+        try{
+            PreparedStatement ps = getCon().prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            
+            if(rs != null){
+                while(rs.next()){
+                    Paciente a = new Paciente();
+                    a.setNome(rs.getString(1));
+                    lista.add(a);
+                }
+                
+                return lista;
+            }else{
+                return lista;
+            }
+        }catch(SQLException e){
+            return null;
+        }
+    }
+     
+      public int CapturarId(String nome){
+        String sql = "select idtb_paciente FROM tb_paciente WHERE nome = ?";
+        int id = -1;
+        
+        try {
+            PreparedStatement ps = getCon().prepareStatement(sql);
+            ps.setString(1, nome);
+            ResultSet rs = ps.executeQuery();
+            
+            while(rs.next()){
+                id = rs.getInt(1);
+            }
+            
+            return id;
+            
+        } catch (SQLException ex) {
+           return id;
+        }
+        
+        
+        
+        
+    }
 }

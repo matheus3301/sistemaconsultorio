@@ -207,4 +207,51 @@ public class MedicoDAO extends ExecuteSQL {
         }
 
     }
+    
+    public List<Medico> ListarCombo(){
+        String sql = "select nome from tb_medico order by nome";
+        List<Medico> lista = new ArrayList<>();
+        try{
+            PreparedStatement ps = getCon().prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            
+            if(rs != null){
+                while(rs.next()){
+                    Medico a = new Medico();
+                    a.setNome(rs.getString(1));
+                    lista.add(a);
+                }
+                
+                return lista;
+            }else{
+                return lista;
+            }
+        }catch(SQLException e){
+            return null;
+        }
+    }
+    
+     public int CapturarId(String nome){
+        String sql = "select idtb_medico FROM tb_medico WHERE nome = ?";
+        int id = -1;
+        
+        try {
+            PreparedStatement ps = getCon().prepareStatement(sql);
+            ps.setString(1, nome);
+            ResultSet rs = ps.executeQuery();
+            
+            while(rs.next()){
+                id = rs.getInt(1);
+            }
+            
+            return id;
+            
+        } catch (SQLException ex) {
+           return id;
+        }
+        
+        
+        
+        
+    }
 }

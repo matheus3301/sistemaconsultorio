@@ -326,12 +326,22 @@ public class home extends javax.swing.JPanel {
                 rSButtonMetro26MouseEntered(evt);
             }
         });
+        rSButtonMetro26.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rSButtonMetro26ActionPerformed(evt);
+            }
+        });
 
         rSButtonMetro28.setBackground(new java.awt.Color(32, 47, 90));
         rSButtonMetro28.setText("Consultar Agenda");
         rSButtonMetro28.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 rSButtonMetro28MouseEntered(evt);
+            }
+        });
+        rSButtonMetro28.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rSButtonMetro28ActionPerformed(evt);
             }
         });
 
@@ -527,6 +537,14 @@ public class home extends javax.swing.JPanel {
     private void jLabel12MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel12MouseClicked
         new TrocarPanel(pnlPrincipal, new bcConvenio());
     }//GEN-LAST:event_jLabel12MouseClicked
+
+    private void rSButtonMetro26ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonMetro26ActionPerformed
+       new TrocarPanel(pnlPrincipal, new cdCompromisso());
+    }//GEN-LAST:event_rSButtonMetro26ActionPerformed
+
+    private void rSButtonMetro28ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonMetro28ActionPerformed
+       new TrocarPanel(pnlPrincipal, new bcCompromisso());
+    }//GEN-LAST:event_rSButtonMetro28ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

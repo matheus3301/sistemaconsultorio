@@ -11,9 +11,9 @@ package com.consultorio.model;
  */
 public class Compromisso {
     private int id;
-    private String medico;
+    private int medico;
     private String tipo;
-    private String paciente;
+    private int paciente;
     private String data;
     private String horario_inicial;
     private String horario_final;
@@ -27,11 +27,11 @@ public class Compromisso {
         this.id = id;
     }
 
-    public String getMedico() {
+    public int getMedico() {
         return medico;
     }
 
-    public void setMedico(String medico) {
+    public void setMedico(int medico) {
         this.medico = medico;
     }
 
@@ -43,11 +43,11 @@ public class Compromisso {
         this.tipo = tipo;
     }
 
-    public String getPaciente() {
+    public int getPaciente() {
         return paciente;
     }
 
-    public void setPaciente(String paciente) {
+    public void setPaciente(int paciente) {
         this.paciente = paciente;
     }
 
