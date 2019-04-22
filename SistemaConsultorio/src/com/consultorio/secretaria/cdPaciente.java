@@ -8,11 +8,13 @@ package com.consultorio.secretaria;
 import com.consultorio.DAO.Conexao;
 import com.consultorio.DAO.ConvenioDAO;
 import com.consultorio.DAO.MedicoDAO;
+import com.consultorio.DAO.PacienteDAO;
 import com.consultorio.DAO.PlanosDAO;
 import com.consultorio.main.ErrorMsg;
 import com.consultorio.main.RightMsg;
 import com.consultorio.model.Convenio;
 import com.consultorio.model.Medico;
+import com.consultorio.model.Paciente;
 import com.consultorio.model.Plano;
 import java.awt.Color;
 import java.sql.Connection;
@@ -25,52 +27,81 @@ import javax.swing.ButtonGroup;
  * @author aluno
  */
 public class cdPaciente extends javax.swing.JPanel {
+    
+    int conv;
+    
+    public boolean VerificarCampos() {
+        if (lblNome.getText().equals("") || lblCpf.getText().equals("") || lblCep.getText().equals("")
+                || !(rdMasc.isSelected() || rdFem.isSelected()) || lblBairro.getText().equals("")
+                || lblN.getText().equals("") || lblTel.getText().equals("") || lblRua.getText().equals("")
+                || lblRg.getText().equals("") || comboPlano.getSelectedItem().toString().equals("Selecione...")) {
+            new ErrorMsg().ReceberMsg("Nenhum Campo pode estar vazio!");
+            return false;
+        } else {
+            
+            return true;
+            
+        }
+    }
+    
+    public void LimparCampos(){
+        lblNome.setText("");
+        lblCpf.setText("");
+        lblCep.setText("");
+        rdMasc.setSelected(false);
+        rdFem.setSelected(false);
+        lblBairro.setText("");
+        lblN.setText("");
+        lblTel.setText("");
+        lblRua.setText("");
+        lblRg.setText("");
+        comboConvenio.setSelectedIndex(0);
+        
+        
+    }
 
     /**
      * Creates new form home
      */
     public cdPaciente() {
         initComponents();
-
+        
         ButtonGroup sexo = new ButtonGroup();
         sexo.add(rdMasc);
         sexo.add(rdFem);
         
         AtualizaComboConvenio();
-
+        
     }
     
     private void AtualizaComboPlanos(int convenio) {
         comboPlano.removeAllItems();
-        
         
         Connection con = Conexao.AbrirConexao();
         PlanosDAO sql = new PlanosDAO(con);
         List<Plano> lista = new ArrayList<>();
         lista = sql.ListarComboPorConvenio(convenio);
         comboPlano.addItem("Selecione...");
-
+        
         for (Plano b : lista) {
             comboPlano.addItem(b.getNome());
         }
-
+        
         Conexao.FecharConexao(con);
     }
     
     private void AtualizaComboConvenio() {
-        
-        
         
         Connection con = Conexao.AbrirConexao();
         ConvenioDAO sql = new ConvenioDAO(con);
         List<Convenio> lista = new ArrayList<>();
         lista = sql.ListarCombo();
         comboConvenio.addItem("Selecione...");
-
+        
         for (Convenio b : lista) {
             comboConvenio.addItem(b.getNome());
         }
-
+        
         Conexao.FecharConexao(con);
     }
 
@@ -382,7 +413,7 @@ public class cdPaciente extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCadastrarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCadastrarMouseExited
-        btnCadastrar.setBackground(new Color(223,57,51));
+        btnCadastrar.setBackground(new Color(223, 57, 51));
         btnCadastrar.setForeground(Color.WHITE);
     }//GEN-LAST:event_btnCadastrarMouseExited
 
@@ -392,7 +423,45 @@ public class cdPaciente extends javax.swing.JPanel {
     }//GEN-LAST:event_btnCadastrarMouseEntered
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
-      
+        if (VerificarCampos()) {
+            Paciente a = new Paciente();
+            a.setNome(lblNome.getText());
+            a.setBairro(lblBairro.getText());
+            a.setCep(lblCep.getText());
+            a.setCpf(lblCpf.getText());
+            a.setNumero(lblN.getText());
+            a.setRg(lblRg.getText());
+            a.setRua(lblRua.getText());
+            
+            
+            if (rdMasc.isSelected()) {
+                a.setSexo("M");
+            }
+
+            if (rdFem.isSelected()) {
+                a.setSexo("F");
+            }
+            
+            a.setTelefone(lblTel.getText());
+            
+            Connection con = Conexao.AbrirConexao();
+            PlanosDAO sql = new PlanosDAO(con);
+            a.setIdPlanoConvenio(sql.Capturar(comboPlano.getSelectedItem().toString(), conv));
+            
+           PacienteDAO banco = new PacienteDAO(con);
+           
+           if (banco.Cadastrar(a)) {
+               new RightMsg().ReceberMsg("Paciente Cadastrado!");
+               LimparCampos();
+               
+               
+           }else{
+               new ErrorMsg().ReceberMsg("Erro ao Cadastrar!");
+           }
+
+            
+        }
+
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
     private void comboConvenioItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboConvenioItemStateChanged
@@ -401,12 +470,11 @@ public class cdPaciente extends javax.swing.JPanel {
         ConvenioDAO sql = new ConvenioDAO(con);
         int idConv = sql.Capturar(comboConvenio.getSelectedItem().toString());
         System.out.println(idConv);
+        conv = idConv;
         
         AtualizaComboPlanos(idConv);
         
-        
-        
-        
+
     }//GEN-LAST:event_comboConvenioItemStateChanged
 
     private void comboConvenioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboConvenioActionPerformed

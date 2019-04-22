@@ -7,8 +7,10 @@ package com.consultorio.secretaria;
 
 import com.consultorio.DAO.Conexao;
 import com.consultorio.DAO.MedicoDAO;
+import com.consultorio.DAO.PacienteDAO;
 import com.consultorio.main.TrocarPanel;
 import com.consultorio.model.Medico;
+import com.consultorio.model.Paciente;
 import java.awt.Color;
 import java.sql.Connection;
 import java.text.SimpleDateFormat;
@@ -66,10 +68,10 @@ public class bcPaciente extends javax.swing.JPanel {
 
     public void listarMedicos(String nome, String crm) {
         Connection con = Conexao.AbrirConexao();
-        MedicoDAO sql = new MedicoDAO(con);
+        PacienteDAO sql = new PacienteDAO(con);
 
-        List<Medico> lista = new ArrayList<>();
-        lista = sql.ListarMedicos(nome, crm);
+        List<Paciente> lista = new ArrayList<>();
+        lista = sql.ListarPacientes(nome, crm);
         
          DefaultTableModel tbm =  (DefaultTableModel) tbMedicos.getModel();
         
@@ -78,11 +80,11 @@ public class bcPaciente extends javax.swing.JPanel {
         }
         
         int i = 0;
-        for (Medico atual : lista) {
+        for (Paciente atual : lista) {
             tbm.addRow(new String[i]);
             tbMedicos.setValueAt(atual.getId(), i, 0);
             tbMedicos.setValueAt(atual.getNome(), i, 1);
-            tbMedicos.setValueAt(atual.getCrm(), i, 2);
+            tbMedicos.setValueAt(atual.getCpf(), i, 2);
             tbMedicos.setValueAt(atual.getSexo(), i, 3);
 
             i++;
@@ -142,7 +144,7 @@ public class bcPaciente extends javax.swing.JPanel {
         btnBuscar.setForeground(new java.awt.Color(255, 255, 255));
         btnBuscar.setText("Buscar");
         btnBuscar.setBorderPainted(false);
-        btnBuscar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnBuscar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnBuscar.setFocusPainted(false);
         btnBuscar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseExited(java.awt.event.MouseEvent evt) {
@@ -163,11 +165,11 @@ public class bcPaciente extends javax.swing.JPanel {
 
             },
             new String [] {
-                "ID", "Nome ", "CPF", "Convênio", "Sexo"
+                "ID", "Nome ", "CPF", "Sexo"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -181,7 +183,7 @@ public class bcPaciente extends javax.swing.JPanel {
         btnBuscar1.setForeground(new java.awt.Color(255, 255, 255));
         btnBuscar1.setText("Mais Opções...");
         btnBuscar1.setBorderPainted(false);
-        btnBuscar1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnBuscar1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnBuscar1.setFocusPainted(false);
         btnBuscar1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseExited(java.awt.event.MouseEvent evt) {
@@ -313,16 +315,16 @@ public class bcPaciente extends javax.swing.JPanel {
 
     private void btnBuscar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscar1ActionPerformed
         Connection con = Conexao.AbrirConexao();
-        MedicoDAO sql = new MedicoDAO(con);
+        PacienteDAO sql = new PacienteDAO(con);
         String id = tbMedicos.getValueAt(tbMedicos.getSelectedRow(), 0).toString();
         System.out.println(id);  
         
-        Medico a = sql.CapturarMedico(Integer.parseInt(id));
+        Paciente a = sql.Capturar(Integer.parseInt(id));
                 
         
         
         
-        new TrocarPanel(pnlPrincipal, new opMedico(a));
+        new TrocarPanel(pnlPrincipal, new opPaciente(a));
     }//GEN-LAST:event_btnBuscar1ActionPerformed
 
 

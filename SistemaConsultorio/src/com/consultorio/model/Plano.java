@@ -14,6 +14,18 @@ public class Plano {
     private int id_convenio;
     private String nome;
     private String descricao;
+    
+    private String nome_conv;
+
+    public String getNome_conv() {
+        return nome_conv;
+    }
+
+    public void setNome_conv(String nome_conv) {
+        this.nome_conv = nome_conv;
+    }
+    
+    
 
     public String getNome() {
         return nome;

@@ -21,6 +21,17 @@ public class Paciente {
     private String numero;
     private String bairro;
     private String cep;
+    private int idPlanoConvenio;
+
+    public int getIdPlanoConvenio() {
+        return idPlanoConvenio;
+    }
+
+    public void setIdPlanoConvenio(int idPlanoConvenio) {
+        this.idPlanoConvenio = idPlanoConvenio;
+    }
+    
+    
 
     public int getId() {
         return id;
