@@ -290,16 +290,19 @@ public class bcCompromisso extends javax.swing.JPanel {
 
     private void btnBuscar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscar1ActionPerformed
         Connection con = Conexao.AbrirConexao();
-        MedicoDAO sql = new MedicoDAO(con);
-        String id = tbCompromisso.getValueAt(tbCompromisso.getSelectedRow(), 0).toString();
-        System.out.println(id);  
+        CompromissoDAO sql = new CompromissoDAO(con);
         
-        Medico a = sql.CapturarMedico(Integer.parseInt(id));
+        String id = tbCompromisso.getValueAt(tbCompromisso.getSelectedRow(), 0).toString();
+        
+        Compromisso a = sql.Capturar(Integer.parseInt(id));
+        
+       
+      
                 
         
         
         
-        new TrocarPanel(pnlPrincipal, new opMedico(a));
+        new TrocarPanel(pnlPrincipal, new opCompromisso(a));
     }//GEN-LAST:event_btnBuscar1ActionPerformed
 
     private void comboMedicoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboMedicoItemStateChanged

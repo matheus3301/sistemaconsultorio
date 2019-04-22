@@ -12,12 +12,12 @@ import com.consultorio.secretaria.*;
  *
  * @author aluno
  */
-public class home extends javax.swing.JPanel {
+public class homeAdm extends javax.swing.JPanel {
 
     /**
      * Creates new form home
      */
-    public home() {
+    public homeAdm() {
         initComponents();
         menuMedico.setVisible(false);
         menuPaciente.setVisible(false);
@@ -44,6 +44,8 @@ public class home extends javax.swing.JPanel {
         bgConvenio = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
         jLabel24 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
         bgPaciente = new javax.swing.JPanel();
         menuPaciente = new javax.swing.JPanel();
         bncCadastrarPaciente = new rojerusan.RSButtonMetro();
@@ -102,16 +104,42 @@ public class home extends javax.swing.JPanel {
             }
         });
 
+        jLabel13.setBackground(new java.awt.Color(204, 204, 204));
+        jLabel13.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(204, 204, 204));
+        jLabel13.setText("Cadastrar Secretária");
+        jLabel13.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jLabel13.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel13MouseClicked(evt);
+            }
+        });
+
+        jLabel14.setBackground(new java.awt.Color(204, 204, 204));
+        jLabel14.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(204, 204, 204));
+        jLabel14.setText("Buscar Secretárias");
+        jLabel14.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jLabel14.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel14MouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout bgConvenioLayout = new javax.swing.GroupLayout(bgConvenio);
         bgConvenio.setLayout(bgConvenioLayout);
         bgConvenioLayout.setHorizontalGroup(
             bgConvenioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(bgConvenioLayout.createSequentialGroup()
-                .addGap(161, 161, 161)
+                .addGap(35, 35, 35)
+                .addComponent(jLabel13)
+                .addGap(43, 43, 43)
+                .addComponent(jLabel14)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel12)
-                .addGap(125, 125, 125)
+                .addGap(32, 32, 32)
                 .addComponent(jLabel24)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(36, 36, 36))
         );
         bgConvenioLayout.setVerticalGroup(
             bgConvenioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -119,7 +147,9 @@ public class home extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(bgConvenioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
-                    .addComponent(jLabel24))
+                    .addComponent(jLabel24)
+                    .addComponent(jLabel13)
+                    .addComponent(jLabel14))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -526,6 +556,14 @@ public class home extends javax.swing.JPanel {
        new TrocarPanel(pnlPrincipal, new bcCompromisso());
     }//GEN-LAST:event_rSButtonMetro28ActionPerformed
 
+    private void jLabel13MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel13MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel13MouseClicked
+
+    private void jLabel14MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel14MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel14MouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel BgPanel;
@@ -537,6 +575,8 @@ public class home extends javax.swing.JPanel {
     private rojerusan.RSButtonMetro bncCadastrarPaciente;
     private rojerusan.RSButtonMetro bntConsultarPaciente;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;

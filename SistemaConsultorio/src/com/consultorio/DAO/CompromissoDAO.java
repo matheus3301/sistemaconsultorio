@@ -19,11 +19,11 @@ import java.util.List;
  * @author matheus
  */
 public class CompromissoDAO extends ExecuteSQL {
-    
+
     public CompromissoDAO(Connection con) {
         super(con);
     }
-    
+
     public boolean Cadastrar(Compromisso a) {
 
         String sql = "INSERT INTO tb_compromissos VALUES(0,?,?,?,?,?,?,?)";
@@ -34,10 +34,10 @@ public class CompromissoDAO extends ExecuteSQL {
             ps.setString(2, a.getTipo());
             if (a.getPaciente() == 0) {
                 ps.setNull(3, java.sql.Types.INTEGER);
-            }else{
+            } else {
                 ps.setInt(3, a.getPaciente());
             }
-            
+
             ps.setString(4, a.getData());
             ps.setString(5, a.getHorario_inicial());
             ps.setString(6, a.getHorario_final());
@@ -54,15 +54,13 @@ public class CompromissoDAO extends ExecuteSQL {
         }
 
     }
-    
-    
+
     public List<Compromisso> ListarTabela(int idM) {
         List<Compromisso> lista = new ArrayList<>();
 
         try {
             String consulta = "select * from tb_compromissos "
                     + "where tb_medico_idtb_medico = ?";
-
 
             PreparedStatement ps = getCon().prepareStatement(consulta);
             ps.setInt(1, idM);
@@ -81,7 +79,7 @@ public class CompromissoDAO extends ExecuteSQL {
                     a.setHorario_inicial(rs.getString(6));
                     a.setHorario_final(rs.getString(7));
                     a.setDescricao(rs.getString(8));
-                    
+
                     lista.add(a);
 
                 }
@@ -92,5 +90,36 @@ public class CompromissoDAO extends ExecuteSQL {
 
         return lista;
     }
-    
+
+    public Compromisso Capturar(int id) {
+        Compromisso a = new Compromisso();
+
+        try {
+            String consulta = "select * from tb_compromissos "
+                    + "where idtb_compromissos = " + id;
+
+            PreparedStatement ps = getCon().prepareStatement(consulta);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs != null) {
+                while (rs.next()) {
+
+                    a.setId(rs.getInt(1));
+                    a.setMedico(rs.getInt(2));
+                    a.setTipo(rs.getString(3));
+                    a.setPaciente(rs.getInt(4));
+                    a.setData(rs.getString(5));
+                    a.setHorario_inicial(rs.getString(6));
+                    a.setHorario_final(rs.getString(7));
+                    a.setDescricao(rs.getString(8));
+
+                }
+            }
+        } catch (SQLException ex) {
+            ex.getMessage();
+        }
+
+        return a;
+    }
+
 }

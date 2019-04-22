@@ -47,4 +47,33 @@ public class AdministradorDAO extends ExecuteSQL{
         return finalResult;
     }
     
+    public Administrador CapturarAdministradorLogin(String login, String senha){
+        
+        Administrador a = new Administrador();
+        try{
+            String consulta = "select login, senha, nome, idtb_administrador from tb_administrador "
+            + "where login = '"+login+"' and senha = '"+senha+"'";
+            
+            PreparedStatement ps = getCon().prepareStatement(consulta);
+            ResultSet rs = ps.executeQuery();
+            
+            if(rs != null){
+                while(rs.next()){
+                    
+                    a.setLogin(rs.getString(1));
+                    a.setSenha(rs.getString(2));
+                    a.setNome(rs.getString(3));
+                    a.setId(rs.getInt(4));
+                    
+                    
+                }
+            }
+        } catch(SQLException ex){
+            ex.getMessage();
+        }
+        
+        return a;
+    }
+
+    
 }

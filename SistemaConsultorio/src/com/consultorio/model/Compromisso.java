@@ -18,6 +18,27 @@ public class Compromisso {
     private String horario_inicial;
     private String horario_final;
     private String descricao;
+    
+    private String nomeM;
+    private String nomeP;
+
+    public String getNomeM() {
+        return nomeM;
+    }
+
+    public void setNomeM(String nomeM) {
+        this.nomeM = nomeM;
+    }
+
+    public String getNomeP() {
+        return nomeP;
+    }
+
+    public void setNomeP(String nomeP) {
+        this.nomeP = nomeP;
+    }
+    
+    
 
     public int getId() {
         return id;

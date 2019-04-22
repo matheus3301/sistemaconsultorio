@@ -12,6 +12,7 @@ import com.consultorio.DAO.AdministradorDAO;
 import com.consultorio.DAO.Conexao;
 import com.consultorio.DAO.MedicoDAO;
 import com.consultorio.DAO.SecretariaDAO;
+import com.consultorio.secretaria.jfMenuAdm;
 import java.sql.Connection;
 import javax.swing.JOptionPane;
 import com.consultorio.secretaria.jfMenuSec;
@@ -322,6 +323,12 @@ public class jfLogin extends javax.swing.JFrame {
                 
                 if(sql.Logar(user, senha) == true){
                     System.out.println("Logado com Sucesso como Adm!");
+                    
+                    jfMenuAdm sec = new jfMenuAdm();
+                    sec.ReceberSec(sql.CapturarAdministradorLogin(user, senha));
+                    sec.setVisible(true);
+                    
+                    dispose();
                 }else{
                     this.telaTremer();
                     this.limpaCampos();
