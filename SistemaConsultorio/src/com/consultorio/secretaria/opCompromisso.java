@@ -13,6 +13,7 @@ import com.consultorio.DAO.PacienteDAO;
 import com.consultorio.DAO.PlanosDAO;
 import com.consultorio.main.ErrorMsg;
 import com.consultorio.main.RightMsg;
+import com.consultorio.main.TrocarPanel;
 import com.consultorio.model.Compromisso;
 import com.consultorio.model.Convenio;
 import com.consultorio.model.Medico;
@@ -23,6 +24,7 @@ import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.ButtonGroup;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -88,12 +90,27 @@ public class opCompromisso extends javax.swing.JPanel {
         lblInicial.setText(a.getHorario_inicial());
         lblFinal.setText(a.getHorario_final());
         
+        
+        Connection con = Conexao.AbrirConexao();
+        MedicoDAO sqlM = new MedicoDAO(con);
+        Medico med = sqlM.CapturarMedico(a.getMedico());
+        
+        comboMedico.setSelectedItem(med.getNome());
+        
         if (a.getTipo().equals("Externo")) {
             rdEx.setSelected(true);
         }else{
             rdCon.setSelected(true);
+            PacienteDAO sqlP = new PacienteDAO(con);
+            Paciente pac = sqlP.Capturar(a.getPaciente());
+        
+            comboPaciente.setSelectedItem(pac.getNome());
         }
         
+        
+        lblDesc.setText(a.getDescricao());
+        
+        lblId.setText(a.getId()+"");
         
         
     }
@@ -140,6 +157,8 @@ public class opCompromisso extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        pnlPrincipal = new javax.swing.JPanel();
+        Home = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
@@ -162,8 +181,13 @@ public class opCompromisso extends javax.swing.JPanel {
         lblInicial = new javax.swing.JFormattedTextField();
         btnCadastrar1 = new javax.swing.JButton();
         btnCadastrar2 = new javax.swing.JButton();
+        labell = new javax.swing.JLabel();
+        lblId = new javax.swing.JTextField();
 
         setPreferredSize(new java.awt.Dimension(880, 470));
+
+        pnlPrincipal.setBackground(new java.awt.Color(255, 255, 255));
+        pnlPrincipal.setLayout(new javax.swing.BoxLayout(pnlPrincipal, javax.swing.BoxLayout.LINE_AXIS));
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         jLabel6.setText("Alterar Compromisso");
@@ -325,39 +349,56 @@ public class opCompromisso extends javax.swing.JPanel {
             }
         });
 
+        labell.setFont(new java.awt.Font("Segoe UI Light", 0, 16)); // NOI18N
+        labell.setForeground(new java.awt.Color(204, 204, 204));
+        labell.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labell.setText("ID");
+
+        lblId.setEditable(false);
+        lblId.setEnabled(false);
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(327, 327, 327)
-                .addComponent(jLabel29, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(btnCadastrar2, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnCadastrar1, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(comboMedico, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(txtP, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(comboPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(rdCon)
-                                .addGap(46, 46, 46)
-                                .addComponent(rdEx)))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(jPanel2Layout.createSequentialGroup()
+                                    .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(comboMedico, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGroup(jPanel2Layout.createSequentialGroup()
+                                    .addComponent(txtP, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(comboPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanel2Layout.createSequentialGroup()
+                                    .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(rdCon)
+                                    .addGap(46, 46, 46)
+                                    .addComponent(rdEx)))
+                            .addComponent(jLabel29, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(40, 40, 40)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(labell, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblId))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lblData, javax.swing.GroupLayout.DEFAULT_SIZE, 282, Short.MAX_VALUE))
+                                .addComponent(lblData, javax.swing.GroupLayout.DEFAULT_SIZE, 292, Short.MAX_VALUE))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -365,15 +406,7 @@ public class opCompromisso extends javax.swing.JPanel {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lblFinal)
-                                    .addComponent(lblInicial)))))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnCadastrar2, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnCadastrar1, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(lblInicial))))))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -400,10 +433,13 @@ public class opCompromisso extends javax.swing.JPanel {
                     .addComponent(txtP)
                     .addComponent(lblFinal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jLabel29)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel29)
+                    .addComponent(lblId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labell))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnCadastrar1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -411,31 +447,64 @@ public class opCompromisso extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+        javax.swing.GroupLayout HomeLayout = new javax.swing.GroupLayout(Home);
+        Home.setLayout(HomeLayout);
+        HomeLayout.setHorizontalGroup(
+            HomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(HomeLayout.createSequentialGroup()
                 .addGap(58, 58, 58)
                 .addComponent(jLabel6)
                 .addGap(112, 112, 112)
                 .addComponent(jLabel3))
             .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+        HomeLayout.setVerticalGroup(
+            HomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(HomeLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
+                .addGroup(HomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(HomeLayout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, HomeLayout.createSequentialGroup()
                         .addComponent(jLabel6)
                         .addGap(34, 34, 34)))
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        pnlPrincipal.add(Home);
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 790, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(pnlPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 790, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 490, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(pnlPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 490, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void rdConStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_rdConStateChanged
+        if (rdCon.isSelected()) {
+            comboPaciente.setVisible(true);
+            txtP.setVisible(true);
+        }else{
+            txtP.setVisible(false);
+            comboPaciente.setVisible(false);
+        }
+    }//GEN-LAST:event_rdConStateChanged
 
     private void btnCadastrarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCadastrarMouseExited
         btnCadastrar.setBackground(new Color(223, 57, 51));
@@ -448,50 +517,27 @@ public class opCompromisso extends javax.swing.JPanel {
     }//GEN-LAST:event_btnCadastrarMouseEntered
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
-        if(VerificarCampos()){
-            Compromisso a = new Compromisso();
-            a.setData(lblData.getFechaSeleccionada());
-            a.setDescricao(lblDesc.getText());
-            a.setHorario_final(lblFinal.getText());
-            a.setHorario_inicial(lblInicial.getText());
-            
-            Connection con = Conexao.AbrirConexao();
-            MedicoDAO sqlM = new MedicoDAO(con);            
-            PacienteDAO sqlP = new PacienteDAO(con);
-            
-            CompromissoDAO sqlC = new CompromissoDAO(con);
-            
-            
-            
-            a.setMedico(sqlM.CapturarId(comboMedico.getSelectedItem().toString()));
-            
-            if (rdCon.isSelected()) {
-                a.setTipo("Consulta");
-                if (comboPaciente.getSelectedItem().toString().equals("Selecione...")) {
-                    new ErrorMsg().ReceberMsg("Selecione um Paciente");
-                }else{
-                    a.setPaciente(sqlP.CapturarId(comboPaciente.getSelectedItem().toString()));
-                    sqlC.Cadastrar(a);
-                    
-                    
-                }
+        int res = JOptionPane.showConfirmDialog(null, "Tem Certeza que deseja excluir?","Consultório",  JOptionPane.YES_NO_OPTION);
+        System.out.println(res);
+
+        Connection con = Conexao.AbrirConexao();
+        CompromissoDAO sql = new CompromissoDAO(con);
+        if (res == 0) {
+            System.out.println("Apagar");
+
+            if (sql.Excluir(Integer.parseInt(lblId.getText()))) {
+                new RightMsg().ReceberMsg("Apagado com sucesso!");
+                new TrocarPanel(pnlPrincipal, new bcCompromisso());
             }else{
-                a.setTipo("Externo");
-                sqlC.Cadastrar(a);
+                new ErrorMsg().ReceberMsg("Erro ao apagar!");
             }
-            
-            new RightMsg().ReceberMsg("Compromisso Marcado!");
-            LimparCampos();
-            
+
+        }else{
+            System.out.println("Cancelar");
         }
-
-            
-        
-
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
     private void comboMedicoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboMedicoItemStateChanged
-        
 
     }//GEN-LAST:event_comboMedicoItemStateChanged
 
@@ -507,16 +553,6 @@ public class opCompromisso extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_lblFinalActionPerformed
 
-    private void rdConStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_rdConStateChanged
-        if (rdCon.isSelected()) {
-            comboPaciente.setVisible(true);
-            txtP.setVisible(true);
-        }else{
-            txtP.setVisible(false);
-            comboPaciente.setVisible(false);
-        }
-    }//GEN-LAST:event_rdConStateChanged
-
     private void btnCadastrar1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCadastrar1MouseExited
         // TODO add your handling code here:
     }//GEN-LAST:event_btnCadastrar1MouseExited
@@ -526,7 +562,40 @@ public class opCompromisso extends javax.swing.JPanel {
     }//GEN-LAST:event_btnCadastrar1MouseEntered
 
     private void btnCadastrar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrar1ActionPerformed
-        // TODO add your handling code here:
+        if(VerificarCampos()){
+            Compromisso a = new Compromisso();
+            a.setData(lblData.getFechaSeleccionada());
+            a.setDescricao(lblDesc.getText());
+            a.setHorario_final(lblFinal.getText());
+            a.setHorario_inicial(lblInicial.getText());
+            a.setId(Integer.parseInt(lblId.getText()));
+
+            Connection con = Conexao.AbrirConexao();
+            MedicoDAO sqlM = new MedicoDAO(con);
+            PacienteDAO sqlP = new PacienteDAO(con);
+
+            CompromissoDAO sqlC = new CompromissoDAO(con);
+
+            a.setMedico(sqlM.CapturarId(comboMedico.getSelectedItem().toString()));
+
+            if (rdCon.isSelected()) {
+                a.setTipo("Consulta");
+                if (comboPaciente.getSelectedItem().toString().equals("Selecione...")) {
+                    new ErrorMsg().ReceberMsg("Selecione um Paciente");
+                }else{
+                    a.setPaciente(sqlP.CapturarId(comboPaciente.getSelectedItem().toString()));
+                    sqlC.Alterar(a);
+
+                }
+            }else{
+                a.setTipo("Externo");
+                sqlC.Alterar(a);
+            }
+
+            new RightMsg().ReceberMsg("Compromisso Alterado!");
+            new TrocarPanel(pnlPrincipal, new bcCompromisso());
+
+        }
     }//GEN-LAST:event_btnCadastrar1ActionPerformed
 
     private void btnCadastrar2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCadastrar2MouseExited
@@ -538,11 +607,12 @@ public class opCompromisso extends javax.swing.JPanel {
     }//GEN-LAST:event_btnCadastrar2MouseEntered
 
     private void btnCadastrar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrar2ActionPerformed
-        // TODO add your handling code here:
+       new TrocarPanel(pnlPrincipal, new bcCompromisso());
     }//GEN-LAST:event_btnCadastrar2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel Home;
     private javax.swing.JButton btnCadastrar;
     private javax.swing.JButton btnCadastrar1;
     private javax.swing.JButton btnCadastrar2;
@@ -558,10 +628,13 @@ public class opCompromisso extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel labell;
     private rojerusan.RSDateChooser lblData;
     private javax.swing.JTextArea lblDesc;
     private javax.swing.JFormattedTextField lblFinal;
+    private javax.swing.JTextField lblId;
     private javax.swing.JFormattedTextField lblInicial;
+    private javax.swing.JPanel pnlPrincipal;
     private javax.swing.JRadioButton rdCon;
     private javax.swing.JRadioButton rdEx;
     private javax.swing.JLabel txtP;

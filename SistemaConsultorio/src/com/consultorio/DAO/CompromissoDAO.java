@@ -121,5 +121,57 @@ public class CompromissoDAO extends ExecuteSQL {
 
         return a;
     }
+    
+    public boolean Alterar(Compromisso a) {
+
+        String sql = "UPDATE tb_compromissos SET tb_medico_idtb_medico = ?, tipo = ?, tb_paciente_idtb_paciente = ?, data = ?, horario_inicial = ?, horario_final = ?, descricao = ?";
+
+        try {
+            PreparedStatement ps = getCon().prepareStatement(sql);
+            ps.setInt(1, a.getMedico());
+            ps.setString(2, a.getTipo());
+            if (a.getPaciente() == 0) {
+                ps.setNull(3, java.sql.Types.INTEGER);
+            } else {
+                ps.setInt(3, a.getPaciente());
+            }
+
+            ps.setString(4, a.getData());
+            ps.setString(5, a.getHorario_inicial());
+            ps.setString(6, a.getHorario_final());
+            ps.setString(7, a.getDescricao());
+
+            if (ps.executeUpdate() > 0) {
+                return true;
+            } else {
+                return false;
+            }
+
+        } catch (SQLException ex) {
+            return false;
+        }
+
+    }
+    
+    public boolean Excluir(int id) {
+
+        String sql = "DELETE FROM tb_compromissos WHERE idtb_compromissos = ?";
+
+        try {
+            PreparedStatement ps = getCon().prepareStatement(sql);
+            ps.setInt(1, id);
+           
+
+            if (ps.executeUpdate() > 0) {
+                return true;
+            } else {
+                return false;
+            }
+
+        } catch (SQLException ex) {
+            return false;
+        }
+
+    }
 
 }

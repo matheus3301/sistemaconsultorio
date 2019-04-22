@@ -387,7 +387,7 @@ public class cdMedico extends javax.swing.JPanel {
             Medico a = new Medico();
 
             a.setNome(lblNome.getText());
-            a.setCpf(lblCep.getText());
+            a.setCpf(lblCpf.getText());
             a.setRg(lblRg.getText());
             a.setCrm(lblCrm.getText());
             a.setTelefone(lblTel.getText());
@@ -425,6 +425,7 @@ public class cdMedico extends javax.swing.JPanel {
                 rdFem.setSelected(false);
                 lblUser.setText("");
                 lblSenha.setText("");
+                lblCpf.setText("");
                 
                 
             }else{

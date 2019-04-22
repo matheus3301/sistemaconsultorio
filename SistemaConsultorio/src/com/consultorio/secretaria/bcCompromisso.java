@@ -94,12 +94,13 @@ public class bcCompromisso extends javax.swing.JPanel {
         while(tbm.getRowCount() > 0){
             tbm.removeRow(0);
         }
-        
+        MedicoDAO sqlM = new MedicoDAO(con);
         int i = 0;
         for (Compromisso atual : lista) {
             tbm.addRow(new String[i]);
+            Medico med = sqlM.CapturarMedico(atual.getMedico());
             tbCompromisso.setValueAt(atual.getId(), i, 0);
-            tbCompromisso.setValueAt(atual.getMedico(), i, 1);
+            tbCompromisso.setValueAt(med.getNome(), i, 1);
             tbCompromisso.setValueAt(atual.getTipo(), i, 2);
             tbCompromisso.setValueAt(atual.getData(), i, 3);
             tbCompromisso.setValueAt(atual.getHorario_inicial(), i, 4);
