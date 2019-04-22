@@ -7,8 +7,10 @@ package com.consultorio.secretaria;
 
 import com.consultorio.DAO.Conexao;
 import com.consultorio.DAO.MedicoDAO;
+import com.consultorio.DAO.SecretariaDAO;
 import com.consultorio.main.TrocarPanel;
 import com.consultorio.model.Medico;
+import com.consultorio.model.Secretaria;
 import java.awt.Color;
 import java.sql.Connection;
 import java.text.SimpleDateFormat;
@@ -66,10 +68,10 @@ public class bcSecretaria extends javax.swing.JPanel {
 
     public void listarMedicos(String nome, String crm) {
         Connection con = Conexao.AbrirConexao();
-        MedicoDAO sql = new MedicoDAO(con);
+        SecretariaDAO sql = new SecretariaDAO(con);
 
-        List<Medico> lista = new ArrayList<>();
-        lista = sql.ListarMedicos(nome, crm);
+        List<Secretaria> lista = new ArrayList<>();
+        lista = sql.ListarSecretarias(nome, crm);
         
          DefaultTableModel tbm =  (DefaultTableModel) tbMedicos.getModel();
         
@@ -78,11 +80,11 @@ public class bcSecretaria extends javax.swing.JPanel {
         }
         
         int i = 0;
-        for (Medico atual : lista) {
+        for (Secretaria atual : lista) {
             tbm.addRow(new String[i]);
             tbMedicos.setValueAt(atual.getId(), i, 0);
             tbMedicos.setValueAt(atual.getNome(), i, 1);
-            tbMedicos.setValueAt(atual.getCrm(), i, 2);
+            tbMedicos.setValueAt(atual.getCpf(), i, 2);
             tbMedicos.setValueAt(atual.getSexo(), i, 3);
 
             i++;
@@ -123,7 +125,7 @@ public class bcSecretaria extends javax.swing.JPanel {
         Home.setPreferredSize(new java.awt.Dimension(800, 490));
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
-        jLabel6.setText("Buscar Médico");
+        jLabel6.setText("Buscar Secretária");
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/fullsize_1.png"))); // NOI18N
 
@@ -137,7 +139,7 @@ public class bcSecretaria extends javax.swing.JPanel {
         jLabel19.setFont(new java.awt.Font("Segoe UI Light", 0, 16)); // NOI18N
         jLabel19.setForeground(new java.awt.Color(204, 204, 204));
         jLabel19.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel19.setText("CRM");
+        jLabel19.setText("CPF");
 
         btnBuscar.setBackground(new java.awt.Color(241, 17, 51));
         btnBuscar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -165,7 +167,7 @@ public class bcSecretaria extends javax.swing.JPanel {
 
             },
             new String [] {
-                "ID", "Nome ", "CRM", "Sexo"
+                "ID", "Nome ", "CPF", "Sexo"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -315,16 +317,16 @@ public class bcSecretaria extends javax.swing.JPanel {
 
     private void btnBuscar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscar1ActionPerformed
         Connection con = Conexao.AbrirConexao();
-        MedicoDAO sql = new MedicoDAO(con);
+        SecretariaDAO sql = new SecretariaDAO(con);
         String id = tbMedicos.getValueAt(tbMedicos.getSelectedRow(), 0).toString();
         System.out.println(id);  
         
-        Medico a = sql.CapturarMedico(Integer.parseInt(id));
+        Secretaria a = sql.CapturarSecretaria(Integer.parseInt(id));
                 
         
         
         
-        new TrocarPanel(pnlPrincipal, new opMedico(a));
+        new TrocarPanel(pnlPrincipal, new opSecretaria(a));
     }//GEN-LAST:event_btnBuscar1ActionPerformed
 
 
