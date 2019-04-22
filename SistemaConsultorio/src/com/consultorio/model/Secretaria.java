@@ -21,6 +21,18 @@ public class Secretaria {
     private String cep;
     private String login;
     private String senha;
+    private String sexo;
+
+    public String getSexo() {
+        return sexo;
+    }
+
+    public void setSexo(String sexo) {
+        this.sexo = sexo;
+    }
+    
+    
+            
 
     public String getLogin() {
         return login;

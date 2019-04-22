@@ -74,5 +74,37 @@ public class SecretariaDAO extends ExecuteSQL{
         
         return a;
     }
-    
+
+
+public boolean Cadastrar(Secretaria a) {
+
+        String sql = "INSERT INTO tb_secretaria VALUES(0,?,?,?,?,?,?,?,?,?,?,?)";
+
+        try {
+            PreparedStatement ps = getCon().prepareStatement(sql);
+            ps.setString(1, a.getNome());
+            ps.setString(2, a.getCpf());
+            ps.setString(3, a.getRg());
+            
+            ps.setString(4, a.getTelefone());
+            ps.setString(5, a.getSexo());
+            ps.setString(6, a.getLogin());
+            ps.setString(7, a.getSenha());
+            ps.setString(8, a.getRua());
+            ps.setString(9, a.getNumero());
+            ps.setString(10, a.getBairro());
+            ps.setString(11, a.getCep());
+            
+
+            if (ps.executeUpdate() > 0) {
+                return true;
+            } else {
+                return false;
+            }
+
+        } catch (SQLException ex) {
+            return false;
+        }
+
+    }    
 }

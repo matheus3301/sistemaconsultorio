@@ -557,11 +557,11 @@ public class homeAdm extends javax.swing.JPanel {
     }//GEN-LAST:event_rSButtonMetro28ActionPerformed
 
     private void jLabel13MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel13MouseClicked
-        // TODO add your handling code here:
+       new TrocarPanel(pnlPrincipal, new cdSecretaria());
     }//GEN-LAST:event_jLabel13MouseClicked
 
     private void jLabel14MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel14MouseClicked
-        // TODO add your handling code here:
+       new TrocarPanel(pnlPrincipal, new bcSecretaria());
     }//GEN-LAST:event_jLabel14MouseClicked
 
 
