@@ -259,7 +259,7 @@ public class jfMenuAdm extends javax.swing.JFrame {
     }//GEN-LAST:event_rSButtonMetro1ActionPerformed
 
     private void rSButtonMetro3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonMetro3ActionPerformed
-        new TrocarPanel(pnlPrincipal, new opConsultorio());
+        new TrocarPanel(pnlPrincipal, new opClinica());
     }//GEN-LAST:event_rSButtonMetro3ActionPerformed
 
     /**
