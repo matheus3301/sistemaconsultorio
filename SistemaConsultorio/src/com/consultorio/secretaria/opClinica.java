@@ -26,20 +26,36 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;
+import com.consultorio.DAO.ClinicaDAO;
+import com.consultorio.model.Clinica;
 
 /**
  *
  * @author aluno
  */
 public class opClinica extends javax.swing.JPanel {
-    int conv;
-    
-    
-     public opClinica() {
+
+    public opClinica() {
         initComponents();
-     
+        InserirDados();
+
     }
-    
+
+    public void InserirDados() {
+        Connection con = Conexao.AbrirConexao();
+        ClinicaDAO sql = new ClinicaDAO(con);
+        Clinica a = sql.Capturar();
+
+        lblNome.setText(a.getNome());
+        lblCnpj.setText(a.getCnpj());
+        lblTel.setText(a.getTelefone());
+        lblCab.setText(a.getCabecalho());
+        lblRua.setText(a.getRua());
+        lblBairro.setText(a.getBairro());
+        lblCep.setText(a.getCep());
+        lblN.setText(a.getNumero());
+        System.out.println("Inserindo DADOS...");
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -60,15 +76,15 @@ public class opClinica extends javax.swing.JPanel {
         jLabel16 = new javax.swing.JLabel();
         lblNome = new javax.swing.JTextField();
         jLabel17 = new javax.swing.JLabel();
-        lblCpf = new javax.swing.JFormattedTextField();
+        lblCnpj = new javax.swing.JFormattedTextField();
         jLabel18 = new javax.swing.JLabel();
-        lblRg = new javax.swing.JFormattedTextField();
+        lblCep = new javax.swing.JFormattedTextField();
         jLabel21 = new javax.swing.JLabel();
         lblRua = new javax.swing.JTextField();
         jLabel23 = new javax.swing.JLabel();
         lblBairro = new javax.swing.JTextField();
         jLabel24 = new javax.swing.JLabel();
-        lblCep = new javax.swing.JTextField();
+        lblCab = new javax.swing.JTextField();
         lblN = new javax.swing.JTextField();
         jLabel25 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
@@ -80,7 +96,7 @@ public class opClinica extends javax.swing.JPanel {
         pnlPrincipal.setLayout(new javax.swing.BoxLayout(pnlPrincipal, javax.swing.BoxLayout.LINE_AXIS));
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
-        jLabel6.setText("Informações Clinica");
+        jLabel6.setText("Informações Clínica");
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/fullsize_1.png"))); // NOI18N
 
@@ -139,13 +155,13 @@ public class opClinica extends javax.swing.JPanel {
         jLabel17.setText("CNPJ");
 
         try {
-            lblCpf.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
+            lblCnpj.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        lblCpf.addActionListener(new java.awt.event.ActionListener() {
+        lblCnpj.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                lblCpfActionPerformed(evt);
+                lblCnpjActionPerformed(evt);
             }
         });
 
@@ -155,7 +171,7 @@ public class opClinica extends javax.swing.JPanel {
         jLabel18.setText("Cabeçalho");
 
         try {
-            lblRg.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##########-#")));
+            lblCep.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##########-#")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
@@ -214,8 +230,8 @@ public class opClinica extends javax.swing.JPanel {
                                             .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGap(22, 22, 22)
                                         .addGroup(BgPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(lblCpf, javax.swing.GroupLayout.DEFAULT_SIZE, 218, Short.MAX_VALUE)
-                                            .addComponent(lblCep)))
+                                            .addComponent(lblCnpj, javax.swing.GroupLayout.DEFAULT_SIZE, 218, Short.MAX_VALUE)
+                                            .addComponent(lblCab)))
                                     .addGroup(BgPanelLayout.createSequentialGroup()
                                         .addGap(9, 9, 9)
                                         .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -243,7 +259,7 @@ public class opClinica extends javax.swing.JPanel {
                         .addGap(462, 462, 462)
                         .addGroup(BgPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(BgPanelLayout.createSequentialGroup()
-                                .addComponent(lblRg, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(lblCep, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(25, 25, 25)
@@ -261,14 +277,14 @@ public class opClinica extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(BgPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(BgPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(lblCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblCnpj, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(lblBairro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel23))
                     .addComponent(jLabel17, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGap(22, 22, 22)
                 .addGroup(BgPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel18)
-                    .addComponent(lblCep, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblCab, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblRua, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel21))
                 .addGap(25, 25, 25)
@@ -278,7 +294,7 @@ public class opClinica extends javax.swing.JPanel {
                         .addComponent(lblTel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(BgPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel24)
-                        .addComponent(lblRg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblCep, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel25)
                         .addComponent(lblN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 76, Short.MAX_VALUE)
@@ -363,12 +379,12 @@ public class opClinica extends javax.swing.JPanel {
     }//GEN-LAST:event_btnSalvarMouseEntered
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-        
+
     }//GEN-LAST:event_btnSalvarActionPerformed
 
-    private void lblCpfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lblCpfActionPerformed
+    private void lblCnpjActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lblCnpjActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_lblCpfActionPerformed
+    }//GEN-LAST:event_lblCnpjActionPerformed
 
     private void lblNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lblNActionPerformed
         // TODO add your handling code here:
@@ -391,11 +407,11 @@ public class opClinica extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JTextField lblBairro;
-    private javax.swing.JTextField lblCep;
-    private javax.swing.JFormattedTextField lblCpf;
+    private javax.swing.JTextField lblCab;
+    private javax.swing.JFormattedTextField lblCep;
+    private javax.swing.JFormattedTextField lblCnpj;
     private javax.swing.JTextField lblN;
     private javax.swing.JTextField lblNome;
-    private javax.swing.JFormattedTextField lblRg;
     private javax.swing.JTextField lblRua;
     private javax.swing.JFormattedTextField lblTel;
     private javax.swing.JPanel pnlPrincipal;

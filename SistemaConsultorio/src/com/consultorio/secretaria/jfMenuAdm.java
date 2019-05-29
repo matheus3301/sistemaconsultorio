@@ -95,7 +95,7 @@ public class jfMenuAdm extends javax.swing.JFrame {
 
         rSButtonIconI1.setBackground(new java.awt.Color(0, 18, 50));
         rSButtonIconI1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/home.png"))); // NOI18N
-        rSButtonIconI1.setText("Inicio");
+        rSButtonIconI1.setText("Início");
         rSButtonIconI1.setColorHover(new java.awt.Color(106, 118, 145));
         rSButtonIconI1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         rSButtonIconI1.addActionListener(new java.awt.event.ActionListener() {
@@ -197,7 +197,7 @@ public class jfMenuAdm extends javax.swing.JFrame {
 
         jLabel8.setFont(new java.awt.Font("Segoe UI Light", 0, 12)); // NOI18N
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/cancel.png"))); // NOI18N
-        jLabel8.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jLabel8.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel8.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel8MouseClicked(evt);
@@ -207,7 +207,7 @@ public class jfMenuAdm extends javax.swing.JFrame {
 
         jLabel23.setFont(new java.awt.Font("Segoe UI Light", 0, 12)); // NOI18N
         jLabel23.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/diminish.png"))); // NOI18N
-        jLabel23.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jLabel23.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel23.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel23MouseClicked(evt);

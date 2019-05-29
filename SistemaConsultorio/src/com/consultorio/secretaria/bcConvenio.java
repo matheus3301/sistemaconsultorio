@@ -139,7 +139,7 @@ public class bcConvenio extends javax.swing.JPanel {
         jLabel19.setFont(new java.awt.Font("Segoe UI Light", 0, 16)); // NOI18N
         jLabel19.setForeground(new java.awt.Color(204, 204, 204));
         jLabel19.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel19.setText("CPNJ");
+        jLabel19.setText("CNPJ");
 
         btnBuscar.setBackground(new java.awt.Color(241, 17, 51));
         btnBuscar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N

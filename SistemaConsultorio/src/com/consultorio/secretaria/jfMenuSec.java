@@ -93,7 +93,7 @@ public class jfMenuSec extends javax.swing.JFrame {
 
         rSButtonIconI1.setBackground(new java.awt.Color(0, 18, 50));
         rSButtonIconI1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/home.png"))); // NOI18N
-        rSButtonIconI1.setText("Inicio");
+        rSButtonIconI1.setText("Início");
         rSButtonIconI1.setColorHover(new java.awt.Color(106, 118, 145));
         rSButtonIconI1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         rSButtonIconI1.addActionListener(new java.awt.event.ActionListener() {
