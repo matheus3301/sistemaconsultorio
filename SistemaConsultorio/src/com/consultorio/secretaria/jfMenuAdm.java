@@ -103,7 +103,7 @@ public class jfMenuAdm extends javax.swing.JFrame {
             }
         });
 
-        rSFotoCircle1.setImagenDefault(new javax.swing.ImageIcon(getClass().getResource("/icons/secretariaicon.png"))); // NOI18N
+        rSFotoCircle1.setImagenDefault(new javax.swing.ImageIcon(getClass().getResource("/icons/adminicon.png"))); // NOI18N
         rSFotoCircle1.setMostrarBordePopu(false);
 
         lblAtual.setForeground(new java.awt.Color(254, 247, 247));
