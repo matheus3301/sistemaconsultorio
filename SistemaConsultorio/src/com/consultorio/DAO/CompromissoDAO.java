@@ -124,7 +124,7 @@ public class CompromissoDAO extends ExecuteSQL {
     
     public boolean Alterar(Compromisso a) {
 
-        String sql = "UPDATE tb_compromissos SET tb_medico_idtb_medico = ?, tipo = ?, tb_paciente_idtb_paciente = ?, data = ?, horario_inicial = ?, horario_final = ?, descricao = ?";
+        String sql = "UPDATE tb_compromissos SET tb_medico_idtb_medico = ?, tipo = ?, tb_paciente_idtb_paciente = ?, data = ?, horario_inicial = ?, horario_final = ?, descricao = ? WHERE idtb_compromissos = ?";
 
         try {
             PreparedStatement ps = getCon().prepareStatement(sql);
@@ -140,6 +140,7 @@ public class CompromissoDAO extends ExecuteSQL {
             ps.setString(5, a.getHorario_inicial());
             ps.setString(6, a.getHorario_final());
             ps.setString(7, a.getDescricao());
+            ps.setInt(8, a.getId());
 
             if (ps.executeUpdate() > 0) {
                 return true;

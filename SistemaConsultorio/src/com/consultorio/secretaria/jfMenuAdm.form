@@ -73,6 +73,7 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="rSButtonMetro1" min="-2" pref="198" max="-2" attributes="0"/>
                               <Component id="rSButtonMetro2" min="-2" pref="198" max="-2" attributes="0"/>
+                              <Component id="rSButtonMetro3" alignment="0" min="-2" pref="198" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -88,12 +89,14 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="rSFotoCircle1" min="-2" pref="175" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-                  <Component id="lblNome" min="-2" pref="44" max="-2" attributes="0"/>
+                  <Component id="lblNome" min="-2" pref="32" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="lblAtual" min="-2" pref="44" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="lblLogin" min="-2" pref="44" max="-2" attributes="0"/>
+                  <Component id="lblAtual" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Component id="lblLogin" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
+                  <Component id="rSButtonMetro3" min="-2" pref="37" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Component id="rSButtonMetro2" min="-2" pref="37" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="rSButtonMetro1" min="-2" pref="35" max="-2" attributes="0"/>
@@ -111,7 +114,7 @@
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/icons/home.png"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Inicio"/>
+            <Property name="text" type="java.lang.String" value="In&#xed;cio"/>
             <Property name="colorHover" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="91" green="76" red="6a" type="rgb"/>
             </Property>
@@ -175,6 +178,17 @@
             <Property name="text" type="java.lang.String" value="Op&#xe7;&#xf5;es de Conta"/>
           </Properties>
         </Component>
+        <Component class="rojerusan.RSButtonMetro" name="rSButtonMetro3">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="32" green="12" red="0" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Op&#xe7;&#xf5;es de Cl&#xed;nica"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rSButtonMetro3ActionPerformed"/>
+          </Events>
+        </Component>
       </SubComponents>
     </Container>
     <Container class="javax.swing.JPanel" name="jPanel3">
@@ -194,7 +208,7 @@
               <Image iconType="3" name="/icons/user_icon.png"/>
             </Property>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-              <Color id="Default Cursor"/>
+              <Color id="Cursor Padr&#xe3;o"/>
             </Property>
           </Properties>
           <Constraints>
@@ -225,7 +239,7 @@
               <Image iconType="3" name="/icons/cancel.png"/>
             </Property>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-              <Color id="Default Cursor"/>
+              <Color id="Cursor em Forma de M&#xe3;o"/>
             </Property>
           </Properties>
           <Events>
@@ -246,7 +260,7 @@
               <Image iconType="3" name="/icons/diminish.png"/>
             </Property>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-              <Color id="Default Cursor"/>
+              <Color id="Cursor em Forma de M&#xe3;o"/>
             </Property>
           </Properties>
           <Events>

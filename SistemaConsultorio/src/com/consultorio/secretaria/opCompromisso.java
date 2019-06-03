@@ -569,6 +569,7 @@ public class opCompromisso extends javax.swing.JPanel {
             a.setHorario_final(lblFinal.getText());
             a.setHorario_inicial(lblInicial.getText());
             a.setId(Integer.parseInt(lblId.getText()));
+            
 
             Connection con = Conexao.AbrirConexao();
             MedicoDAO sqlM = new MedicoDAO(con);

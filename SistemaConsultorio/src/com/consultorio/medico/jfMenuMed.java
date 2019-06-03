@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.consultorio.secretaria;
+package com.consultorio.medico;
 
+import com.consultorio.secretaria.*;
 import com.consultorio.main.TrocarPanel;
 import com.consultorio.main.jfEntrada;
 import com.consultorio.model.Administrador;
@@ -20,18 +21,18 @@ import javax.swing.JFrame;
  *
  * @author Marcus
  */
-public class jfMenuAdm extends javax.swing.JFrame {
+public class jfMenuMed extends javax.swing.JFrame {
 
     /**
      * Creates new form Menu
      */
-    public jfMenuAdm() {
+    public jfMenuMed() {
         initComponents();
 
         ConfigurarHorario();
         AtualizaHorario();
 
-        new TrocarPanel(pnlPrincipal, new homeAdm());
+        new TrocarPanel(pnlPrincipal, new home());
 
     }
 
@@ -128,10 +129,10 @@ public class jfMenuAdm extends javax.swing.JFrame {
         });
 
         rSButtonMetro2.setBackground(new java.awt.Color(0, 18, 50));
-        rSButtonMetro2.setText("Opções de Conta");
+        rSButtonMetro2.setText("Emitir Atestado");
 
         rSButtonMetro3.setBackground(new java.awt.Color(0, 18, 50));
-        rSButtonMetro3.setText("Opções de Clínica");
+        rSButtonMetro3.setText("Emitir Receita");
         rSButtonMetro3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rSButtonMetro3ActionPerformed(evt);
@@ -279,14 +280,26 @@ public class jfMenuAdm extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(jfMenuAdm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(jfMenuMed.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(jfMenuAdm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(jfMenuMed.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(jfMenuAdm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(jfMenuMed.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(jfMenuAdm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(jfMenuMed.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -295,7 +308,7 @@ public class jfMenuAdm extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new jfMenuAdm().setVisible(true);
+                new jfMenuMed().setVisible(true);
             }
         });
     }
