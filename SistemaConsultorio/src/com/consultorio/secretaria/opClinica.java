@@ -40,6 +40,17 @@ public class opClinica extends javax.swing.JPanel {
         InserirDados();
 
     }
+    
+    public boolean VerificarCampos(){
+        boolean res = true;
+        
+        if (lblNome.getText().equals("") || lblCnpj.getText().equals("") || lblBairro.getText().equals("") || lblRua.getText().equals("") || lblTel.getText().equals("") || lblCep.getText().equals("") || lblN.getText().equals("")) {
+            res = false;
+        }
+        
+        return res;
+        
+    }
 
     public void InserirDados() {
         Connection con = Conexao.AbrirConexao();
@@ -379,7 +390,34 @@ public class opClinica extends javax.swing.JPanel {
     }//GEN-LAST:event_btnSalvarMouseEntered
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
+        if (VerificarCampos()) {
+            Clinica a = new Clinica();
+            
+            a.setBairro(lblBairro.getText());
+            a.setCabecalho(lblCab.getText());
+            a.setCep(lblCep.getText());
+            a.setCnpj(lblCnpj.getText());
+            a.setNome(lblNome.getText());
+            a.setNumero(lblN.getText());
+            a.setRua(lblRua.getText());
+            a.setTelefone(lblTel.getText());
+            
+            
+            Connection con = Conexao.AbrirConexao();
+            ClinicaDAO sql = new ClinicaDAO(con);
+            
+            if ( sql.Alterar(a)) {
+                 new RightMsg().ReceberMsg("Informações da Clínica Alteradas com sucesso!");
+            }else{
+                new ErrorMsg().ReceberMsg("Erro ao alterar");
+            }
 
+            
+           
+        }else{
+            
+            new ErrorMsg().ReceberMsg("Nenhum Campo pode estar Vazio!");
+        }
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void lblCnpjActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lblCnpjActionPerformed

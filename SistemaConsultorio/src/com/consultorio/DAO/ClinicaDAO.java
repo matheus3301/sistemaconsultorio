@@ -23,7 +23,7 @@ public class ClinicaDAO extends ExecuteSQL {
     }
 
     public boolean Alterar(Clinica a) {
-        String sql = "UPDATE tb_clinica SET nome = ?, cnpj = ?, telefone = ?, cabecalho = ?, rua = ?, bairro = ?, cep = ?, numero = ? ";
+        String sql = "UPDATE tb_clinica SET nome = ?, cnpj = ?, telefone = ?, cabecalho = ?, rua = ?, bairro = ?, cep = ?, numero = ?";
 
         try {
             PreparedStatement ps = getCon().prepareStatement(sql);
@@ -34,10 +34,16 @@ public class ClinicaDAO extends ExecuteSQL {
             ps.setString(4, a.getCabecalho());
             ps.setString(5, a.getRua());
             ps.setString(6, a.getBairro());
-            ps.setString(6, a.getCep());
+            ps.setString(7, a.getCep());
             ps.setString(8, a.getNumero());
+            
+            
 
-            return ps.execute();
+            if (ps.executeUpdate() > 0) {
+                return true;
+            } else {
+                return false;
+            }
         } catch (SQLException ex) {
             return false;
         }
@@ -63,7 +69,8 @@ public class ClinicaDAO extends ExecuteSQL {
                     a.setCabecalho(rs.getString(5));
                     a.setRua(rs.getString(6));
                     a.setBairro(rs.getString(7));
-                    a.setNumero(rs.getString(8));
+                    a.setCep(rs.getString(8));
+                    a.setNumero(rs.getString(9));
 
                 }
             }
