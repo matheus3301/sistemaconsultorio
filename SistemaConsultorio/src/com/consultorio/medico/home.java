@@ -5,8 +5,17 @@
  */
 package com.consultorio.medico;
 
+import com.consultorio.DAO.CompromissoDAO;
+import com.consultorio.DAO.Conexao;
+import com.consultorio.DAO.MedicoDAO;
 import com.consultorio.main.TrocarPanel;
+import com.consultorio.model.Compromisso;
+import com.consultorio.model.Medico;
 import com.consultorio.secretaria.*;
+import java.sql.Connection;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -14,13 +23,69 @@ import com.consultorio.secretaria.*;
  */
 public class home extends javax.swing.JPanel {
 
+    int idM;
+
     /**
      * Creates new form home
      */
-    public home() {
-        initComponents();       
+    public home(int id) {
+        initComponents();
+        VerificaCalendario();
+
+        idM = id;
+        System.out.println(idM);
+
+    }
+
+    public void VerificaCalendario() {
+
+        Connection con = Conexao.AbrirConexao();
+        CompromissoDAO sql = new CompromissoDAO(con);
         
-        
+
+        new Thread() {
+            public void run() {
+                 String ultima = calendario.getFechaSeleccionada();
+                while (true) {
+                   
+                    if (calendario.getFechaSeleccionada() != null && !calendario.getFechaSeleccionada().equals(ultima)) {
+                        ultima = calendario.getFechaSeleccionada();
+                        
+                        
+                        List<Compromisso> compromissos = sql.ListarTabelaData(idM, calendario.getFechaSeleccionada());
+                        System.out.println(compromissos);
+                        DefaultTableModel tbm = (DefaultTableModel) tbCompromisso.getModel();
+
+                        while (tbm.getRowCount() > 0) {
+                            tbm.removeRow(0);
+                        }
+                        MedicoDAO sqlM = new MedicoDAO(con);
+                        int i = 0;
+                        for (Compromisso atual : compromissos) {
+                            tbm.addRow(new String[i]);
+
+                            tbCompromisso.setValueAt(atual.getId(), i, 0);
+
+                            tbCompromisso.setValueAt(atual.getTipo(), i, 3);
+
+                            tbCompromisso.setValueAt(atual.getHorario_inicial(), i, 1);
+                            tbCompromisso.setValueAt(atual.getHorario_final(), i, 2);
+
+                            i++;
+
+                        }
+
+                    }
+
+                    try {
+                        Thread.sleep(500);
+                    } catch (Exception ex) {
+
+                    }
+                }
+            }
+
+        }.start();
     }
 
     /**
@@ -40,7 +105,7 @@ public class home extends javax.swing.JPanel {
         BgPanel = new javax.swing.JPanel();
         calendario = new rojerusan.RSCalendar();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tbCompromisso = new javax.swing.JTable();
 
         setPreferredSize(new java.awt.Dimension(790, 470));
 
@@ -59,16 +124,40 @@ public class home extends javax.swing.JPanel {
 
         calendario.setColorBackground(new java.awt.Color(32, 47, 90));
         calendario.setColorButtonHover(new java.awt.Color(1, 1, 1));
+        calendario.setFormatoFecha("dd/MM/yyyy");
+        calendario.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                calendarioMouseClicked(evt);
+            }
+        });
+        calendario.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                calendarioPropertyChange(evt);
+            }
+        });
+        calendario.addVetoableChangeListener(new java.beans.VetoableChangeListener() {
+            public void vetoableChange(java.beans.PropertyChangeEvent evt)throws java.beans.PropertyVetoException {
+                calendarioVetoableChange(evt);
+            }
+        });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tbCompromisso.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
                 "Compromisso", "Horário Inicial", "Horário Final", "Tipo"
             }
-        ));
-        jScrollPane1.setViewportView(jTable1);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tbCompromisso);
 
         javax.swing.GroupLayout BgPanelLayout = new javax.swing.GroupLayout(BgPanel);
         BgPanel.setLayout(BgPanelLayout);
@@ -87,8 +176,8 @@ public class home extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(BgPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(calendario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(calendario, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout HomeLayout = new javax.swing.GroupLayout(Home);
@@ -147,6 +236,18 @@ public class home extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void calendarioPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_calendarioPropertyChange
+       
+    }//GEN-LAST:event_calendarioPropertyChange
+
+    private void calendarioVetoableChange(java.beans.PropertyChangeEvent evt)throws java.beans.PropertyVetoException {//GEN-FIRST:event_calendarioVetoableChange
+      
+    }//GEN-LAST:event_calendarioVetoableChange
+
+    private void calendarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_calendarioMouseClicked
+        System.out.println("Teste");
+    }//GEN-LAST:event_calendarioMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel BgPanel;
@@ -156,7 +257,7 @@ public class home extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JPanel pnlPrincipal;
+    private javax.swing.JTable tbCompromisso;
     // End of variables declaration//GEN-END:variables
 }

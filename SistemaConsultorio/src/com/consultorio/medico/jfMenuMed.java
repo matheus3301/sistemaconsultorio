@@ -9,6 +9,7 @@ import com.consultorio.secretaria.*;
 import com.consultorio.main.TrocarPanel;
 import com.consultorio.main.jfEntrada;
 import com.consultorio.model.Administrador;
+import com.consultorio.model.Medico;
 import com.consultorio.model.Secretaria;
 import java.awt.Color;
 import java.util.Date;
@@ -22,6 +23,7 @@ import javax.swing.JFrame;
  * @author Marcus
  */
 public class jfMenuMed extends javax.swing.JFrame {
+   
 
     /**
      * Creates new form Menu
@@ -32,12 +34,14 @@ public class jfMenuMed extends javax.swing.JFrame {
         ConfigurarHorario();
         AtualizaHorario();
 
-        new TrocarPanel(pnlPrincipal, new home());
+        
 
     }
 
-    public void ReceberSec(Administrador a) {
+    public void ReceberSec(Medico a) {
         lblNome.setText("Olá, Sr(ª) " + a.getNome());
+       
+        new TrocarPanel(pnlPrincipal, new home(a.getId()));
     }
 
     public void ConfigurarHorario() {
@@ -45,7 +49,10 @@ public class jfMenuMed extends javax.swing.JFrame {
 
         lblLogin.setText("Hora de Acesso: " + hora.format(new Date()));
     }
-
+    
+    
+    
+    
     public void AtualizaHorario() {
         SimpleDateFormat hora = new SimpleDateFormat("HH:mm:ss");
 
@@ -53,6 +60,8 @@ public class jfMenuMed extends javax.swing.JFrame {
             public void run() {
                 while (true) {
                     lblAtual.setText("Hora Atual: " + hora.format(new Date()));
+                    
+                    
                     try {
                         Thread.sleep(1000);
                     } catch (Exception ex) {

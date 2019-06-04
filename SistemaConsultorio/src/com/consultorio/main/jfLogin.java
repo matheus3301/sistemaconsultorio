@@ -313,6 +313,10 @@ public class jfLogin extends javax.swing.JFrame {
                     System.out.println("Logado com Sucesso como Medico!");
                     
                     jfMenuMed med = new jfMenuMed();
+                    med.ReceberSec(sql.CapturarAdministradorLogin(user, senha));
+                    med.setVisible(true);
+                    
+                    dispose();
                 }else{
                     this.telaTremer();
                     this.limpaCampos();

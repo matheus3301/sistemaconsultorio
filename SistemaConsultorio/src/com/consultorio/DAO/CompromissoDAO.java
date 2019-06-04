@@ -174,5 +174,44 @@ public class CompromissoDAO extends ExecuteSQL {
         }
 
     }
+    
+    public List<Compromisso> ListarTabelaData(int idM, String data) {
+        List<Compromisso> lista = new ArrayList<>();
+
+        try {
+            String consulta = "select * from tb_compromissos "
+                    + "where tb_medico_idtb_medico = ? AND data = ?";
+
+            PreparedStatement ps = getCon().prepareStatement(consulta);
+            ps.setInt(1, idM);
+            ps.setString(2, data);
+
+            ResultSet rs = ps.executeQuery();
+
+            if (rs != null) {
+                while (rs.next()) {
+                    Compromisso a = new Compromisso();
+
+                    a.setId(rs.getInt(1));
+                    a.setMedico(rs.getInt(2));
+                    a.setTipo(rs.getString(3));
+                    a.setPaciente(rs.getInt(4));
+                    a.setData(rs.getString(5));
+                    a.setHorario_inicial(rs.getString(6));
+                    a.setHorario_final(rs.getString(7));
+                    a.setDescricao(rs.getString(8));
+
+                    lista.add(a);
+
+                }
+            }
+        } catch (SQLException ex) {
+            ex.getMessage();
+        }
+
+        return lista;
+    }
+    
+    
 
 }
