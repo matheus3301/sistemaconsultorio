@@ -23,9 +23,15 @@ import com.consultorio.model.Paciente;
 import com.consultorio.model.Plano;
 import com.lowagie.text.Document;
 import com.lowagie.text.DocumentException;
+import com.lowagie.text.Element;
+import com.lowagie.text.Font;
 import com.lowagie.text.Paragraph;
+import com.lowagie.text.Phrase;
+import com.lowagie.text.pdf.PdfPCell;
+import com.lowagie.text.pdf.PdfPTable;
 import com.lowagie.text.pdf.PdfWriter;
 import java.awt.Color;
+
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.sql.Connection;
@@ -36,34 +42,22 @@ import java.util.logging.Logger;
 import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;
 
-
 /**
  *
  * @author aluno
  */
 public class opRelatorio extends javax.swing.JPanel {
-    
+
     int conv;
     ButtonGroup sexo;
-    
-   
-    
-   
 
     /**
      * Creates new form home
      */
     public opRelatorio() {
         initComponents();
-        
-       
-        
-        
+
     }
-    
-    
-    
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -124,7 +118,7 @@ public class opRelatorio extends javax.swing.JPanel {
         bgMedico1.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 180, 40));
 
         jLabel33.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/medico.png"))); // NOI18N
-        bgMedico1.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
+        bgMedico1.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, -1, -1));
 
         bgMedico2.setBackground(new java.awt.Color(106, 116, 145));
         bgMedico2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -143,12 +137,15 @@ public class opRelatorio extends javax.swing.JPanel {
         bgMedico2.add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 180, -1));
 
         jLabel35.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/consulta.png"))); // NOI18N
-        bgMedico2.add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, -1, -1));
+        bgMedico2.add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
 
         bgMedico3.setBackground(new java.awt.Color(106, 116, 145));
         bgMedico3.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         bgMedico3.setPreferredSize(new java.awt.Dimension(213, 189));
         bgMedico3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                bgMedico3MousePressed(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 bgMedico3MouseEntered(evt);
             }
@@ -162,12 +159,15 @@ public class opRelatorio extends javax.swing.JPanel {
         bgMedico3.add(jLabel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 200, 20));
 
         jLabel37.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/pacienteP.png"))); // NOI18N
-        bgMedico3.add(jLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
+        bgMedico3.add(jLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, -1, -1));
 
         bgMedico4.setBackground(new java.awt.Color(106, 116, 145));
         bgMedico4.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         bgMedico4.setPreferredSize(new java.awt.Dimension(213, 189));
         bgMedico4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                bgMedico4MousePressed(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 bgMedico4MouseEntered(evt);
             }
@@ -181,7 +181,7 @@ public class opRelatorio extends javax.swing.JPanel {
         bgMedico4.add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 10, 220, -1));
 
         jLabel39.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/ambulancia.png"))); // NOI18N
-        bgMedico4.add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, -1, -1));
+        bgMedico4.add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, -1, -1));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -280,37 +280,203 @@ public class opRelatorio extends javax.swing.JPanel {
 
     private void bgMedico1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bgMedico1MousePressed
         System.out.println("Gerando PDF...");
-        
-        
-       Document document = new Document();
-       Connection con = Conexao.AbrirConexao();
-       
-       ClinicaDAO sqlC = new ClinicaDAO(con);
-       MedicoDAO sqlM = new MedicoDAO(con);
-       Clinica clinica = sqlC.Capturar();
-       
-       List<Medico> medicos = sqlM.ListarMedicos("", "");
-       
+
+        Document document = new Document();
+        Connection con = Conexao.AbrirConexao();
+
+        ClinicaDAO sqlC = new ClinicaDAO(con);
+        MedicoDAO sqlM = new MedicoDAO(con);
+        Clinica clinica = sqlC.Capturar();
+
+        List<Medico> medicos = sqlM.ListarMedicos("", "");
+
         try {
             PdfWriter.getInstance(document, new FileOutputStream("listaMedicos.pdf"));
             document.open();
-                document.add(new Paragraph ("Consultório Médico - "+clinica.getNome()));
-                document.add(new Paragraph (clinica.getCabecalho()));
-                document.add(new Paragraph(""));
-                document.add(new Paragraph("Lista de Médicos Cadastrados"));
-                for (Medico atual : medicos) {
-                    document.add(new Paragraph("Médico:"+atual.getNome()));
-                }
-                
-                
+            
+            Paragraph titulo = new Paragraph("Consultório Médico - " + clinica.getNome());
+            titulo.setAlignment(Element.ALIGN_CENTER);
             
             
+            Paragraph cab = new Paragraph(clinica.getCabecalho());
+            cab.setAlignment(Element.ALIGN_CENTER);
+            
+            document.add(titulo);
+            document.add(cab);
+            document.add(new Paragraph("\n"));
+            document.add(new Paragraph("Lista de Médicos Cadastrados:"));
+            document.add(new Paragraph("\n"));
+
+            PdfPTable table = new PdfPTable(new float[]{10f, 10f, 3f,10f});
+            PdfPCell celulaNome = new PdfPCell(new Phrase("Nome"));
+            celulaNome.setHorizontalAlignment(Element.ALIGN_CENTER);
+            PdfPCell celulaCrm = new PdfPCell(new Phrase("CRM"));
+            celulaCrm.setHorizontalAlignment(Element.ALIGN_CENTER);
+
+            PdfPCell celulaSexo = new PdfPCell(new Phrase("Sexo"));
+            celulaSexo.setHorizontalAlignment(Element.ALIGN_CENTER);
+
+            PdfPCell celulaTelefone = new PdfPCell(new Phrase("Telefone"));
+            celulaTelefone.setHorizontalAlignment(Element.ALIGN_CENTER);
+
+            table.addCell(celulaNome);
+            table.addCell(celulaCrm);
+            table.addCell(celulaSexo);
+            table.addCell(celulaTelefone);
+
+            for (Medico atual : medicos) {
+                PdfPCell celula1 = new PdfPCell(new Phrase(atual.getNome()));
+                PdfPCell celula2 = new PdfPCell(new Phrase(atual.getCrm()));
+                PdfPCell celula3 = new PdfPCell(new Phrase(String.valueOf(atual.getSexo())));
+                PdfPCell celula4 = new PdfPCell(new Phrase(String.valueOf(atual.getTelefone())));
+
+                table.addCell(celula1);
+                table.addCell(celula2);
+                table.addCell(celula3);
+                table.addCell(celula4);
+            }
+            
+            document.add(table);
+
         } catch (Exception ex) {
             System.out.println("ERROU!!");
-        }finally{
+        } finally {
             document.close();
-        } 
+        }
     }//GEN-LAST:event_bgMedico1MousePressed
+
+    private void bgMedico3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bgMedico3MousePressed
+       System.out.println("Gerando PDF...");
+
+        Document document = new Document();
+        Connection con = Conexao.AbrirConexao();
+
+        ClinicaDAO sqlC = new ClinicaDAO(con);
+        PacienteDAO sqlM = new PacienteDAO(con);
+        Clinica clinica = sqlC.Capturar();
+
+        List<Paciente> medicos = sqlM.ListarPacientes("","");
+
+        try {
+            PdfWriter.getInstance(document, new FileOutputStream("listaPacientes.pdf"));
+            document.open();
+            
+            Paragraph titulo = new Paragraph("Consultório Médico - " + clinica.getNome());
+            titulo.setAlignment(Element.ALIGN_CENTER);
+            
+            
+            Paragraph cab = new Paragraph(clinica.getCabecalho());
+            cab.setAlignment(Element.ALIGN_CENTER);
+            
+            document.add(titulo);
+            document.add(cab);
+            document.add(new Paragraph("\n"));
+            document.add(new Paragraph("Lista de Pacientes Cadastrados:"));
+            document.add(new Paragraph("\n"));
+
+            PdfPTable table = new PdfPTable(new float[]{10f, 10f, 3f,10f});
+            PdfPCell celulaNome = new PdfPCell(new Phrase("Nome"));
+            celulaNome.setHorizontalAlignment(Element.ALIGN_CENTER);
+            PdfPCell celulaCrm = new PdfPCell(new Phrase("CPF"));
+            celulaCrm.setHorizontalAlignment(Element.ALIGN_CENTER);
+
+            PdfPCell celulaSexo = new PdfPCell(new Phrase("Sexo"));
+            celulaSexo.setHorizontalAlignment(Element.ALIGN_CENTER);
+
+            PdfPCell celulaTelefone = new PdfPCell(new Phrase("Telefone"));
+            celulaTelefone.setHorizontalAlignment(Element.ALIGN_CENTER);
+
+            table.addCell(celulaNome);
+            table.addCell(celulaCrm);
+            table.addCell(celulaSexo);
+            table.addCell(celulaTelefone);
+
+            for (Paciente atual : medicos) {
+                PdfPCell celula1 = new PdfPCell(new Phrase(atual.getNome()));
+                PdfPCell celula2 = new PdfPCell(new Phrase(atual.getCpf()));
+                PdfPCell celula3 = new PdfPCell(new Phrase(String.valueOf(atual.getSexo())));
+                PdfPCell celula4 = new PdfPCell(new Phrase(String.valueOf(atual.getTelefone())));
+
+                table.addCell(celula1);
+                table.addCell(celula2);
+                table.addCell(celula3);
+                table.addCell(celula4);
+            }
+            
+            document.add(table);
+
+        } catch (Exception ex) {
+            System.out.println("ERROU!!");
+        } finally {
+            document.close();
+        }
+    }//GEN-LAST:event_bgMedico3MousePressed
+
+    private void bgMedico4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bgMedico4MousePressed
+        System.out.println("Gerando PDF...");
+
+        Document document = new Document();
+        Connection con = Conexao.AbrirConexao();
+
+        ClinicaDAO sqlC = new ClinicaDAO(con);
+        ConvenioDAO sqlM = new ConvenioDAO(con);
+        Clinica clinica = sqlC.Capturar();
+
+        List<Convenio> medicos = sqlM.ListarConvenios("", "");
+
+        try {
+            PdfWriter.getInstance(document, new FileOutputStream("listaConvenios.pdf"));
+            document.open();
+            
+            Paragraph titulo = new Paragraph("Consultório Médico - " + clinica.getNome());
+            titulo.setAlignment(Element.ALIGN_CENTER);
+            
+            
+            Paragraph cab = new Paragraph(clinica.getCabecalho());
+            cab.setAlignment(Element.ALIGN_CENTER);
+            
+            document.add(titulo);
+            document.add(cab);
+            document.add(new Paragraph("\n"));
+            document.add(new Paragraph("Lista de Convenios Cadastrados:"));
+            document.add(new Paragraph("\n"));
+
+            PdfPTable table = new PdfPTable(new float[]{10f, 10f, 10f});
+            PdfPCell celulaNome = new PdfPCell(new Phrase("Nome"));
+            celulaNome.setHorizontalAlignment(Element.ALIGN_CENTER);
+            PdfPCell celulaCrm = new PdfPCell(new Phrase("CNPJ"));
+            celulaCrm.setHorizontalAlignment(Element.ALIGN_CENTER);
+
+         
+
+            PdfPCell celulaTelefone = new PdfPCell(new Phrase("Telefone"));
+            celulaTelefone.setHorizontalAlignment(Element.ALIGN_CENTER);
+
+            table.addCell(celulaNome);
+            table.addCell(celulaCrm);
+            
+            table.addCell(celulaTelefone);
+
+            for(Convenio atual : medicos) {
+                PdfPCell celula1 = new PdfPCell(new Phrase(atual.getNome()));
+                PdfPCell celula2 = new PdfPCell(new Phrase(atual.getCnpj()));
+               
+                PdfPCell celula4 = new PdfPCell(new Phrase(String.valueOf(atual.getTelefone())));
+
+                table.addCell(celula1);
+                table.addCell(celula2);
+               
+                table.addCell(celula4);
+            }
+            
+            document.add(table);
+
+        } catch (Exception ex) {
+            System.out.println("ERROU!!");
+        } finally {
+            document.close();
+        }
+    }//GEN-LAST:event_bgMedico4MousePressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
