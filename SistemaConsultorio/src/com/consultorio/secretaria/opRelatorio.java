@@ -35,7 +35,9 @@ import java.awt.Color;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.sql.Connection;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -50,6 +52,9 @@ public class opRelatorio extends javax.swing.JPanel {
 
     int conv;
     ButtonGroup sexo;
+    Date dataAtual = new Date();
+    SimpleDateFormat formatadorCompleto = new SimpleDateFormat("ddMMyyyyHHmmss");
+    SimpleDateFormat formatadorSimples = new SimpleDateFormat("dd/MM/yyyy");
 
     /**
      * Creates new form home
@@ -124,6 +129,9 @@ public class opRelatorio extends javax.swing.JPanel {
         bgMedico2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         bgMedico2.setPreferredSize(new java.awt.Dimension(213, 189));
         bgMedico2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                bgMedico2MouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 bgMedico2MouseEntered(evt);
             }
@@ -291,7 +299,7 @@ public class opRelatorio extends javax.swing.JPanel {
         List<Medico> medicos = sqlM.ListarMedicos("", "");
 
         try {
-            PdfWriter.getInstance(document, new FileOutputStream("listaMedicos.pdf"));
+            PdfWriter.getInstance(document, new FileOutputStream("listaMedicos"+formatadorCompleto.format(dataAtual)+".pdf"));
             document.open();
             
             Paragraph titulo = new Paragraph("Consultório Médico - " + clinica.getNome());
@@ -304,7 +312,7 @@ public class opRelatorio extends javax.swing.JPanel {
             document.add(titulo);
             document.add(cab);
             document.add(new Paragraph("\n"));
-            document.add(new Paragraph("Lista de Médicos Cadastrados:"));
+            document.add(new Paragraph("Lista de Médicos Cadastrados:              Emitido em:"+formatadorSimples.format(dataAtual)));
             document.add(new Paragraph("\n"));
 
             PdfPTable table = new PdfPTable(new float[]{10f, 10f, 3f,10f});
@@ -337,6 +345,15 @@ public class opRelatorio extends javax.swing.JPanel {
             }
             
             document.add(table);
+            document.add(new Paragraph("\n"));
+            document.add(new Paragraph("\n"));
+            document.add(new Paragraph("\n"));
+            document.add(new Paragraph("Endereço: "+clinica.getNumero()+", "+clinica.getRua()+", "+clinica.getBairro()));
+            document.add(new Paragraph("Telefone: "+clinica.getTelefone()+"        CNPJ: "+clinica.getCnpj()));
+            
+            
+            
+            new RightMsg().ReceberMsg("PDF Construído");
 
         } catch (Exception ex) {
             System.out.println("ERROU!!");
@@ -358,7 +375,7 @@ public class opRelatorio extends javax.swing.JPanel {
         List<Paciente> medicos = sqlM.ListarPacientes("","");
 
         try {
-            PdfWriter.getInstance(document, new FileOutputStream("listaPacientes.pdf"));
+            PdfWriter.getInstance(document, new FileOutputStream("listaPacientes"+formatadorCompleto.format(dataAtual)+".pdf"));
             document.open();
             
             Paragraph titulo = new Paragraph("Consultório Médico - " + clinica.getNome());
@@ -371,7 +388,7 @@ public class opRelatorio extends javax.swing.JPanel {
             document.add(titulo);
             document.add(cab);
             document.add(new Paragraph("\n"));
-            document.add(new Paragraph("Lista de Pacientes Cadastrados:"));
+            document.add(new Paragraph("Lista de Pacientes Cadastrados:              Emitido em:"+formatadorSimples.format(dataAtual)));
             document.add(new Paragraph("\n"));
 
             PdfPTable table = new PdfPTable(new float[]{10f, 10f, 3f,10f});
@@ -404,6 +421,12 @@ public class opRelatorio extends javax.swing.JPanel {
             }
             
             document.add(table);
+            document.add(new Paragraph("\n"));
+            document.add(new Paragraph("\n"));
+            document.add(new Paragraph("\n"));
+            document.add(new Paragraph("Endereço: "+clinica.getNumero()+", "+clinica.getRua()+", "+clinica.getBairro()));
+            document.add(new Paragraph("Telefone: "+clinica.getTelefone()+"        CNPJ: "+clinica.getCnpj()));
+            new RightMsg().ReceberMsg("PDF Construído");
 
         } catch (Exception ex) {
             System.out.println("ERROU!!");
@@ -425,7 +448,7 @@ public class opRelatorio extends javax.swing.JPanel {
         List<Convenio> medicos = sqlM.ListarConvenios("", "");
 
         try {
-            PdfWriter.getInstance(document, new FileOutputStream("listaConvenios.pdf"));
+            PdfWriter.getInstance(document, new FileOutputStream("listaConvenios"+formatadorCompleto.format(dataAtual)+".pdf"));
             document.open();
             
             Paragraph titulo = new Paragraph("Consultório Médico - " + clinica.getNome());
@@ -438,7 +461,7 @@ public class opRelatorio extends javax.swing.JPanel {
             document.add(titulo);
             document.add(cab);
             document.add(new Paragraph("\n"));
-            document.add(new Paragraph("Lista de Convenios Cadastrados:"));
+            document.add(new Paragraph("Lista de Convenios Cadastrados:              Emitido em:"+formatadorSimples.format(dataAtual)));
             document.add(new Paragraph("\n"));
 
             PdfPTable table = new PdfPTable(new float[]{10f, 10f, 10f});
@@ -470,6 +493,14 @@ public class opRelatorio extends javax.swing.JPanel {
             }
             
             document.add(table);
+            document.add(new Paragraph("\n"));
+            document.add(new Paragraph("\n"));
+            document.add(new Paragraph("\n"));
+            document.add(new Paragraph("Endereço: "+clinica.getNumero()+", "+clinica.getRua()+", "+clinica.getBairro()));
+            document.add(new Paragraph("Telefone: "+clinica.getTelefone()+"        CNPJ: "+clinica.getCnpj()));
+            
+            
+            new RightMsg().ReceberMsg("PDF Construído");
 
         } catch (Exception ex) {
             System.out.println("ERROU!!");
@@ -477,6 +508,10 @@ public class opRelatorio extends javax.swing.JPanel {
             document.close();
         }
     }//GEN-LAST:event_bgMedico4MousePressed
+
+    private void bgMedico2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bgMedico2MouseClicked
+        System.out.println(formatadorCompleto.format(dataAtual));
+    }//GEN-LAST:event_bgMedico2MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
