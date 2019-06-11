@@ -8,9 +8,11 @@ package com.consultorio.medico;
 import com.consultorio.DAO.CompromissoDAO;
 import com.consultorio.DAO.Conexao;
 import com.consultorio.DAO.MedicoDAO;
+import com.consultorio.DAO.PacienteDAO;
 import com.consultorio.main.TrocarPanel;
 import com.consultorio.model.Compromisso;
 import com.consultorio.model.Medico;
+import com.consultorio.model.Paciente;
 import com.consultorio.secretaria.*;
 import java.sql.Connection;
 import java.text.SimpleDateFormat;
@@ -28,8 +30,9 @@ public class home extends javax.swing.JPanel {
     int idM;
 
     Date dataAtual = new Date();
-    
+
     SimpleDateFormat formatador = new SimpleDateFormat("dd/MM/yyyy");
+
     /**
      * Creates new form home
      */
@@ -44,7 +47,7 @@ public class home extends javax.swing.JPanel {
         Connection con = Conexao.AbrirConexao();
         CompromissoDAO sql = new CompromissoDAO(con);
 
-        List<Compromisso> compromissos = sql.ListarTabelaData(idM, formatador.format(dataAtual) );
+        List<Compromisso> compromissos = sql.ListarTabelaData(idM, formatador.format(dataAtual));
         System.out.println(compromissos);
         DefaultTableModel tbm = (DefaultTableModel) tbCompromisso.getModel();
 
@@ -58,7 +61,14 @@ public class home extends javax.swing.JPanel {
 
             tbCompromisso.setValueAt(atual.getId(), i, 0);
 
-            tbCompromisso.setValueAt(atual.getTipo(), i, 3);
+            if (atual.getTipo().equals("Externo")) {
+                tbCompromisso.setValueAt(atual.getTipo(), i, 3);
+            } else {
+                PacienteDAO sqlP = new PacienteDAO(con);
+                Paciente paciente = sqlP.Capturar(atual.getPaciente());
+
+                tbCompromisso.setValueAt(paciente.getNome(), i, 3);
+            }
 
             tbCompromisso.setValueAt(atual.getHorario_inicial(), i, 1);
             tbCompromisso.setValueAt(atual.getHorario_final(), i, 2);
@@ -81,7 +91,7 @@ public class home extends javax.swing.JPanel {
 
                     if (calendario.getFechaSeleccionada() != null && !calendario.getFechaSeleccionada().equals(ultima)) {
                         ultima = calendario.getFechaSeleccionada();
-                        lblDia.setText("Compromissos de: "+calendario.getFechaSeleccionada());
+                        lblDia.setText("Compromissos de: " + calendario.getFechaSeleccionada());
 
                         List<Compromisso> compromissos = sql.ListarTabelaData(idM, calendario.getFechaSeleccionada());
                         System.out.println(compromissos);
@@ -97,7 +107,14 @@ public class home extends javax.swing.JPanel {
 
                             tbCompromisso.setValueAt(atual.getId(), i, 0);
 
-                            tbCompromisso.setValueAt(atual.getTipo(), i, 3);
+                            if (atual.getTipo().equals("Externo")) {
+                                tbCompromisso.setValueAt(atual.getTipo(), i, 3);
+                            } else {
+                                PacienteDAO sqlP = new PacienteDAO(con);
+                                Paciente paciente = sqlP.Capturar(atual.getPaciente());
+
+                                tbCompromisso.setValueAt(paciente.getNome(), i, 3);
+                            }
 
                             tbCompromisso.setValueAt(atual.getHorario_inicial(), i, 1);
                             tbCompromisso.setValueAt(atual.getHorario_final(), i, 2);
@@ -119,7 +136,6 @@ public class home extends javax.swing.JPanel {
         }.start();
     }
 
-    
     public void VerificaTable() {
 
         Connection con = Conexao.AbrirConexao();
@@ -130,19 +146,17 @@ public class home extends javax.swing.JPanel {
                 String ultima = calendario.getFechaSeleccionada();
                 while (true) {
 
-
-                    
                     System.out.println("Verificando");
-                            
-                    if(tbCompromisso.getSelectedRow() != -1){
-                        if (tbCompromisso.getValueAt(tbCompromisso.getSelectedRow(), 3).toString().equals("Consulta")) {
+
+                    if (tbCompromisso.getSelectedRow() != -1) {
+                        if (!tbCompromisso.getValueAt(tbCompromisso.getSelectedRow(), 3).toString().equals("Externo")) {
                             btnBuscar1.setEnabled(true);
                         }
-                       
-                    }else{
-                       btnBuscar1.setEnabled(false);
-                    }                    
-                    
+
+                    } else {
+                        btnBuscar1.setEnabled(false);
+                    }
+
                     try {
                         Thread.sleep(100);
                     } catch (Exception ex) {
@@ -153,6 +167,7 @@ public class home extends javax.swing.JPanel {
 
         }.start();
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -213,7 +228,7 @@ public class home extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Compromisso", "Horário Inicial", "Horário Final", "Tipo"
+                "ID", "Horário Inicial", "Horário Final", "Compromisso"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -362,7 +377,7 @@ public class home extends javax.swing.JPanel {
     }//GEN-LAST:event_btnBuscar1MouseEntered
 
     private void btnBuscar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscar1ActionPerformed
-        new TrocarPanel(pnlPrincipal, new relizarConsulta());
+        new TrocarPanel(pnlPrincipal, new realizarConsulta(Integer.parseInt(tbCompromisso.getValueAt(tbCompromisso.getSelectedRow(), 0).toString())));
     }//GEN-LAST:event_btnBuscar1ActionPerformed
 
 

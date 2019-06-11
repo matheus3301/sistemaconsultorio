@@ -26,7 +26,7 @@ public class CompromissoDAO extends ExecuteSQL {
 
     public boolean Cadastrar(Compromisso a) {
 
-        String sql = "INSERT INTO tb_compromissos VALUES(0,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO tb_compromissos VALUES(0,?,?,?,?,?,?,?,0)";
 
         try {
             PreparedStatement ps = getCon().prepareStatement(sql);
@@ -154,6 +154,27 @@ public class CompromissoDAO extends ExecuteSQL {
 
     }
     
+    public boolean RealizarCompromisso(Compromisso a) {
+
+        String sql = "UPDATE tb_compromissos SET status = 1 WHERE idtb_compromissos = ?";
+
+        try {
+            PreparedStatement ps = getCon().prepareStatement(sql);
+           
+            ps.setInt(1, a.getId());
+
+            if (ps.executeUpdate() > 0) {
+                return true;
+            } else {
+                return false;
+            }
+
+        } catch (SQLException ex) {
+            return false;
+        }
+
+    }
+    
     public boolean Excluir(int id) {
 
         String sql = "DELETE FROM tb_compromissos WHERE idtb_compromissos = ?";
@@ -180,7 +201,7 @@ public class CompromissoDAO extends ExecuteSQL {
 
         try {
             String consulta = "select * from tb_compromissos "
-                    + "where tb_medico_idtb_medico = ? AND data = ?";
+                    + "where tb_medico_idtb_medico = ? AND data = ? AND status = 0";
 
             PreparedStatement ps = getCon().prepareStatement(consulta);
             ps.setInt(1, idM);
