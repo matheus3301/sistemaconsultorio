@@ -233,6 +233,40 @@ public class CompromissoDAO extends ExecuteSQL {
         return lista;
     }
     
+     public List<Compromisso> ListarConsultas() {
+        System.out.println("Listando Consultas");
+        List<Compromisso> lista = new ArrayList<>();
+
+        try {
+            String consulta = "select tb_medico.nome, tb_paciente.nome, data, descricao from tb_compromissos INNER JOIN tb_medico ON tb_medico.idtb_medico = tb_medico_idtb_medico INNER JOIN tb_paciente ON tb_paciente.idtb_paciente = tb_paciente_idtb_paciente WHERE tipo = ?";
+
+            PreparedStatement ps = getCon().prepareStatement(consulta);
+            ps.setString(1, "Consulta");
+
+            ResultSet rs = ps.executeQuery();
+
+            if (rs != null) {
+                while (rs.next()) {
+                    System.out.println("Nova Consulta");
+                    Compromisso a = new Compromisso();
+
+                                      
+                    a.setHorario_inicial(rs.getString(1));
+                    a.setHorario_final(rs.getString(2));
+                    a.setData(rs.getString(3));
+                    a.setDescricao(rs.getString(4));
+
+                    lista.add(a);
+
+                }
+            }
+        } catch (SQLException ex) {
+            ex.getMessage();
+        }
+
+        return lista;
+        
+    }
     
 
 }

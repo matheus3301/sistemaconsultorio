@@ -27,6 +27,7 @@ import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.ButtonGroup;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -34,24 +35,62 @@ import javax.swing.ButtonGroup;
  */
 public class dadosPaciente extends javax.swing.JPanel {
     
-    int idComp;
     
-    public dadosPaciente(int idCompromisso) {
+    
+    public dadosPaciente() {
         initComponents();
-        idComp = idCompromisso;
-        CapturarConsulta();
+        AtualizaComboPaciente();
+       
     }
     
-    public void CapturarConsulta() {
+    
+    
+    private void AtualizaComboPaciente() {
+        comboPaciente.removeAllItems();
+        
         Connection con = Conexao.AbrirConexao();
-        CompromissoDAO sqlC = new CompromissoDAO(con);
-        Compromisso consulta = sqlC.Capturar(idComp);
+        PacienteDAO sql = new PacienteDAO(con);
+        List<Paciente> lista = new ArrayList<>();
+        lista = sql.ListarCombo();
+        comboPaciente.addItem("Selecione...");
         
+        for (Paciente b : lista) {
+            comboPaciente.addItem(b.getNome());
+        }
+        
+        Conexao.FecharConexao(con);
+    }
+    
+    private void ListaDiagonosticos(String nomeP) {
+        
+        
+        Connection con = Conexao.AbrirConexao();
         PacienteDAO sqlP = new PacienteDAO(con);
-        Paciente paciente = sqlP.Capturar(consulta.getPaciente());
         
-        iptPaciente.setText(paciente.getNome());
-        iptDesc.setText(consulta.getDescricao());
+        int idPaciente = sqlP.CapturarId(nomeP);
+        
+        DiagnosticoDAO sqlD = new DiagnosticoDAO(con);
+        List<Diagnostico> lista = sqlD.ListarDiagnostico(idPaciente);
+        
+         DefaultTableModel tbm =  (DefaultTableModel) tbDiagnostico.getModel();
+        
+        while(tbm.getRowCount() > 0){
+            tbm.removeRow(0);
+        }
+        
+        int i = 0;
+        for (Diagnostico atual : lista) {
+            tbm.addRow(new String[i]);
+            tbDiagnostico.setValueAt(atual.getId(), i, 0);
+            tbDiagnostico.setValueAt(atual.getDiagnostico(), i, 1);
+            
+            i++;
+
+        }
+        
+        Conexao.FecharConexao(con);
+        
+        
     }
 
     /**
@@ -68,14 +107,10 @@ public class dadosPaciente extends javax.swing.JPanel {
         jLabel6 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        jLabel16 = new javax.swing.JLabel();
-        iptNome = new javax.swing.JTextField();
-        jLabel19 = new javax.swing.JLabel();
-        iptCrm = new javax.swing.JTextField();
-        btnBuscar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tbMedicos = new javax.swing.JTable();
-        btnBuscar1 = new javax.swing.JButton();
+        tbDiagnostico = new javax.swing.JTable();
+        txtP = new javax.swing.JLabel();
+        comboPaciente = new javax.swing.JComboBox<>();
 
         setPreferredSize(new java.awt.Dimension(880, 470));
 
@@ -91,73 +126,37 @@ public class dadosPaciente extends javax.swing.JPanel {
 
         jPanel2.setBackground(new java.awt.Color(32, 47, 90));
 
-        jLabel16.setFont(new java.awt.Font("Segoe UI Light", 0, 16)); // NOI18N
-        jLabel16.setForeground(new java.awt.Color(204, 204, 204));
-        jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel16.setText("Nome");
-
-        jLabel19.setFont(new java.awt.Font("Segoe UI Light", 0, 16)); // NOI18N
-        jLabel19.setForeground(new java.awt.Color(204, 204, 204));
-        jLabel19.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel19.setText("CPF");
-
-        btnBuscar.setBackground(new java.awt.Color(241, 17, 51));
-        btnBuscar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnBuscar.setForeground(new java.awt.Color(255, 255, 255));
-        btnBuscar.setText("Buscar");
-        btnBuscar.setBorderPainted(false);
-        btnBuscar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        btnBuscar.setFocusPainted(false);
-        btnBuscar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnBuscarMouseExited(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnBuscarMouseEntered(evt);
-            }
-        });
-        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBuscarActionPerformed(evt);
-            }
-        });
-
-        tbMedicos.setModel(new javax.swing.table.DefaultTableModel(
+        tbDiagnostico.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "ID", "Nome ", "CPF", "Sexo"
+                "ID", "Diagnostico"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(tbMedicos);
+        jScrollPane1.setViewportView(tbDiagnostico);
 
-        btnBuscar1.setBackground(new java.awt.Color(14, 196, 10));
-        btnBuscar1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnBuscar1.setForeground(new java.awt.Color(255, 255, 255));
-        btnBuscar1.setText("Ver Ficha");
-        btnBuscar1.setBorderPainted(false);
-        btnBuscar1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        btnBuscar1.setFocusPainted(false);
-        btnBuscar1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnBuscar1MouseExited(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnBuscar1MouseEntered(evt);
+        txtP.setFont(new java.awt.Font("Segoe UI Light", 0, 16)); // NOI18N
+        txtP.setForeground(new java.awt.Color(204, 204, 204));
+        txtP.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        txtP.setText("Paciente");
+
+        comboPaciente.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                comboPacienteItemStateChanged(evt);
             }
         });
-        btnBuscar1.addActionListener(new java.awt.event.ActionListener() {
+        comboPaciente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBuscar1ActionPerformed(evt);
+                comboPacienteActionPerformed(evt);
             }
         });
 
@@ -167,37 +166,24 @@ public class dadosPaciente extends javax.swing.JPanel {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnBuscar1, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(jPanel2Layout.createSequentialGroup()
-                            .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(3, 3, 3)
-                            .addComponent(iptNome, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(2, 2, 2)
-                            .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(iptCrm, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 745, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(txtP, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(comboPaciente, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 745, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(25, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(35, 35, 35)
+                .addGap(42, 42, 42)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(iptNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel16)
-                    .addComponent(iptCrm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel19)
-                    .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28)
+                    .addComponent(comboPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtP))
+                .addGap(29, 29, 29)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnBuscar1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(38, Short.MAX_VALUE))
+                .addContainerGap(85, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -249,53 +235,24 @@ public class dadosPaciente extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnBuscarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarMouseExited
-        btnBuscar.setBackground(new Color(241,17,51));
-        btnBuscar.setForeground(Color.WHITE);
-    }//GEN-LAST:event_btnBuscarMouseExited
-
-    private void btnBuscarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarMouseEntered
-        btnBuscar.setBackground(new Color(235, 235, 235));
-        btnBuscar.setForeground(new Color(58, 65, 84));
-    }//GEN-LAST:event_btnBuscarMouseEntered
-
-    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        listarMedicos(iptNome.getText(), iptCrm.getText() );
-    }//GEN-LAST:event_btnBuscarActionPerformed
-
-    private void btnBuscar1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscar1MouseExited
+    private void comboPacienteItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboPacienteItemStateChanged
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnBuscar1MouseExited
+    }//GEN-LAST:event_comboPacienteItemStateChanged
 
-    private void btnBuscar1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscar1MouseEntered
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnBuscar1MouseEntered
-
-    private void btnBuscar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscar1ActionPerformed
-        Connection con = Conexao.AbrirConexao();
-        PacienteDAO sql = new PacienteDAO(con);
-        String id = tbMedicos.getValueAt(tbMedicos.getSelectedRow(), 0).toString();
-        System.out.println(id);
-
-        Paciente a = sql.Capturar(Integer.parseInt(id));
-
-        new TrocarPanel(pnlPrincipal, new opPaciente(a));
-    }//GEN-LAST:event_btnBuscar1ActionPerformed
+    private void comboPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboPacienteActionPerformed
+        ListaDiagonosticos(comboPaciente.getSelectedItem().toString());
+    }//GEN-LAST:event_comboPacienteActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnBuscar;
-    private javax.swing.JButton btnBuscar1;
-    private javax.swing.JTextField iptCrm;
-    private javax.swing.JTextField iptNome;
-    private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel19;
+    private javax.swing.JComboBox<String> comboPaciente;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel pnlPrincipal;
-    private javax.swing.JTable tbMedicos;
+    private javax.swing.JTable tbDiagnostico;
+    private javax.swing.JLabel txtP;
     // End of variables declaration//GEN-END:variables
 }

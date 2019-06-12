@@ -8,7 +8,10 @@ package com.consultorio.DAO;
 import com.consultorio.model.Diagnostico;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -37,6 +40,38 @@ public class DiagnosticoDAO extends ExecuteSQL{
         } catch (SQLException ex) {
             return false;
         }
+    }
+    
+    public List<Diagnostico> ListarDiagnostico(int idPaciente) {
+        List<Diagnostico> lista = new ArrayList<>();
+
+        try {
+            String consulta = "select * from tb_diagnostico "
+                    + "where tb_paciente_idtb_paciente = ?";
+
+            PreparedStatement ps = getCon().prepareStatement(consulta);
+            
+            ps.setInt(1, idPaciente);
+            
+            ResultSet rs = ps.executeQuery();
+
+            if (rs != null) {
+                while (rs.next()) {
+                    Diagnostico a = new Diagnostico();
+
+                    a.setId(rs.getInt(1));
+                    a.setId_paciente(rs.getInt(2));
+                    a.setDiagnostico(rs.getString(3));
+
+                    lista.add(a);
+
+                }
+            }
+        } catch (SQLException ex) {
+            ex.getMessage();
+        }
+
+        return lista;
     }
     
 }

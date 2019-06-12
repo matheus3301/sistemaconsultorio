@@ -36,6 +36,8 @@ public class realizarConsulta extends javax.swing.JPanel {
     
     int idComp;
     
+    String nomeMedico;
+    
     public realizarConsulta(int idCompromisso) {
         initComponents();
         idComp = idCompromisso;
@@ -49,6 +51,17 @@ public class realizarConsulta extends javax.swing.JPanel {
         
         PacienteDAO sqlP = new PacienteDAO(con);
         Paciente paciente = sqlP.Capturar(consulta.getPaciente());
+        
+        
+        
+        MedicoDAO sqlM = new MedicoDAO(con);
+        
+        
+        Medico med = sqlM.CapturarMedico(consulta.getMedico());
+        
+        nomeMedico = med.getNome();
+        
+        
         
         iptPaciente.setText(paciente.getNome());
         iptDesc.setText(consulta.getDescricao());
@@ -373,7 +386,7 @@ public class realizarConsulta extends javax.swing.JPanel {
     }//GEN-LAST:event_btnExameMouseEntered
 
     private void btnExameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExameActionPerformed
-        // TODO add your handling code here:
+        new jfDocumento().ReceberTipo("Exame", "Solicito o exame \npara o paciente", nomeMedico);
     }//GEN-LAST:event_btnExameActionPerformed
 
     private void btnCidMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCidMouseExited
@@ -397,7 +410,7 @@ public class realizarConsulta extends javax.swing.JPanel {
     }//GEN-LAST:event_btnReceitaMouseEntered
 
     private void btnReceitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReceitaActionPerformed
-        // TODO add your handling code here:
+        new jfDocumento().ReceberTipo("Receita", "Prescrevo o medicamento \npara o paciente", nomeMedico);
     }//GEN-LAST:event_btnReceitaActionPerformed
 
     private void btnAtestadoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAtestadoMouseExited
@@ -409,7 +422,7 @@ public class realizarConsulta extends javax.swing.JPanel {
     }//GEN-LAST:event_btnAtestadoMouseEntered
 
     private void btnAtestadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtestadoActionPerformed
-        // TODO add your handling code here:
+        new jfDocumento().ReceberTipo("Atestado", "Declaro o paciente inapto para suas atividades pelo período de ", nomeMedico);
     }//GEN-LAST:event_btnAtestadoActionPerformed
 
 

@@ -23,7 +23,7 @@ import javax.swing.JFrame;
  * @author Marcus
  */
 public class jfMenuMed extends javax.swing.JFrame {
-   
+    int idM;
 
     /**
      * Creates new form Menu
@@ -40,6 +40,7 @@ public class jfMenuMed extends javax.swing.JFrame {
 
     public void ReceberSec(Medico a) {
         lblNome.setText("Olá, Sr(ª) " + a.getNome());
+        idM = a.getId();
        
         new TrocarPanel(pnlPrincipal, new home(a.getId()));
     }
@@ -89,6 +90,7 @@ public class jfMenuMed extends javax.swing.JFrame {
         lblNome = new javax.swing.JLabel();
         lblLogin = new javax.swing.JLabel();
         rSButtonMetro1 = new rojerusan.RSButtonMetro();
+        rSButtonMetro2 = new rojerusan.RSButtonMetro();
         jPanel3 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -135,6 +137,14 @@ public class jfMenuMed extends javax.swing.JFrame {
             }
         });
 
+        rSButtonMetro2.setBackground(new java.awt.Color(0, 18, 50));
+        rSButtonMetro2.setText("Ficha Médica");
+        rSButtonMetro2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rSButtonMetro2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -153,7 +163,9 @@ public class jfMenuMed extends javax.swing.JFrame {
                         .addComponent(lblLogin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(12, 12, 12)
-                        .addComponent(rSButtonMetro1, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(rSButtonMetro1, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
+                            .addComponent(rSButtonMetro2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addGap(22, 22, 22))
         );
         jPanel1Layout.setVerticalGroup(
@@ -169,7 +181,9 @@ public class jfMenuMed extends javax.swing.JFrame {
                 .addComponent(lblAtual)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lblLogin)
-                .addGap(127, 127, 127)
+                .addGap(37, 37, 37)
+                .addComponent(rSButtonMetro2, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(35, 35, 35)
                 .addComponent(rSButtonMetro1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -240,13 +254,17 @@ public class jfMenuMed extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel23MouseClicked
 
     private void rSButtonIconI1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonIconI1ActionPerformed
-        new TrocarPanel(pnlPrincipal, new homeAdm());
+        new TrocarPanel(pnlPrincipal, new home(idM));
     }//GEN-LAST:event_rSButtonIconI1ActionPerformed
 
     private void rSButtonMetro1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonMetro1ActionPerformed
         dispose();
         new jfEntrada().setVisible(true);
     }//GEN-LAST:event_rSButtonMetro1ActionPerformed
+
+    private void rSButtonMetro2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonMetro2ActionPerformed
+        new TrocarPanel(pnlPrincipal, new dadosPaciente());
+    }//GEN-LAST:event_rSButtonMetro2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -311,6 +329,7 @@ public class jfMenuMed extends javax.swing.JFrame {
     private javax.swing.JPanel pnlPrincipal;
     private rojerusan.RSButtonIconI rSButtonIconI1;
     private rojerusan.RSButtonMetro rSButtonMetro1;
+    private rojerusan.RSButtonMetro rSButtonMetro2;
     private rojerusan.RSFotoCircle rSFotoCircle1;
     // End of variables declaration//GEN-END:variables
 }

@@ -240,6 +240,11 @@ public class cdCompromisso extends javax.swing.JPanel {
                 comboPacienteItemStateChanged(evt);
             }
         });
+        comboPaciente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboPacienteActionPerformed(evt);
+            }
+        });
 
         lblData.setFormatoFecha("dd/MM/yyyy");
         lblData.setPlaceholder("Selecione a Data...");
@@ -452,6 +457,10 @@ public class cdCompromisso extends javax.swing.JPanel {
             comboPaciente.setVisible(false);
         }
     }//GEN-LAST:event_rdConStateChanged
+
+    private void comboPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboPacienteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboPacienteActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

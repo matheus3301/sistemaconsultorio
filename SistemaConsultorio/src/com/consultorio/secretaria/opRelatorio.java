@@ -129,6 +129,9 @@ public class opRelatorio extends javax.swing.JPanel {
         bgMedico2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         bgMedico2.setPreferredSize(new java.awt.Dimension(213, 189));
         bgMedico2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                bgMedico2MousePressed(evt);
+            }
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 bgMedico2MouseClicked(evt);
             }
@@ -512,6 +515,84 @@ public class opRelatorio extends javax.swing.JPanel {
     private void bgMedico2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bgMedico2MouseClicked
         System.out.println(formatadorCompleto.format(dataAtual));
     }//GEN-LAST:event_bgMedico2MouseClicked
+
+    private void bgMedico2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bgMedico2MousePressed
+       System.out.println("Gerando PDF...");
+
+        Document document = new Document();
+        Connection con = Conexao.AbrirConexao();
+
+        ClinicaDAO sqlC = new ClinicaDAO(con);
+        CompromissoDAO sqlComp = new CompromissoDAO(con);
+        
+        Clinica clinica = sqlC.Capturar();
+
+        List<Compromisso> compromissos = sqlComp.ListarConsultas();
+
+        try {
+            PdfWriter.getInstance(document, new FileOutputStream("listaConsultas"+formatadorCompleto.format(dataAtual)+".pdf"));
+            document.open();
+            
+            Paragraph titulo = new Paragraph("Consultório Médico - " + clinica.getNome());
+            titulo.setAlignment(Element.ALIGN_CENTER);
+            
+            
+            Paragraph cab = new Paragraph(clinica.getCabecalho());
+            cab.setAlignment(Element.ALIGN_CENTER);
+            
+            document.add(titulo);
+            document.add(cab);
+            document.add(new Paragraph("\n"));
+            document.add(new Paragraph("Lista de Consultas Realizadas:              Emitido em:"+formatadorSimples.format(dataAtual)));
+            document.add(new Paragraph("\n"));
+
+            PdfPTable table = new PdfPTable(new float[]{5f, 5f, 5f, 5f});
+            PdfPCell celulaNome = new PdfPCell(new Phrase("Medico"));
+            celulaNome.setHorizontalAlignment(Element.ALIGN_CENTER);
+            PdfPCell celulaCrm = new PdfPCell(new Phrase("Paciente"));
+            celulaCrm.setHorizontalAlignment(Element.ALIGN_CENTER);
+
+            PdfPCell celulaSexo = new PdfPCell(new Phrase("Data"));
+            celulaSexo.setHorizontalAlignment(Element.ALIGN_CENTER);
+
+            PdfPCell celulaTelefone = new PdfPCell(new Phrase("Descrição"));
+            celulaTelefone.setHorizontalAlignment(Element.ALIGN_CENTER);
+
+            table.addCell(celulaNome);
+            table.addCell(celulaCrm);
+            table.addCell(celulaSexo);
+            table.addCell(celulaTelefone);
+
+            for (Compromisso atual : compromissos) {
+                System.out.println("Repetiu....");
+                PdfPCell celula1 = new PdfPCell(new Phrase(atual.getHorario_inicial()));
+                PdfPCell celula2 = new PdfPCell(new Phrase(atual.getHorario_final()));
+                PdfPCell celula3 = new PdfPCell(new Phrase(atual.getData()));
+                PdfPCell celula4 = new PdfPCell(new Phrase(atual.getDescricao()));
+
+                table.addCell(celula1);
+                table.addCell(celula2);
+                table.addCell(celula3);
+                table.addCell(celula4);
+            }
+            
+            document.add(table);
+            document.add(new Paragraph("\n"));
+            document.add(new Paragraph("\n"));
+            document.add(new Paragraph("\n"));
+            document.add(new Paragraph("Endereço: "+clinica.getNumero()+", "+clinica.getRua()+", "+clinica.getBairro()));
+            document.add(new Paragraph("Telefone: "+clinica.getTelefone()+"        CNPJ: "+clinica.getCnpj()));
+            
+            
+            
+            new RightMsg().ReceberMsg("PDF Construído");
+
+        } catch (Exception ex) {
+            System.out.println("ERROU!!");
+        } finally {
+            document.close();
+        }
+    }//GEN-LAST:event_bgMedico2MousePressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
