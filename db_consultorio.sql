@@ -1,27 +1,61 @@
 -- phpMyAdmin SQL Dump
--- version 4.1.4
--- http://www.phpmyadmin.net
+-- version 4.8.3
+-- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: 30-Jun-2015 às 16:11
--- Versão do servidor: 5.6.15-log
--- PHP Version: 5.5.8
+-- Host: localhost
+-- Tempo de geração: 29/08/2019 às 13:55
+-- Versão do servidor: 10.1.35-MariaDB
+-- Versão do PHP: 7.2.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `new_clinicare`
+-- Banco de dados: `db_consultorio`
 --
 
+-- --------------------------------------------------------
+
 --
--- Extraindo dados da tabela `cid`
+-- Estrutura para tabela `tb_administrador`
+--
+
+CREATE TABLE `tb_administrador` (
+  `idtb_administrador` int(11) NOT NULL,
+  `login` varchar(45) DEFAULT NULL,
+  `senha` varchar(45) DEFAULT NULL,
+  `nome` varchar(45) DEFAULT NULL,
+  `telefone` varchar(45) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Fazendo dump de dados para tabela `tb_administrador`
+--
+
+INSERT INTO `tb_administrador` (`idtb_administrador`, `login`, `senha`, `nome`, `telefone`) VALUES
+(1, 'admin', 'admin', 'Matheus Rocha', '11111111111');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `tb_cid`
+--
+
+CREATE TABLE `tb_cid` (
+  `idCid` varchar(30) DEFAULT NULL,
+  `descricaoCid` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Fazendo dump de dados para tabela `tb_cid`
 --
 
 INSERT INTO `tb_cid` (`idCid`, `descricaoCid`) VALUES
@@ -1017,8 +1051,7 @@ INSERT INTO `tb_cid` (`idCid`, `descricaoCid`) VALUES
 ('C48.0', 'Retroperitônio'),
 ('C48.1', 'Partes especificadas do peritônio'),
 ('C48.2', 'Peritônio'),
-('C48.8', 'Lesão invasiva dos tecidos moles do retroperitônio e do peritônio');
-INSERT INTO `tb_cid` (`idCid`, `descricaoCid`) VALUES
+('C48.8', 'Lesão invasiva dos tecidos moles do retroperitônio e do peritônio'),
 ('C49.0', 'Tecido conjuntivo e tecidos moles da cabeça, face e pescoço'),
 ('C49.1', 'Tecido conjuntivo e tecidos moles dos membros superiores, incluindo ombro'),
 ('C49.2', 'Tecido conjuntivo e tecidos moles dos membros inferiores, incluindo quadril'),
@@ -1052,7 +1085,8 @@ INSERT INTO `tb_cid` (`idCid`, `descricaoCid`) VALUES
 ('C54.2', 'Miométrio'),
 ('C54.3', 'Fundo do útero'),
 ('C54.8', 'Lesão invasiva do corpo do útero'),
-('C54.9', 'Corpo do útero, não especificado'),
+('C54.9', 'Corpo do útero, não especificado');
+INSERT INTO `tb_cid` (`idCid`, `descricaoCid`) VALUES
 ('C55', '  Neoplasia maligna do útero, porção não especificada'),
 ('C56', '  Neoplasia maligna do ovário'),
 ('C57.0', 'Trompa de Falópio'),
@@ -1683,8 +1717,8 @@ INSERT INTO `tb_cid` (`idCid`, `descricaoCid`) VALUES
 ('D82.2', 'Imunodeficiência com encurtamento de membros'),
 ('D82.3', 'Imunodeficiência que se segue à resposta hereditária defeituosa ao vírus de Epstein-Barr (EB)'),
 ('D82.4', 'Síndrome da hiperimunoglobulina E [IgE]'),
-('D82.8', 'Imunodeficiências associadas com outros defeitos "major" especificados'),
-('D82.9', 'Imunodeficiência associada com defeitos "major" não especificados'),
+('D82.8', 'Imunodeficiências associadas com outros defeitos \"major\" especificados'),
+('D82.9', 'Imunodeficiência associada com defeitos \"major\" não especificados'),
 ('D83.0', 'Imunodeficiência comum variável com predominância de anormalidades do número e da função das células B'),
 ('D83.1', 'Imunodeficiência comum variável com predominância de transtornos imunorregulatórios de células T'),
 ('D83.2', 'Imunodeficiência comum variável com auto-anticorpos às células B ou T'),
@@ -1732,7 +1766,7 @@ INSERT INTO `tb_cid` (`idCid`, `descricaoCid`) VALUES
 ('E05.2', 'Tireotoxicose com bócio tóxico multinodular'),
 ('E05.3', 'Tireotoxicose causada por tecido tireoidiano ectópico'),
 ('E05.4', 'Tireotoxicose factícia'),
-('E05.5', 'Crise ou "tempestade" tireotóxica'),
+('E05.5', 'Crise ou \"tempestade\" tireotóxica'),
 ('E05.8', 'Outras tireotoxicoses'),
 ('E05.9', 'Tireotoxicose não especificada'),
 ('E06.0', 'Tireoidite aguda'),
@@ -2002,8 +2036,7 @@ INSERT INTO `tb_cid` (`idCid`, `descricaoCid`) VALUES
 ('E78.4', 'Outras hiperlipidemias'),
 ('E78.5', 'Hiperlipidemia não especificada'),
 ('E78.6', 'Deficiências de lipoproteínas'),
-('E78.8', 'Outros distúrbios do metabolismo de lipoproteínas');
-INSERT INTO `tb_cid` (`idCid`, `descricaoCid`) VALUES
+('E78.8', 'Outros distúrbios do metabolismo de lipoproteínas'),
 ('E78.9', 'Distúrbio não especificado do metabolismo de lipoproteínas'),
 ('E79.0', 'Hiperuricemia sem sinais de artrite inflamatória e de doença com tofos'),
 ('E79.1', 'Síndrome de Lesch-Nyhan'),
@@ -2060,7 +2093,8 @@ INSERT INTO `tb_cid` (`idCid`, `descricaoCid`) VALUES
 ('E89.6', 'Hipofunção adrenocortical(-medular) pós-procedimento'),
 ('E89.8', 'Outros transtornos endócrinos e metabólicos pós-procedimento'),
 ('E89.9', 'Transtornos endócrinos e metabólicos não especificados pós-procedimento'),
-('E90', 'Transtornos nutricionais e metabólicos em doenças classificadas em outra parte'),
+('E90', 'Transtornos nutricionais e metabólicos em doenças classificadas em outra parte');
+INSERT INTO `tb_cid` (`idCid`, `descricaoCid`) VALUES
 ('F00.0', 'Demência na doença de Alzheimer de início precoce (G30.0+),F00.0*Demência na doença de Alzheimer de início precoce (G30.0+)'),
 ('F00.1', 'Demência na doença de Alzheimer de início tardio (G30.1+),F00.1*Demência na doença de Alzheimer de início tardio (G30.1+)'),
 ('F00.2', 'Demência na doença de Alzheimer, forma atípica ou mista (G30.8+),F00.2*Demência na doença de Alzheimer, forma atípica ou mista (G30.8+)'),
@@ -2278,11 +2312,11 @@ INSERT INTO `tb_cid` (`idCid`, `descricaoCid`) VALUES
 ('F42.2', 'Forma mista, com idéias obsessivas e comportamentos compulsivos'),
 ('F42.8', 'Outros transtornos obsessivo-compulsivos'),
 ('F42.9', 'Transtorno obsessivo-compulsivo não especificado'),
-('F43.0', 'Reação aguda ao "stress"'),
-('F43.1', 'Estado de "stress" pós-traumático'),
+('F43.0', 'Reação aguda ao \"stress\"'),
+('F43.1', 'Estado de \"stress\" pós-traumático'),
 ('F43.2', 'Transtornos de adaptação'),
-('F43.8', 'Outras reações ao "stress" grave'),
-('F43.9', 'Reação não especificada a um "stress" grave'),
+('F43.8', 'Outras reações ao \"stress\" grave'),
+('F43.9', 'Reação não especificada a um \"stress\" grave'),
 ('F44.0', 'Amnésia dissociativa'),
 ('F44.1', 'Fuga dissociativa'),
 ('F44.2', 'Estupor dissociativo'),
@@ -2591,7 +2625,7 @@ INSERT INTO `tb_cid` (`idCid`, `descricaoCid`) VALUES
 ('G43.3', 'Enxaqueca complicada'),
 ('G43.8', 'Outras formas de enxaqueca'),
 ('G43.9', 'Enxaqueca, sem especificação'),
-('G44.0', 'Síndrome de "cluster-headache"'),
+('G44.0', 'Síndrome de \"cluster-headache\"'),
 ('G44.1', 'Cefaléia vascular, não classificada em outra parte'),
 ('G44.2', 'Cefaléia tensional'),
 ('G44.3', 'Cefaléia crônica pós-traumática'),
@@ -2719,8 +2753,7 @@ INSERT INTO `tb_cid` (`idCid`, `descricaoCid`) VALUES
 ('G72.2', 'Miopatia devida a outros agentes tóxicos'),
 ('G72.3', 'Paralisia periódica'),
 ('G72.4', 'Miopatia inflamatória não classificada em outra parte'),
-('G72.8', 'Outras miopatias especificadas');
-INSERT INTO `tb_cid` (`idCid`, `descricaoCid`) VALUES
+('G72.8', 'Outras miopatias especificadas'),
 ('G72.9', 'Miopatia não especificada'),
 ('G73.0', 'Síndromes miastênicas em doenças endócrinas'),
 ('G73.1', 'Síndrome de Eaton-Lambert (C80+)'),
@@ -2797,7 +2830,8 @@ INSERT INTO `tb_cid` (`idCid`, `descricaoCid`) VALUES
 ('G98', '  Outras transtornos do sistema nervoso não classificados em outra parte'),
 ('G99.0', 'Neuropatia autonômica em doenças endócrinas e metabólicas'),
 ('G99.1', 'Outros transtornos do sistema nervoso autônomo em doenças classificadas em outra parte'),
-('G99.2', 'Mielopatia em doenças classificadas em outra parte'),
+('G99.2', 'Mielopatia em doenças classificadas em outra parte');
+INSERT INTO `tb_cid` (`idCid`, `descricaoCid`) VALUES
 ('G99.8', 'Outros transtornos especificados do sistema nervoso em doenças classificadas em outra parte'),
 ('H00.0', 'Hordéolo e outras inflamações profundas das pálpebras'),
 ('H00.1', 'Calázio'),
@@ -3355,7 +3389,7 @@ INSERT INTO `tb_cid` (`idCid`, `descricaoCid`) VALUES
 ('I47.1', 'Taquicardia supraventricular'),
 ('I47.2', 'Taquicardia ventricular'),
 ('I47.9', 'Taquicardia paroxística não especificada'),
-('I48', '  "Flutter" e fibrilação atrial'),
+('I48', '  \"Flutter\" e fibrilação atrial'),
 ('I49.0', 'Flutter e fibrilação ventricular'),
 ('I49.1', 'Despolarização atrial prematura'),
 ('I49.2', 'Despolarização juncional prematura'),
@@ -3607,8 +3641,7 @@ INSERT INTO `tb_cid` (`idCid`, `descricaoCid`) VALUES
 ('J16.8', 'Pneumonia devida a outros microorganismos infecciosos especificados'),
 ('J17.0', 'Pneumonia em doenças bacterianas classificadas em outra parte'),
 ('J17.1', 'Pneumonia em doenças virais classificadas em outra parte'),
-('J17.2', 'Pneumonia em micoses classificadas em outra parte');
-INSERT INTO `tb_cid` (`idCid`, `descricaoCid`) VALUES
+('J17.2', 'Pneumonia em micoses classificadas em outra parte'),
 ('J17.3', 'Pneumonia em doenças parasitárias classificadas em outra parte'),
 ('J17.8', 'Pneumonia em outras doenças classificadas em outra parte'),
 ('J18.0', 'Broncopneumonia não especificada'),
@@ -3722,7 +3755,8 @@ INSERT INTO `tb_cid` (`idCid`, `descricaoCid`) VALUES
 ('J67.5', 'Pulmão dos que trabalham com cogumelos'),
 ('J67.6', 'Pulmão dos cortadores de casca do bordo'),
 ('J67.7', 'Doença pulmonar devida aos sistemas de ar condicionado e de umidificação do ar'),
-('J67.8', 'Pneumonites de hipersensibilidade, devidas a outras poeiras orgânicas'),
+('J67.8', 'Pneumonites de hipersensibilidade, devidas a outras poeiras orgânicas');
+INSERT INTO `tb_cid` (`idCid`, `descricaoCid`) VALUES
 ('J67.9', 'Pneumonite de hipersensibilidade devida a poeira orgânica não especificada'),
 ('J68.0', 'Bronquite e pneumonite devida a produtos químicos, gases, fumaças e vapores'),
 ('J68.1', 'Edema pulmonar agudo devido a produtos químicos, gases, fumaças e vapores'),
@@ -4558,8 +4592,7 @@ INSERT INTO `tb_cid` (`idCid`, `descricaoCid`) VALUES
 ('M02.1', 'Artropatia pós-desintérica'),
 ('M02.2', 'Artropatia pós-imunização'),
 ('M02.3', 'Doença de Reiter'),
-('M02.8', 'Outras artropatias reacionais');
-INSERT INTO `tb_cid` (`idCid`, `descricaoCid`) VALUES
+('M02.8', 'Outras artropatias reacionais'),
 ('M02.9', 'Artropatia reacional não especificada'),
 ('M03.0', 'Artrite pós-meningocócica (A39.8+)'),
 ('M03.1', 'Artropatia pós-infecciosa na sífilis (A50.5+)'),
@@ -4697,7 +4730,8 @@ INSERT INTO `tb_cid` (`idCid`, `descricaoCid`) VALUES
 ('M24.0', 'Corpo flutuante em articulação'),
 ('M24.1', 'Outros transtornos das cartilagens articulares'),
 ('M24.2', 'Transtornos de ligamentos'),
-('M24.3', 'Deslocamento e subluxação patológicas de articulação, não classificada em outra parte'),
+('M24.3', 'Deslocamento e subluxação patológicas de articulação, não classificada em outra parte');
+INSERT INTO `tb_cid` (`idCid`, `descricaoCid`) VALUES
 ('M24.4', 'Deslocamento e subluxação de articulação recidivantes'),
 ('M24.5', 'Contratura articular'),
 ('M24.6', 'Ancilose articular'),
@@ -4706,7 +4740,7 @@ INSERT INTO `tb_cid` (`idCid`, `descricaoCid`) VALUES
 ('M24.9', 'Desarranjo articular não especificado'),
 ('M25.0', 'Hemartrose'),
 ('M25.1', 'Fístula articular'),
-('M25.2', '"Flail joint"'),
+('M25.2', '\"Flail joint\"'),
 ('M25.3', 'Outras instabilidades articulares'),
 ('M25.4', 'Derrame articular'),
 ('M25.5', 'Dor articular'),
@@ -4799,7 +4833,7 @@ INSERT INTO `tb_cid` (`idCid`, `descricaoCid`) VALUES
 ('M47.9', 'Espondilose não especificada'),
 ('M48.0', 'Estenose da coluna vertebral'),
 ('M48.1', 'Hiperostose ancilosante [Forestier]'),
-('M48.2', '"Kissing spine"'),
+('M48.2', '\"Kissing spine\"'),
 ('M48.3', 'Espondilopatia traumática'),
 ('M48.4', 'Fratura de fadiga de vértebra'),
 ('M48.5', 'Vértebra colapsada não classificada em outra parte'),
@@ -4983,7 +5017,7 @@ INSERT INTO `tb_cid` (`idCid`, `descricaoCid`) VALUES
 ('M84.0', 'Defeito de consolidação da fratura'),
 ('M84.1', 'Ausência de consolidação da fratura [pseudo-artrose]'),
 ('M84.2', 'Atraso de consolidação de fratura'),
-('M84.3', 'Fratura de fadiga ("stress") não classificada em outra parte'),
+('M84.3', 'Fratura de fadiga (\"stress\") não classificada em outra parte'),
 ('M84.4', 'Fratura patológica não classificada em outra parte'),
 ('M84.8', 'Outros transtornos da continuidade do osso'),
 ('M84.9', 'Transtorno não especificado da continuidade do osso'),
@@ -5026,7 +5060,7 @@ INSERT INTO `tb_cid` (`idCid`, `descricaoCid`) VALUES
 ('M90.0', 'Tuberculose óssea (A18.0+)'),
 ('M90.1', 'Periostite em outras doenças infecciosas classificadas em outra parte'),
 ('M90.2', 'Osteopatia em outras doenças infecciosas classificadas em outra parte'),
-('M90.3', 'Osteonecrose em "mal dos caixões" (T70.3+)'),
+('M90.3', 'Osteonecrose em \"mal dos caixões\" (T70.3+)'),
 ('M90.4', 'Osteonecrose devida à hemoglobinopatia (D50-D64+)'),
 ('M90.5', 'Osteonecrose em outras doenças classificadas em outra parte'),
 ('M90.6', 'Osteíte deformante em doenças neoplásicas (C00-C48+)'),
@@ -5280,7 +5314,7 @@ INSERT INTO `tb_cid` (`idCid`, `descricaoCid`) VALUES
 ('N39.0', 'Infecção do trato urinário de localização não especificada'),
 ('N39.1', 'Proteinúria persistente não especificada'),
 ('N39.2', 'Proteinúria ortostática não especificada'),
-('N39.3', 'Incontinência de tensão ("stress")'),
+('N39.3', 'Incontinência de tensão (\"stress\")'),
 ('N39.4', 'Outras incontinências urinárias especificadas'),
 ('N39.8', 'Outros transtornos especificados do aparelho urinário'),
 ('N39.9', 'Transtornos não especificados do aparelho urinário'),
@@ -5465,8 +5499,7 @@ INSERT INTO `tb_cid` (`idCid`, `descricaoCid`) VALUES
 ('N90.5', 'Atrofia da vulva'),
 ('N90.6', 'Hipertrofia da vulva'),
 ('N90.7', 'Cisto vulvar'),
-('N90.8', 'Outros transtornos não-inflamatórios especificados da vulva e do períneo');
-INSERT INTO `tb_cid` (`idCid`, `descricaoCid`) VALUES
+('N90.8', 'Outros transtornos não-inflamatórios especificados da vulva e do períneo'),
 ('N90.9', 'Transtorno não-inflamatório e não especificado da vulva e do períneo'),
 ('N91.0', 'Amenorréia primária'),
 ('N91.1', 'Amenorréia secundária'),
@@ -5578,7 +5611,8 @@ INSERT INTO `tb_cid` (`idCid`, `descricaoCid`) VALUES
 ('O07.2', 'Falha de aborto provocado por razões médicas, complicado por embolia'),
 ('O07.3', 'Falha de aborto provocado por razões médicas, com outras complicações ou com complicações não especificadas'),
 ('O07.4', 'Falha de aborto provocado por razões médicas, sem complicações'),
-('O07.5', 'Outras formas, e as não especificadas, de falha na provocação de aborto, complicadas por infecção do trato genital e por infecção dos órgãos pélvicos'),
+('O07.5', 'Outras formas, e as não especificadas, de falha na provocação de aborto, complicadas por infecção do trato genital e por infecção dos órgãos pélvicos');
+INSERT INTO `tb_cid` (`idCid`, `descricaoCid`) VALUES
 ('O07.6', 'Outras formas, e as não especificadas, de falha na provocação de aborto, complicadas por hemorragia tardia ou excessiva'),
 ('O07.7', 'Outras formas, e as não especificadas, de falha na provocação de aborto, complicadas por embolia'),
 ('O07.8', 'Outras formas, e as não especificadas, de falha na provocação de aborto, com outras complicações ou com complicações não especificadas'),
@@ -5652,14 +5686,14 @@ INSERT INTO `tb_cid` (`idCid`, `descricaoCid`) VALUES
 ('O26.7', 'Subluxação da sínfise (púbica) na gravidez, parto e puerpério'),
 ('O26.8', 'Outras afecções especificadas, ligadas a gravidez'),
 ('O26.9', 'Afecções ligadas a gravidez, não especificadas'),
-('O28.0', 'Achados hematológicos anormais do rastreamento ["screening"] antenatal da mãe'),
-('O28.1', 'Achados bioquímicos anormais do rastreamento ["screening"] antenatal da mãe'),
-('O28.2', 'Achados citológicos anormais do rastreamento ["screening"] antenatal da mãe'),
-('O28.3', 'Achados ultrassonográficos anormais do rastreamento ["screening"] antenatal da mãe'),
-('O28.4', 'Achados radiológicos anormais do rastreamento ["screening"] antenatal da mãe'),
-('O28.5', 'Achados cromossômicos e genéticos anormais do rastreamento ["screening"] antenatal da mãe'),
-('O28.8', 'Outros achados anormais do rastreamento ["screening"] antenatal da mãe'),
-('O28.9', 'Achados anormais do rastreamento ["screening"] antenatal da mãe, não especificados'),
+('O28.0', 'Achados hematológicos anormais do rastreamento [\"screening\"] antenatal da mãe'),
+('O28.1', 'Achados bioquímicos anormais do rastreamento [\"screening\"] antenatal da mãe'),
+('O28.2', 'Achados citológicos anormais do rastreamento [\"screening\"] antenatal da mãe'),
+('O28.3', 'Achados ultrassonográficos anormais do rastreamento [\"screening\"] antenatal da mãe'),
+('O28.4', 'Achados radiológicos anormais do rastreamento [\"screening\"] antenatal da mãe'),
+('O28.5', 'Achados cromossômicos e genéticos anormais do rastreamento [\"screening\"] antenatal da mãe'),
+('O28.8', 'Outros achados anormais do rastreamento [\"screening\"] antenatal da mãe'),
+('O28.9', 'Achados anormais do rastreamento [\"screening\"] antenatal da mãe, não especificados'),
 ('O29.0', 'Complicações pulmonares de anestesia administrada durante a gravidez'),
 ('O29.1', 'Complicações cardíacas de anestesia administrada durante a gravidez'),
 ('O29.2', 'Complicações relativas ao sistema nervoso central devidas a anestesia administrada durante a gravidez'),
@@ -6018,7 +6052,7 @@ INSERT INTO `tb_cid` (`idCid`, `descricaoCid`) VALUES
 ('P11.5', 'Traumatismo de parto da coluna e da medula espinhal'),
 ('P11.9', 'Traumatismo de parto não especificado do sistema nervoso central'),
 ('P12.0', 'Céfalo-hematoma devido a traumatismo de parto'),
-('P12.1', '"Chignon" devido a traumatismo de parto'),
+('P12.1', '\"Chignon\" devido a traumatismo de parto'),
 ('P12.2', 'Hemorragia subaponeurótica epicraniana devida a traumatismo de parto'),
 ('P12.3', 'Esmagamento do couro cabeludo devido a traumatismo de parto'),
 ('P12.4', 'Lesão por monitorização do couro cabeludo do recém-nascido'),
@@ -6159,8 +6193,7 @@ INSERT INTO `tb_cid` (`idCid`, `descricaoCid`) VALUES
 ('P54.6', 'Hemorragia vaginal neonatal'),
 ('P54.8', 'Outras hemorragias fetais e neonatais especificadas'),
 ('P54.9', 'Hemorragia fetal e neonatal não especificada'),
-('P55.0', 'Isoimunização Rh do feto e do recém-nascido');
-INSERT INTO `tb_cid` (`idCid`, `descricaoCid`) VALUES
+('P55.0', 'Isoimunização Rh do feto e do recém-nascido'),
 ('P55.1', 'Isoimunização ABO do feto e do recém-nascido'),
 ('P55.8', 'Outras doenças hemolíticas do feto e do recém-nascido'),
 ('P55.9', 'Doença hemolítica não especificada do feto e do recém-nascido'),
@@ -6221,7 +6254,7 @@ INSERT INTO `tb_cid` (`idCid`, `descricaoCid`) VALUES
 ('P74.8', 'Outros distúrbios metabólicos transitórios do recém-nascido'),
 ('P74.9', 'Distúrbio metabólico transitório não especificado do recém-nascido'),
 ('P75', ' *Íleo meconial (E84.1+)'),
-('P76.0', 'Síndrome da "rolha de mecônio"'),
+('P76.0', 'Síndrome da \"rolha de mecônio\"'),
 ('P76.1', 'Íleo transitório do recém-nascido'),
 ('P76.2', 'Obstrução intestinal devido a leite espesso'),
 ('P76.8', 'Outras obstruções intestinais especificadas do recém-nascido'),
@@ -6344,7 +6377,8 @@ INSERT INTO `tb_cid` (`idCid`, `descricaoCid`) VALUES
 ('Q13.0', 'Coloboma da íris'),
 ('Q13.1', 'Ausência de íris'),
 ('Q13.2', 'Outras malformações congênitas da íris'),
-('Q13.3', 'Opacidade congênita da córnea'),
+('Q13.3', 'Opacidade congênita da córnea');
+INSERT INTO `tb_cid` (`idCid`, `descricaoCid`) VALUES
 ('Q13.4', 'Outras malformações congênitas da córnea'),
 ('Q13.5', 'Esclerótica azul'),
 ('Q13.8', 'Outras malformações congênitas da câmara anterior do olho'),
@@ -6769,7 +6803,7 @@ INSERT INTO `tb_cid` (`idCid`, `descricaoCid`) VALUES
 ('Q79.1', 'Outras malformações congênitas do diafragma'),
 ('Q79.2', 'Exonfalia'),
 ('Q79.3', 'Gastrosquise'),
-('Q79.4', 'Síndrome do abdome em ameixa seca ("prune belly syndrome")'),
+('Q79.4', 'Síndrome do abdome em ameixa seca (\"prune belly syndrome\")'),
 ('Q79.5', 'Outras malformações congênitas da parede abdominal'),
 ('Q79.6', 'Síndrome de Ehlers-Danlos'),
 ('Q79.8', 'Outras malformações congênitas do sistema osteomuscular'),
@@ -7040,7 +7074,7 @@ INSERT INTO `tb_cid` (`idCid`, `descricaoCid`) VALUES
 ('R46.3', 'Hiperatividade'),
 ('R46.4', 'Lentidão e baixa reatividade'),
 ('R46.5', 'Personalidade suspeita e evasiva'),
-('R46.6', 'Inquietação e preocupação exageradas com acontecimentos "estressantes"'),
+('R46.6', 'Inquietação e preocupação exageradas com acontecimentos \"estressantes\"'),
 ('R46.7', 'Verborragia e pormenores circunstanciais mascarando o motivo da consulta'),
 ('R46.8', 'Outros sintomas e sinais relativos à aparência e ao comportamento'),
 ('R47.0', 'Disfasia e afasia'),
@@ -7111,8 +7145,7 @@ INSERT INTO `tb_cid` (`idCid`, `descricaoCid`) VALUES
 ('R76.0', 'Título aumentado de anticorpos'),
 ('R76.1', 'Reação anormal ao teste da tuberculina'),
 ('R76.2', 'Exame sorológico falso positivo para sífilis'),
-('R76.8', 'Outros achados imunológicos especificados anormais no soro');
-INSERT INTO `tb_cid` (`idCid`, `descricaoCid`) VALUES
+('R76.8', 'Outros achados imunológicos especificados anormais no soro'),
 ('R76.9', 'Achado anormal de exame imunológico sérico, não especificado'),
 ('R77.0', 'Anormalidade da albumina'),
 ('R77.1', 'Anormalidade das globulinas'),
@@ -7239,7 +7272,8 @@ INSERT INTO `tb_cid` (`idCid`, `descricaoCid`) VALUES
 ('S00.5', 'Traumatismo superficial dos lábios e da cavidade oral'),
 ('S00.7', 'Traumatismos superficiais múltiplos da cabeça'),
 ('S00.8', 'Traumatismo superficial de outras partes da cabeça'),
-('S00.9', 'Traumatismo superficial da cabeça, parte não especificada'),
+('S00.9', 'Traumatismo superficial da cabeça, parte não especificada');
+INSERT INTO `tb_cid` (`idCid`, `descricaoCid`) VALUES
 ('S01.0', 'Ferimento do couro cabeludo'),
 ('S01.1', 'Ferimento da pálpebra e da região periocular'),
 ('S01.2', 'Ferimento do nariz'),
@@ -7846,8 +7880,7 @@ INSERT INTO `tb_cid` (`idCid`, `descricaoCid`) VALUES
 ('T02.1', 'Fraturas envolvendo tórax com parte inferior do dorso e da pelve'),
 ('T02.2', 'Fraturas envolvendo regiões múltiplas de um membro superior'),
 ('T02.3', 'Fraturas envolvendo regiões múltiplas de um membro inferior'),
-('T02.4', 'Fraturas envolvendo regiões múltiplas de ambos os membros superiores');
-INSERT INTO `tb_cid` (`idCid`, `descricaoCid`) VALUES
+('T02.4', 'Fraturas envolvendo regiões múltiplas de ambos os membros superiores'),
 ('T02.5', 'Fraturas envolvendo regiões múltiplas de ambos os membros inferiores'),
 ('T02.6', 'Fraturas envolvendo regiões múltiplas do(s) membro(s) superior(es) com inferior(es)'),
 ('T02.7', 'Fraturas envolvendo tórax com parte inferior do dorso e pelve com membro(s)'),
@@ -8037,7 +8070,8 @@ INSERT INTO `tb_cid` (`idCid`, `descricaoCid`) VALUES
 ('T29.6', 'Corrosões múltiplas, sem mencionar corrosão(ões) ultrapassando o segundo grau'),
 ('T29.7', 'Corrosões múltiplas, mencionado ao menos uma corrosão de terceiro grau'),
 ('T30.0', 'Queimadura, parte do corpo não especificada, grau não especificado'),
-('T30.1', 'Queimadura de primeiro grau, parte do corpo não especificada'),
+('T30.1', 'Queimadura de primeiro grau, parte do corpo não especificada');
+INSERT INTO `tb_cid` (`idCid`, `descricaoCid`) VALUES
 ('T30.2', 'Queimadura de segundo grau, parte do corpo não especificada'),
 ('T30.3', 'Queimadura de terceiro grau, parte do corpo não especificada'),
 ('T30.4', 'Corrosão, parte do corpo não especificada, grau não especificado'),
@@ -8516,9 +8550,9 @@ INSERT INTO `tb_cid` (`idCid`, `descricaoCid`) VALUES
 ('V02.0', 'Pedestre traumatizado em colisão com um veículo a motor de duas ou três rodas - acidente não-de-trânsito'),
 ('V02.1', 'Pedestre traumatizado em colisão com um veículo a motor de duas ou três rodas - acidente de trânsito'),
 ('V02.9', 'Pedestre traumatizado em colisão com um veículo a motor de duas ou três rodas - acidente não especificado se de trânsito ou não de trânsito'),
-('V03.0', 'Pedestre traumatizado em colisão com um automóvel [carro], "pick up" ou caminhonete - acidente não-de-trânsito'),
-('V03.1', 'Pedestre traumatizado em colisão com um automóvel [carro], "pick up" ou caminhonete - acidente de trânsito'),
-('V03.9', 'Pedestre traumatizado em colisão com um automóvel [carro], "pick up" ou caminhonete - acidente não especificado se de trânsito ou não de trânsito'),
+('V03.0', 'Pedestre traumatizado em colisão com um automóvel [carro], \"pick up\" ou caminhonete - acidente não-de-trânsito'),
+('V03.1', 'Pedestre traumatizado em colisão com um automóvel [carro], \"pick up\" ou caminhonete - acidente de trânsito'),
+('V03.9', 'Pedestre traumatizado em colisão com um automóvel [carro], \"pick up\" ou caminhonete - acidente não especificado se de trânsito ou não de trânsito'),
 ('V04.0', 'Pedestre traumatizado em colisão com um veículo de transporte pesado ou com um ônibus - acidente não-de-trânsito'),
 ('V04.1', 'Pedestre traumatizado em colisão com um veículo de transporte pesado ou com um ônibus - acidente de trânsito'),
 ('V04.9', 'Pedestre traumatizado em colisão com um veículo de transporte pesado ou com um ônibus - acidente não especificado se de trânsito ou não de trânsito'),
@@ -8554,16 +8588,15 @@ INSERT INTO `tb_cid` (`idCid`, `descricaoCid`) VALUES
 ('V12.4', 'Ciclista traumatizado em colisão com um veículo a motor de duas ou três rodas - condutor traumatizado em um acidente de trânsito'),
 ('V12.5', 'Ciclista traumatizado em colisão com um veículo a motor de duas ou três rodas - passageiro traumatizado em um acidente de trânsito'),
 ('V12.9', 'Ciclista traumatizado em colisão com um veículo a motor de duas ou três rodas - ciclista não especificado traumatizado em um acidente de trânsito'),
-('V13.0', 'Ciclista traumatizado em colisão com um automóvel, "pick up" ou caminhonete - condutor traumatizado em acidente não-de-trânsito'),
-('V13.1', 'Ciclista traumatizado em colisão com um automóvel, "pick up" ou caminhonete - passageiro traumatizado em acidente não-de-trânsito'),
-('V13.2', 'Ciclista traumatizado em colisão com um automóvel, "pick up" ou caminhonete - ciclista não especificado traumatizado em acidente não-de-trânsito'),
-('V13.3', 'Ciclista traumatizado em colisão com um automóvel, "pick up" ou caminhonete - pessoa traumatizada ao subir ou descer do veículo'),
-('V13.4', 'Ciclista traumatizado em colisão com um automóvel, "pick up" ou caminhonete - condutor traumatizado em um acidente de trânsito'),
-('V13.5', 'Ciclista traumatizado em colisão com um automóvel, "pick up" ou caminhonete - passageiro traumatizado em um acidente de trânsito'),
-('V13.9', 'Ciclista traumatizado em colisão com um automóvel, "pick up" ou caminhonete - ciclista não especificado traumatizado em um acidente de trânsito'),
+('V13.0', 'Ciclista traumatizado em colisão com um automóvel, \"pick up\" ou caminhonete - condutor traumatizado em acidente não-de-trânsito'),
+('V13.1', 'Ciclista traumatizado em colisão com um automóvel, \"pick up\" ou caminhonete - passageiro traumatizado em acidente não-de-trânsito'),
+('V13.2', 'Ciclista traumatizado em colisão com um automóvel, \"pick up\" ou caminhonete - ciclista não especificado traumatizado em acidente não-de-trânsito'),
+('V13.3', 'Ciclista traumatizado em colisão com um automóvel, \"pick up\" ou caminhonete - pessoa traumatizada ao subir ou descer do veículo'),
+('V13.4', 'Ciclista traumatizado em colisão com um automóvel, \"pick up\" ou caminhonete - condutor traumatizado em um acidente de trânsito'),
+('V13.5', 'Ciclista traumatizado em colisão com um automóvel, \"pick up\" ou caminhonete - passageiro traumatizado em um acidente de trânsito'),
+('V13.9', 'Ciclista traumatizado em colisão com um automóvel, \"pick up\" ou caminhonete - ciclista não especificado traumatizado em um acidente de trânsito'),
 ('V14.0', 'Ciclista traumatizado em colisão com um veículo de transporte pesado ou um ônibus - condutor traumatizado em acidente não-de-trânsito'),
-('V14.1', 'Ciclista traumatizado em colisão com um veículo de transporte pesado ou um ônibus - passageiro traumatizado em acidente não-de-trânsito');
-INSERT INTO `tb_cid` (`idCid`, `descricaoCid`) VALUES
+('V14.1', 'Ciclista traumatizado em colisão com um veículo de transporte pesado ou um ônibus - passageiro traumatizado em acidente não-de-trânsito'),
 ('V14.2', 'Ciclista traumatizado em colisão com um veículo de transporte pesado ou um ônibus - ciclista não especificado traumatizado em acidente não-de-trânsito'),
 ('V14.3', 'Ciclista traumatizado em colisão com um veículo de transporte pesado ou um ônibus - pessoa traumatizada ao subir ou descer do veículo'),
 ('V14.4', 'Ciclista traumatizado em colisão com um veículo de transporte pesado ou um ônibus - condutor traumatizado em um acidente de trânsito'),
@@ -8627,13 +8660,13 @@ INSERT INTO `tb_cid` (`idCid`, `descricaoCid`) VALUES
 ('V22.4', 'Motociclista traumatizado em colisão com um veículo a motor de duas ou três rodas - condutor traumatizado em um acidente de trânsito'),
 ('V22.5', 'Motociclista traumatizado em colisão com um veículo a motor de duas ou três rodas - passageiro traumatizado em um acidente de trânsito'),
 ('V22.9', 'Motociclista traumatizado em colisão com um veículo a motor de duas ou três rodas - motociclista não especificado traumatizado em um acidente de trânsito'),
-('V23.0', 'Motociclista traumatizado em colisão com um automóvel [carro], "pick up" ou caminhonete - condutor traumatizado em acidente não-de-trânsito'),
-('V23.1', 'Motociclista traumatizado em colisão com um automóvel [carro], "pick up" ou caminhonete - passageiro traumatizado em acidente não-de-trânsito'),
-('V23.2', 'Motociclista traumatizado em colisão com um automóvel [carro], "pick up" ou caminhonete - motociclista não especificado traumatizado em acidente não-de-trânsito'),
-('V23.3', 'Motociclista traumatizado em colisão com um automóvel [carro], "pick up" ou caminhonete - pessoa traumatizado ao subir ou descer do veículo'),
-('V23.4', 'Motociclista traumatizado em colisão com um automóvel [carro], "pick up" ou caminhonete - condutor traumatizado em um acidente de trânsito'),
-('V23.5', 'Motociclista traumatizado em colisão com um automóvel [carro], "pick up" ou caminhonete - passageiro traumatizado em um acidente de trânsito'),
-('V23.9', 'Motociclista traumatizado em colisão com um automóvel [carro], "pick up" ou caminhonete - motociclista não especificado traumatizado em um acidente de trânsito'),
+('V23.0', 'Motociclista traumatizado em colisão com um automóvel [carro], \"pick up\" ou caminhonete - condutor traumatizado em acidente não-de-trânsito'),
+('V23.1', 'Motociclista traumatizado em colisão com um automóvel [carro], \"pick up\" ou caminhonete - passageiro traumatizado em acidente não-de-trânsito'),
+('V23.2', 'Motociclista traumatizado em colisão com um automóvel [carro], \"pick up\" ou caminhonete - motociclista não especificado traumatizado em acidente não-de-trânsito'),
+('V23.3', 'Motociclista traumatizado em colisão com um automóvel [carro], \"pick up\" ou caminhonete - pessoa traumatizado ao subir ou descer do veículo'),
+('V23.4', 'Motociclista traumatizado em colisão com um automóvel [carro], \"pick up\" ou caminhonete - condutor traumatizado em um acidente de trânsito'),
+('V23.5', 'Motociclista traumatizado em colisão com um automóvel [carro], \"pick up\" ou caminhonete - passageiro traumatizado em um acidente de trânsito'),
+('V23.9', 'Motociclista traumatizado em colisão com um automóvel [carro], \"pick up\" ou caminhonete - motociclista não especificado traumatizado em um acidente de trânsito'),
 ('V24.0', 'Motociclista traumatizado em colisão com um veículo de transporte pesado ou um ônibus - condutor traumatizado em acidente não-de-trânsito'),
 ('V24.1', 'Motociclista traumatizado em colisão com um veículo de transporte pesado ou um ônibus - passageiro traumatizado em acidente não-de-trânsito'),
 ('V24.2', 'Motociclista traumatizado em colisão com um veículo de transporte pesado ou um ônibus - motociclista não especificado traumatizado em acidente não-de-trânsito'),
@@ -8672,7 +8705,8 @@ INSERT INTO `tb_cid` (`idCid`, `descricaoCid`) VALUES
 ('V29.0', 'Condutor traumatizado em colisão com outros veículos e com veículos não especificados, a motor, em um acidente não-de-trânsito'),
 ('V29.1', 'Passageiro traumatizado em colisão com outros veículos com veículos não especificados, a motor, em um acidente não-de-trânsito'),
 ('V29.2', 'Motociclista não especificado traumatizado em colisão com outros veículos e com veículos não especificados, a motor, em um acidente não-de-trânsito'),
-('V29.3', 'Motociclista [qualquer] traumatizado em um acidente não especificado, não-de-trânsito'),
+('V29.3', 'Motociclista [qualquer] traumatizado em um acidente não especificado, não-de-trânsito');
+INSERT INTO `tb_cid` (`idCid`, `descricaoCid`) VALUES
 ('V29.4', 'Condutor traumatizado em colisão com outros veículos e com veículos não especificados, a motor, em um acidente de trânsito'),
 ('V29.5', 'Passageiro traumatizado em colisão com outros veículos e com veículos não especificados, a motor, em um acidente de trânsito'),
 ('V29.6', 'Motociclista não especificado traumatizado em colisão com outros veículos e com veículos não especificados, a motor em um acidente de trânsito'),
@@ -8705,15 +8739,15 @@ INSERT INTO `tb_cid` (`idCid`, `descricaoCid`) VALUES
 ('V32.6', 'Ocupante de um triciclo motorizado traumatizado em colisão com outro veículo a motor de duas ou três rodas - passageiro traumatizado em um acidente de trânsito'),
 ('V32.7', 'Ocupante de um triciclo motorizado traumatizado em colisão com outro veículo a motor de duas ou três rodas - pessoa viajando no exterior do veículo traumatizada em um acidente de trânsito'),
 ('V32.9', 'Ocupante de um triciclo motorizado traumatizado em colisão com outro veículo a motor de duas ou três rodas - ocupante não especificado de um triciclo motorizado traumatizado em um acidente de trânsito'),
-('V33.0', 'Ocupante de um triciclo motorizado traumatizado em colisão com um automóvel, "pick up" ou caminhonete - condutor traumatizado em acidente não-de-trânsito'),
-('V33.1', 'Ocupante de um triciclo motorizado traumatizado em colisão com um automóvel, "pick up" ou caminhonete - passageiro traumatizado em acidente não-de-trânsito'),
-('V33.2', 'Ocupante de um triciclo motorizado traumatizado em colisão com um automóvel, "pick up" ou caminhonete - pessoa viajando no exterior do veículo traumatizada em um acidente não-de-trânsito'),
-('V33.3', 'Ocupante de um triciclo motorizado traumatizado em colisão com um automóvel, "pick up" ou caminhonete - ocupante não especificado de um triciclo motorizado traumatizado em acidente não-de-trânsito'),
-('V33.4', 'Ocupante de um triciclo motorizado traumatizado em colisão com um automóvel, "pick up" ou caminhonete - pessoa traumatizada ao subir ou descer do veículo'),
-('V33.5', 'Ocupante de um triciclo motorizado traumatizado em colisão com um automóvel, "pick up" ou caminhonete - condutor traumatizado em um acidente de trânsito'),
-('V33.6', 'Ocupante de um triciclo motorizado traumatizado em colisão com um automóvel, "pick up" ou caminhonete - passageiro traumatizado em um acidente de trânsito'),
-('V33.7', 'Ocupante de um triciclo motorizado traumatizado em colisão com um automóvel, "pick up" ou caminhonete - pessoa viajando no exterior do veículo traumatizada em um acidente de trânsito'),
-('V33.9', 'Ocupante de um triciclo motorizado traumatizado em colisão com um automóvel, "pick up" ou caminhonete - ocupante não especificado de um triciclo motorizado traumatizado em um acidente de trânsito'),
+('V33.0', 'Ocupante de um triciclo motorizado traumatizado em colisão com um automóvel, \"pick up\" ou caminhonete - condutor traumatizado em acidente não-de-trânsito'),
+('V33.1', 'Ocupante de um triciclo motorizado traumatizado em colisão com um automóvel, \"pick up\" ou caminhonete - passageiro traumatizado em acidente não-de-trânsito'),
+('V33.2', 'Ocupante de um triciclo motorizado traumatizado em colisão com um automóvel, \"pick up\" ou caminhonete - pessoa viajando no exterior do veículo traumatizada em um acidente não-de-trânsito'),
+('V33.3', 'Ocupante de um triciclo motorizado traumatizado em colisão com um automóvel, \"pick up\" ou caminhonete - ocupante não especificado de um triciclo motorizado traumatizado em acidente não-de-trânsito'),
+('V33.4', 'Ocupante de um triciclo motorizado traumatizado em colisão com um automóvel, \"pick up\" ou caminhonete - pessoa traumatizada ao subir ou descer do veículo'),
+('V33.5', 'Ocupante de um triciclo motorizado traumatizado em colisão com um automóvel, \"pick up\" ou caminhonete - condutor traumatizado em um acidente de trânsito'),
+('V33.6', 'Ocupante de um triciclo motorizado traumatizado em colisão com um automóvel, \"pick up\" ou caminhonete - passageiro traumatizado em um acidente de trânsito'),
+('V33.7', 'Ocupante de um triciclo motorizado traumatizado em colisão com um automóvel, \"pick up\" ou caminhonete - pessoa viajando no exterior do veículo traumatizada em um acidente de trânsito'),
+('V33.9', 'Ocupante de um triciclo motorizado traumatizado em colisão com um automóvel, \"pick up\" ou caminhonete - ocupante não especificado de um triciclo motorizado traumatizado em um acidente de trânsito'),
 ('V34.0', 'Ocupante de um triciclo motorizado traumatizado em colisão com um veículo de transporte pesado ou um ônibus - condutor traumatizado em acidente não-de-trânsito'),
 ('V34.1', 'Ocupante de um triciclo motorizado traumatizado em colisão com um veículo de transporte pesado ou um ônibus - passageiro traumatizado em acidente não-de-trânsito'),
 ('V34.2', 'Ocupante de um triciclo motorizado traumatizado em colisão com um veículo de transporte pesado ou um ônibus - pessoa viajando no exterior do veículo traumatizada em um acidente não-de-trânsito'),
@@ -8795,15 +8829,15 @@ INSERT INTO `tb_cid` (`idCid`, `descricaoCid`) VALUES
 ('V42.6', 'Ocupante de um automóvel [carro] traumatizado em colisão com outro veículo a motor de duas ou três rodas - passageiro traumatizado em um acidente de trânsito'),
 ('V42.7', 'Ocupante de um automóvel [carro] traumatizado em colisão com outro veículo a motor de duas ou três rodas - pessoa viajando no exterior do veículo traumatizada em um acidente de trânsito'),
 ('V42.9', 'Ocupante de um automóvel [carro] traumatizado em colisão com outro veículo a motor de duas ou três rodas - ocupante não especificado de um automóvel [carro] traumatizado em um acidente de trânsito'),
-('V43.0', 'Ocupante de um automóvel [carro] traumatizado em colisão com um automóvel [carro], "pick up" ou caminhonete - condutor [motorista] traumatizado em um acidente não-de-trânsito'),
-('V43.1', 'Ocupante de um automóvel [carro] traumatizado em colisão com um automóvel [carro], "pick up" ou caminhonete - passageiro traumatizado em um acidente não-de-trânsito'),
-('V43.2', 'Ocupante de um automóvel [carro] traumatizado em colisão com um automóvel [carro], "pick up" ou caminhonete - pessoa viajando no exterior do veículo traumatizada em um acidente não-de-trânsito'),
-('V43.3', 'Ocupante de um automóvel [carro] traumatizado em colisão com um automóvel [carro], "pick up" ou caminhonete - ocupante não especificado de um automóvel [carro] traumatizado em um acidente não-de-trânsito'),
-('V43.4', 'Ocupante de um automóvel [carro] traumatizado em colisão com um automóvel [carro], "pick up" ou caminhonete - pessoa traumatizada ao subir ou descer do veículo'),
-('V43.5', 'Ocupante de um automóvel [carro] traumatizado em colisão com um automóvel [carro], "pick up" ou caminhonete - condutor [motorista] traumatizado em um acidente de trânsito'),
-('V43.6', 'Ocupante de um automóvel [carro] traumatizado em colisão com um automóvel [carro], "pick up" ou caminhonete - passageiro traumatizado em um acidente de trânsito'),
-('V43.7', 'Ocupante de um automóvel [carro] traumatizado em colisão com um automóvel [carro], "pick up" ou caminhonete - pessoa viajando no exterior do veículo traumatizada em um acidente de trânsito'),
-('V43.9', 'Ocupante de um automóvel [carro] traumatizado em colisão com um automóvel [carro], "pick up" ou caminhonete - ocupante não especificado de um automóvel [carro] traumatizado em um acidente de trânsito'),
+('V43.0', 'Ocupante de um automóvel [carro] traumatizado em colisão com um automóvel [carro], \"pick up\" ou caminhonete - condutor [motorista] traumatizado em um acidente não-de-trânsito'),
+('V43.1', 'Ocupante de um automóvel [carro] traumatizado em colisão com um automóvel [carro], \"pick up\" ou caminhonete - passageiro traumatizado em um acidente não-de-trânsito'),
+('V43.2', 'Ocupante de um automóvel [carro] traumatizado em colisão com um automóvel [carro], \"pick up\" ou caminhonete - pessoa viajando no exterior do veículo traumatizada em um acidente não-de-trânsito'),
+('V43.3', 'Ocupante de um automóvel [carro] traumatizado em colisão com um automóvel [carro], \"pick up\" ou caminhonete - ocupante não especificado de um automóvel [carro] traumatizado em um acidente não-de-trânsito'),
+('V43.4', 'Ocupante de um automóvel [carro] traumatizado em colisão com um automóvel [carro], \"pick up\" ou caminhonete - pessoa traumatizada ao subir ou descer do veículo'),
+('V43.5', 'Ocupante de um automóvel [carro] traumatizado em colisão com um automóvel [carro], \"pick up\" ou caminhonete - condutor [motorista] traumatizado em um acidente de trânsito'),
+('V43.6', 'Ocupante de um automóvel [carro] traumatizado em colisão com um automóvel [carro], \"pick up\" ou caminhonete - passageiro traumatizado em um acidente de trânsito'),
+('V43.7', 'Ocupante de um automóvel [carro] traumatizado em colisão com um automóvel [carro], \"pick up\" ou caminhonete - pessoa viajando no exterior do veículo traumatizada em um acidente de trânsito'),
+('V43.9', 'Ocupante de um automóvel [carro] traumatizado em colisão com um automóvel [carro], \"pick up\" ou caminhonete - ocupante não especificado de um automóvel [carro] traumatizado em um acidente de trânsito'),
 ('V44.0', 'Ocupante de um automóvel [carro] traumatizado em colisão com um veículo de transporte pesado ou um ônibus - condutor [motorista] traumatizado em um acidente não-de-trânsito'),
 ('V44.1', 'Ocupante de um automóvel [carro] traumatizado em colisão com um veículo de transporte pesado ou um ônibus - passageiro traumatizado em um acidente não-de-trânsito'),
 ('V44.2', 'Ocupante de um automóvel [carro] traumatizado em colisão com um veículo de transporte pesado ou um ônibus - pessoa viajando no exterior do veículo traumatizada em um acidente não-de-trânsito'),
@@ -8866,8 +8900,7 @@ INSERT INTO `tb_cid` (`idCid`, `descricaoCid`) VALUES
 ('V50.5', 'Ocupante de uma caminhonete traumatizado em colisão com um pedestre ou um animal - condutor [motorista] traumatizado em um acidente de trânsito'),
 ('V50.6', 'Ocupante de uma caminhonete traumatizado em colisão com um pedestre ou um animal - passageiro traumatizado em um acidente de trânsito'),
 ('V50.7', 'Ocupante de uma caminhonete traumatizado em colisão com um pedestre ou um animal - pessoa viajando no exterior do veículo traumatizada em um acidente de trânsito'),
-('V50.9', 'Ocupante de uma caminhonete traumatizado em colisão com um pedestre ou um animal - ocupante não especificado de uma caminhonete traumatizado em um acidente de trânsito');
-INSERT INTO `tb_cid` (`idCid`, `descricaoCid`) VALUES
+('V50.9', 'Ocupante de uma caminhonete traumatizado em colisão com um pedestre ou um animal - ocupante não especificado de uma caminhonete traumatizado em um acidente de trânsito'),
 ('V51.0', 'Ocupante de uma caminhonete traumatizado em colisão com um veículo a pedal - condutor [motorista] traumatizado em um acidente não-de-trânsito'),
 ('V51.1', 'Ocupante de uma caminhonete traumatizado em colisão com um veículo a pedal - passageiro traumatizado em um acidente não-de-trânsito'),
 ('V51.2', 'Ocupante de uma caminhonete traumatizado em colisão com um veículo a pedal - pessoa viajando no exterior do veículo traumatizada em um acidente não-de-trânsito'),
@@ -8964,7 +8997,8 @@ INSERT INTO `tb_cid` (`idCid`, `descricaoCid`) VALUES
 ('V61.3', 'Ocupante de um veículo de transporte pesado traumatizado em colisão com um veículo a pedal - ocupante não especificado de um veículo de transporte pesado traumatizado em um acidente não-de-trânsito'),
 ('V61.4', 'Ocupante de um veículo de transporte pesado traumatizado em colisão com um veículo a pedal - pessoa traumatizado ao subir ou descer do veículo'),
 ('V61.5', 'Ocupante de um veículo de transporte pesado traumatizado em colisão com um veículo a pedal - condutor [motorista] traumatizado em um acidente de trânsito'),
-('V61.6', 'Ocupante de um veículo de transporte pesado traumatizado em colisão com um veículo a pedal - passageiro traumatizado em um acidente de trânsito'),
+('V61.6', 'Ocupante de um veículo de transporte pesado traumatizado em colisão com um veículo a pedal - passageiro traumatizado em um acidente de trânsito');
+INSERT INTO `tb_cid` (`idCid`, `descricaoCid`) VALUES
 ('V61.7', 'Ocupante de um veículo de transporte pesado traumatizado em colisão com um veículo a pedal - pessoa viajando no exterior do veículo traumatizada em um acidente de trânsito'),
 ('V61.9', 'Ocupante de um veículo de transporte pesado traumatizado em colisão com um veículo a pedal - ocupante não especificado de um veículo de transporte pesado traumatizado em um acidente de trânsito'),
 ('V62.0', 'Ocupante de um veículo de transporte pesado traumatizado em colisão com um veículo a motor de duas ou três rodas - condutor [motorista] traumatizado em um acidente não-de-trânsito'),
@@ -9155,8 +9189,7 @@ INSERT INTO `tb_cid` (`idCid`, `descricaoCid`) VALUES
 ('V82.3', 'Ocupante de um bonde [carro elétrico] traumatizado em uma colisão com outro objeto'),
 ('V82.4', 'Pessoa traumatizada ao subir ou descer de um bonde [carro elétrico]'),
 ('V82.5', 'Ocupante de um bonde [carro elétrico] traumatizado devido a uma queda no interior do mesmo'),
-('V82.6', 'Ocupante de um bonde [carro elétrico] traumatizado devido a uma queda do mesmo');
-INSERT INTO `tb_cid` (`idCid`, `descricaoCid`) VALUES
+('V82.6', 'Ocupante de um bonde [carro elétrico] traumatizado devido a uma queda do mesmo'),
 ('V82.7', 'Ocupante de um bonde [carro elétrico] traumatizado devido a um descarrilhamento sem colisão antecedente'),
 ('V82.8', 'Ocupante de um bonde [carro elétrico] traumatizado em outros acidentes de transporte especificados'),
 ('V82.9', 'Ocupante de um bonde [carro elétrico] traumatizado em um acidente de trânsito não especificado'),
@@ -9310,7 +9343,8 @@ INSERT INTO `tb_cid` (`idCid`, `descricaoCid`) VALUES
 ('W01.7', 'Queda no mesmo nível por escorregão, tropeção ou passos em falsos [traspés] - fazenda'),
 ('W01.8', 'Queda no mesmo nível por escorregão, tropeção ou passos em falsos [traspés] - outros locais especificados'),
 ('W01.9', 'Queda no mesmo nível por escorregão, tropeção ou passos em falsos [traspés] - local não especificado'),
-('W02.0', 'Queda envolvendo patins de rodas ou para gelo, esqui ou pranchas de rodas - residência'),
+('W02.0', 'Queda envolvendo patins de rodas ou para gelo, esqui ou pranchas de rodas - residência');
+INSERT INTO `tb_cid` (`idCid`, `descricaoCid`) VALUES
 ('W02.1', 'Queda envolvendo patins de rodas ou para gelo, esqui ou pranchas de rodas - habitação coletiva'),
 ('W02.2', 'Queda envolvendo patins de rodas ou para gelo, esqui ou pranchas de rodas - escolas, outras instituições e áreas de administração pública'),
 ('W02.3', 'Queda envolvendo patins de rodas ou para gelo, esqui ou pranchas de rodas - área para a prática de esportes e atletismo'),
@@ -9380,16 +9414,16 @@ INSERT INTO `tb_cid` (`idCid`, `descricaoCid`) VALUES
 ('W08.7', 'Queda de outro tipo de mobília - fazenda'),
 ('W08.8', 'Queda de outro tipo de mobília - outros locais especificados'),
 ('W08.9', 'Queda de outro tipo de mobília - local não especificado'),
-('W09.0', 'Queda envolvendo equipamento de "playground" - residência'),
-('W09.1', 'Queda envolvendo equipamento de "playground" - habitação coletiva'),
-('W09.2', 'Queda envolvendo equipamento de "playground" - escolas, outras instituições e áreas de administração pública'),
-('W09.3', 'Queda envolvendo equipamento de "playground" - área para a prática de esportes e atletismo'),
-('W09.4', 'Queda envolvendo equipamento de "playground" - rua e estrada'),
-('W09.5', 'Queda envolvendo equipamento de "playground" - áreas de comércio e de serviços'),
-('W09.6', 'Queda envolvendo equipamento de "playground" - áreas industriais e em construção'),
-('W09.7', 'Queda envolvendo equipamento de "playground" - fazenda'),
-('W09.8', 'Queda envolvendo equipamento de "playground" - outros locais especificados'),
-('W09.9', 'Queda envolvendo equipamento de "playground" - local não especificado'),
+('W09.0', 'Queda envolvendo equipamento de \"playground\" - residência'),
+('W09.1', 'Queda envolvendo equipamento de \"playground\" - habitação coletiva'),
+('W09.2', 'Queda envolvendo equipamento de \"playground\" - escolas, outras instituições e áreas de administração pública'),
+('W09.3', 'Queda envolvendo equipamento de \"playground\" - área para a prática de esportes e atletismo'),
+('W09.4', 'Queda envolvendo equipamento de \"playground\" - rua e estrada'),
+('W09.5', 'Queda envolvendo equipamento de \"playground\" - áreas de comércio e de serviços'),
+('W09.6', 'Queda envolvendo equipamento de \"playground\" - áreas industriais e em construção'),
+('W09.7', 'Queda envolvendo equipamento de \"playground\" - fazenda'),
+('W09.8', 'Queda envolvendo equipamento de \"playground\" - outros locais especificados'),
+('W09.9', 'Queda envolvendo equipamento de \"playground\" - local não especificado'),
 ('W10.0', 'Queda em ou de escadas ou degraus - residência'),
 ('W10.1', 'Queda em ou de escadas ou degraus - habitação coletiva'),
 ('W10.2', 'Queda em ou de escadas ou degraus - escolas, outras instituições e áreas de administração pública'),
@@ -9660,8 +9694,7 @@ INSERT INTO `tb_cid` (`idCid`, `descricaoCid`) VALUES
 ('W36.7', 'Explosão ou ruptura de cilindro de gás - fazenda'),
 ('W36.8', 'Explosão ou ruptura de cilindro de gás - outros locais especificados'),
 ('W36.9', 'Explosão ou ruptura de cilindro de gás - local não especificado'),
-('W37.0', 'Explosão ou ruptura de pneumático, tubulação ou mangueira, pressurizados - residência');
-INSERT INTO `tb_cid` (`idCid`, `descricaoCid`) VALUES
+('W37.0', 'Explosão ou ruptura de pneumático, tubulação ou mangueira, pressurizados - residência'),
 ('W37.1', 'Explosão ou ruptura de pneumático, tubulação ou mangueira, pressurizados - habitação coletiva'),
 ('W37.2', 'Explosão ou ruptura de pneumático, tubulação ou mangueira, pressurizados - escolas, outras instituições e áreas de administração pública'),
 ('W37.3', 'Explosão ou ruptura de pneumático, tubulação ou mangueira, pressurizados - área para a prática de esportes e atletismo'),
@@ -9873,7 +9906,8 @@ INSERT INTO `tb_cid` (`idCid`, `descricaoCid`) VALUES
 ('W60.9', 'Contato com espinhos de plantas ou com folhas aguçadas - local não especificado'),
 ('W64.0', 'Exposição a outras forças mecânicas animadas e às não especificadas - residência'),
 ('W64.1', 'Exposição a outras forças mecânicas animadas e às não especificadas - habitação coletiva'),
-('W64.2', 'Exposição a outras forças mecânicas animadas e às não especificadas - escolas, outras instituições e áreas de administração pública'),
+('W64.2', 'Exposição a outras forças mecânicas animadas e às não especificadas - escolas, outras instituições e áreas de administração pública');
+INSERT INTO `tb_cid` (`idCid`, `descricaoCid`) VALUES
 ('W64.3', 'Exposição a outras forças mecânicas animadas e às não especificadas - área para a prática de esportes e atletismo'),
 ('W64.4', 'Exposição a outras forças mecânicas animadas e às não especificadas - rua e estrada'),
 ('W64.5', 'Exposição a outras forças mecânicas animadas e às não especificadas - áreas de comércio e de serviços'),
@@ -10169,8 +10203,7 @@ INSERT INTO `tb_cid` (`idCid`, `descricaoCid`) VALUES
 ('X00.5', 'Exposição a fogo não-controlado em um edifício ou outro tipo de construção - áreas de comércio e de serviços'),
 ('X00.6', 'Exposição a fogo não-controlado em um edifício ou outro tipo de construção - áreas industriais e em construção'),
 ('X00.7', 'Exposição a fogo não-controlado em um edifício ou outro tipo de construção - fazenda'),
-('X00.8', 'Exposição a fogo não-controlado em um edifício ou outro tipo de construção - outros locais especificados');
-INSERT INTO `tb_cid` (`idCid`, `descricaoCid`) VALUES
+('X00.8', 'Exposição a fogo não-controlado em um edifício ou outro tipo de construção - outros locais especificados'),
 ('X00.9', 'Exposição a fogo não-controlado em um edifício ou outro tipo de construção - local não especificado'),
 ('X01.0', 'Exposição a fogo não-controlado fora de um edifício ou de outro tipo de construção - residência'),
 ('X01.1', 'Exposição a fogo não-controlado fora de um edifício ou de outro tipo de construção - habitação coletiva'),
@@ -10401,7 +10434,8 @@ INSERT INTO `tb_cid` (`idCid`, `descricaoCid`) VALUES
 ('X24.6', 'Contato com centopéias e miriápodes venenosas (tropicais) - áreas industriais e em construção'),
 ('X24.7', 'Contato com centopéias e miriápodes venenosas (tropicais) - fazenda'),
 ('X24.8', 'Contato com centopéias e miriápodes venenosas (tropicais) - outros locais especificados'),
-('X24.9', 'Contato com centopéias e miriápodes venenosas (tropicais) - local não especificado'),
+('X24.9', 'Contato com centopéias e miriápodes venenosas (tropicais) - local não especificado');
+INSERT INTO `tb_cid` (`idCid`, `descricaoCid`) VALUES
 ('X25.0', 'Contato com outros artrópodes venenosos especificados - residência'),
 ('X25.1', 'Contato com outros artrópodes venenosos especificados - habitação coletiva'),
 ('X25.2', 'Contato com outros artrópodes venenosos especificados - escolas, outras instituições e áreas de administração pública'),
@@ -10640,8 +10674,7 @@ INSERT INTO `tb_cid` (`idCid`, `descricaoCid`) VALUES
 ('X48.5', 'Envenenamento [intoxicação] acidental por e exposição a pesticidas - áreas de comércio e de serviços'),
 ('X48.6', 'Envenenamento [intoxicação] acidental por e exposição a pesticidas - áreas industriais e em construção'),
 ('X48.7', 'Envenenamento [intoxicação] acidental por e exposição a pesticidas - fazenda'),
-('X48.8', 'Envenenamento [intoxicação] acidental por e exposição a pesticidas - outros locais especificados');
-INSERT INTO `tb_cid` (`idCid`, `descricaoCid`) VALUES
+('X48.8', 'Envenenamento [intoxicação] acidental por e exposição a pesticidas - outros locais especificados'),
 ('X48.9', 'Envenenamento [intoxicação] acidental por e exposição a pesticidas - local não especificado'),
 ('X49.0', 'Envenenamento [intoxicação] acidental por e exposição a outras substâncias químicas nocivas e às não especificadas - residência'),
 ('X49.1', 'Envenenamento [intoxicação] acidental por e exposição a outras substâncias químicas nocivas e às não especificadas - habitação coletiva'),
@@ -10846,7 +10879,8 @@ INSERT INTO `tb_cid` (`idCid`, `descricaoCid`) VALUES
 ('X71.0', 'Lesão autoprovocada intencionalmente por afogamento e submersão - residência'),
 ('X71.1', 'Lesão autoprovocada intencionalmente por afogamento e submersão - habitação coletiva'),
 ('X71.2', 'Lesão autoprovocada intencionalmente por afogamento e submersão - escolas, outras instituições e áreas de administração pública'),
-('X71.3', 'Lesão autoprovocada intencionalmente por afogamento e submersão - área para a prática de esportes e atletismo'),
+('X71.3', 'Lesão autoprovocada intencionalmente por afogamento e submersão - área para a prática de esportes e atletismo');
+INSERT INTO `tb_cid` (`idCid`, `descricaoCid`) VALUES
 ('X71.4', 'Lesão autoprovocada intencionalmente por afogamento e submersão - rua e estrada'),
 ('X71.5', 'Lesão autoprovocada intencionalmente por afogamento e submersão - áreas de comércio e de serviços'),
 ('X71.6', 'Lesão autoprovocada intencionalmente por afogamento e submersão - áreas industriais e em construção'),
@@ -11064,8 +11098,7 @@ INSERT INTO `tb_cid` (`idCid`, `descricaoCid`) VALUES
 ('X92.8', 'Agressão por meio de afogamento e submersão - outros locais especificados'),
 ('X92.9', 'Agressão por meio de afogamento e submersão - local não especificado'),
 ('X93.0', 'Agressão por meio de disparo de arma de fogo de mão - residência'),
-('X93.1', 'Agressão por meio de disparo de arma de fogo de mão - habitação coletiva');
-INSERT INTO `tb_cid` (`idCid`, `descricaoCid`) VALUES
+('X93.1', 'Agressão por meio de disparo de arma de fogo de mão - habitação coletiva'),
 ('X93.2', 'Agressão por meio de disparo de arma de fogo de mão - escolas, outras instituições e áreas de administração pública'),
 ('X93.3', 'Agressão por meio de disparo de arma de fogo de mão - área para a prática de esportes e atletismo'),
 ('X93.4', 'Agressão por meio de disparo de arma de fogo de mão - rua e estrada'),
@@ -11237,7 +11270,7 @@ INSERT INTO `tb_cid` (`idCid`, `descricaoCid`) VALUES
 ('Y10.9', 'Envenenamento [intoxicação] por e exposição a analgésicos, antipiréticos e anti-reumáticos não-opiáceos, intenção não determinada - local não especificado'),
 ('Y11.0', 'Envenenamento [intoxicação] por e exposição a anticonvulsivantes [antiepilépticos], sedativos, hipnóticos, antiparkinsonianos e psicotrópicos não classificados em outra parte, intenção não determinada - residência'),
 ('Y11.1', 'Envenenamento [intoxicação] por e exposição a anticonvulsivantes [antiepilépticos], sedativos, hipnóticos, antiparkinsonianos e psicotrópicos não classificados em outra parte, intenção não determinada - habitação coletiva'),
-('Y11.2', 'Envenenamento [intoxicação] por e exposição a anticonvulsivantes [antiepilépticos], sedativos, hipnóticos, antiparkinsonianos e psicotrópicos não classificados em outra parte, intenção não determinada - escolas, outras instituições e áreas de administração pública'),
+('Y11.2', 'Envenenamento [intoxicação] por e exposição a anticonvulsivantes [antiepilépticos], sedativos, hipnóticos, antiparkinsonianos e psicotrópicos não classificados em outra parte, intenção não determinada - escolas, outras instituições e áreas de administraçã'),
 ('Y11.3', 'Envenenamento [intoxicação] por e exposição a anticonvulsivantes [antiepilépticos], sedativos, hipnóticos, antiparkinsonianos e psicotrópicos não classificados em outra parte, intenção não determinada - área para a prática de esportes e atletismo'),
 ('Y11.4', 'Envenenamento [intoxicação] por e exposição a anticonvulsivantes [antiepilépticos], sedativos, hipnóticos, antiparkinsonianos e psicotrópicos não classificados em outra parte, intenção não determinada - rua e estrada'),
 ('Y11.5', 'Envenenamento [intoxicação] por e exposição a anticonvulsivantes [antiepilépticos], sedativos, hipnóticos, antiparkinsonianos e psicotrópicos não classificados em outra parte, intenção não determinada - áreas de comércio e de serviços'),
@@ -11284,7 +11317,8 @@ INSERT INTO `tb_cid` (`idCid`, `descricaoCid`) VALUES
 ('Y15.6', 'Envenenamento [intoxicação] por e exposição ao álcool, intenção não determinada - áreas industriais e em construção'),
 ('Y15.7', 'Envenenamento [intoxicação] por e exposição ao álcool, intenção não determinada - fazenda'),
 ('Y15.8', 'Envenenamento [intoxicação] por e exposição ao álcool, intenção não determinada - outros locais especificados'),
-('Y15.9', 'Envenenamento [intoxicação] por e exposição ao álcool, intenção não determinada - local não especificado'),
+('Y15.9', 'Envenenamento [intoxicação] por e exposição ao álcool, intenção não determinada - local não especificado');
+INSERT INTO `tb_cid` (`idCid`, `descricaoCid`) VALUES
 ('Y16.0', 'Envenenamento [intoxicação] por e exposição a solventes orgânicos e hidrocarbonetos halogenados e seus vapores, intenção não determinada - residência'),
 ('Y16.1', 'Envenenamento [intoxicação] por e exposição a solventes orgânicos e hidrocarbonetos halogenados e seus vapores, intenção não determinada - habitação coletiva'),
 ('Y16.2', 'Envenenamento [intoxicação] por e exposição a solventes orgânicos e hidrocarbonetos halogenados e seus vapores, intenção não determinada - escolas, outras instituições e áreas de administração pública'),
@@ -11466,8 +11500,7 @@ INSERT INTO `tb_cid` (`idCid`, `descricaoCid`) VALUES
 ('Y33.8', 'Outros fatos ou eventos especificados, intenção não determinada - outros locais especificados'),
 ('Y33.9', 'Outros fatos ou eventos especificados, intenção não determinada - local não especificado'),
 ('Y34.0', 'Fatos ou eventos não especificados e intenção não determinada - residência'),
-('Y34.1', 'Fatos ou eventos não especificados e intenção não determinada - habitação coletiva');
-INSERT INTO `tb_cid` (`idCid`, `descricaoCid`) VALUES
+('Y34.1', 'Fatos ou eventos não especificados e intenção não determinada - habitação coletiva'),
 ('Y34.2', 'Fatos ou eventos não especificados e intenção não determinada - escolas, outras instituições e áreas de administração pública'),
 ('Y34.3', 'Fatos ou eventos não especificados e intenção não determinada - área para a prática de esportes e atletismo'),
 ('Y34.4', 'Fatos ou eventos não especificados e intenção não determinada - rua e estrada'),
@@ -11787,7 +11820,7 @@ INSERT INTO `tb_cid` (`idCid`, `descricaoCid`) VALUES
 ('Y82.8', 'Outros dispositivos (aparelhos) associados a incidentes adversos e os não especificados - dispositivos (aparelhos) diversos, inclusive combinações, não classificada em outra parte'),
 ('Y83.0', 'Intervenção cirúrgica com transplante de todo o órgão'),
 ('Y83.1', 'Intervenção cirúrgica com implante de uma prótese interna'),
-('Y83.2', 'Intervenção cirúrgica com anastomose, derivação ("bypass") ou enxerto'),
+('Y83.2', 'Intervenção cirúrgica com anastomose, derivação (\"bypass\") ou enxerto'),
 ('Y83.3', 'Intervenção cirúrgica com formação de estoma externo'),
 ('Y83.4', 'Outras cirurgias reparadoras'),
 ('Y83.5', 'Amputação de membro(s)'),
@@ -11811,7 +11844,8 @@ INSERT INTO `tb_cid` (`idCid`, `descricaoCid`) VALUES
 ('Y87.1', 'Seqüelas de uma agressão'),
 ('Y87.2', 'Seqüelas de um fato cuja intenção é indeterminada'),
 ('Y88.0', 'Seqüelas de efeitos adversos causados por drogas, medicamentos ou substâncias biológicas usados com finalidade terapêutica'),
-('Y88.1', 'Seqüelas de acidentes durante a prestação de cuidado médico e cirúrgico'),
+('Y88.1', 'Seqüelas de acidentes durante a prestação de cuidado médico e cirúrgico');
+INSERT INTO `tb_cid` (`idCid`, `descricaoCid`) VALUES
 ('Y88.2', 'Seqüelas de incidentes adversos associados com o uso de dispositivos (aparelhos) médicos durante atos diagnósticos ou terapêuticos'),
 ('Y88.3', 'Seqüelas de reação anormal em paciente ou complicação tardia causada por procedimento médico e cirúrgico sem menção de acidente durante o procedimento'),
 ('Y89.0', 'Seqüelas de intervenção legal'),
@@ -11998,7 +12032,7 @@ INSERT INTO `tb_cid` (`idCid`, `descricaoCid`) VALUES
 ('Z30.9', 'Procedimento anticoncepcional não especificado'),
 ('Z31.0', 'Tuboplastia ou vasoplastia após esterilização prévia'),
 ('Z31.1', 'Inseminação artificial'),
-('Z31.2', 'Fecundação "in vitro"'),
+('Z31.2', 'Fecundação \"in vitro\"'),
 ('Z31.3', 'Outros métodos assistidos de fertilização'),
 ('Z31.4', 'Investigação e testes com relação à procriação'),
 ('Z31.5', 'Aconselhamento genético'),
@@ -12137,8 +12171,7 @@ INSERT INTO `tb_cid` (`idCid`, `descricaoCid`) VALUES
 ('Z52.8', 'Doador de outros órgãos ou tecidos'),
 ('Z52.9', 'Doador de órgão ou tecido não especificado'),
 ('Z53.0', 'Procedimento não realizado devido à contra-indicação'),
-('Z53.1', 'Procedimento não realizado devido à decisão do paciente por razões de crença ou grupo de pressão');
-INSERT INTO `tb_cid` (`idCid`, `descricaoCid`) VALUES
+('Z53.1', 'Procedimento não realizado devido à decisão do paciente por razões de crença ou grupo de pressão'),
 ('Z53.2', 'Procedimento não realizado devido à decisão do paciente por outras razões e as não especificadas'),
 ('Z53.8', 'Procedimento não realizado por outras razões'),
 ('Z53.9', 'Procedimento não realizado por razão não especificada'),
@@ -12272,7 +12305,7 @@ INSERT INTO `tb_cid` (`idCid`, `descricaoCid`) VALUES
 ('Z73.0', 'Esgotamento'),
 ('Z73.1', 'Acentuação de traços de personalidade'),
 ('Z73.2', 'Falta de repouso e de lazer'),
-('Z73.3', '"Stress" não classificado em outra parte'),
+('Z73.3', '\"Stress\" não classificado em outra parte'),
 ('Z73.4', 'Habilidades sociais inadequadas não classificadas em outra parte'),
 ('Z73.5', 'Conflito sobre o papel social, não classificado em outra parte'),
 ('Z73.6', 'Limites impostos às atividades por invalidez'),
@@ -12464,6 +12497,435 @@ INSERT INTO `tb_cid` (`idCid`, `descricaoCid`) VALUES
 ('Z99.3', 'Dependência de cadeira de rodas'),
 ('Z99.8', 'Dependência de outras máquinas e aparelhos capacitantes'),
 ('Z99.9', 'Dependência de máquina e aparelho capacitante não especificado');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `tb_clinica`
+--
+
+CREATE TABLE `tb_clinica` (
+  `idtb_clinica` int(11) NOT NULL,
+  `nome` varchar(45) DEFAULT NULL,
+  `cnpj` varchar(45) DEFAULT NULL,
+  `telefone` varchar(45) DEFAULT NULL,
+  `cabecalho` varchar(255) DEFAULT NULL,
+  `rua` varchar(45) DEFAULT NULL,
+  `bairro` varchar(45) DEFAULT NULL,
+  `cep` varchar(45) DEFAULT NULL,
+  `numero` varchar(45) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Fazendo dump de dados para tabela `tb_clinica`
+--
+
+INSERT INTO `tb_clinica` (`idtb_clinica`, `nome`, `cnpj`, `telefone`, `cabecalho`, `rua`, `bairro`, `cep`, `numero`) VALUES
+(1, 'Clinica do 3ºC', '222.222.222-22', '(22)22222-2222', 'A Sua Clínica Ideal', '22222', '2222', '1111111111-1', '222');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `tb_compromissos`
+--
+
+CREATE TABLE `tb_compromissos` (
+  `idtb_compromissos` int(11) NOT NULL,
+  `tb_medico_idtb_medico` int(11) NOT NULL,
+  `tipo` varchar(45) DEFAULT NULL,
+  `tb_paciente_idtb_paciente` int(11) DEFAULT NULL,
+  `data` varchar(45) DEFAULT NULL,
+  `horario_inicial` varchar(45) DEFAULT NULL,
+  `horario_final` varchar(45) DEFAULT NULL,
+  `descricao` varchar(45) DEFAULT NULL,
+  `status` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Fazendo dump de dados para tabela `tb_compromissos`
+--
+
+INSERT INTO `tb_compromissos` (`idtb_compromissos`, `tb_medico_idtb_medico`, `tipo`, `tb_paciente_idtb_paciente`, `data`, `horario_inicial`, `horario_final`, `descricao`, `status`) VALUES
+(1, 1, 'Externo', NULL, '11/06/2019', '22:22', '22:40', 'aaaa', 0),
+(2, 1, 'Consulta', 1, '10/06/2019', '22:22', '22:22', 'aaaa', 1),
+(3, 1, 'Consulta', 1, '13/06/2019', '10:00', '10:50', 'Enxaqueca constante', 1),
+(4, 1, 'Consulta', 1, '13/06/2019', '11:11', '11:11', 'AAAAA', 1),
+(5, 1, 'Consulta', 2, '15/06/2019', '10:50', '11:30', 'Paciente sentindo muita febre e enxaqueca', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `tb_convenio`
+--
+
+CREATE TABLE `tb_convenio` (
+  `idtb_convenio` int(11) NOT NULL,
+  `nome` varchar(45) DEFAULT NULL,
+  `telefone` varchar(45) DEFAULT NULL,
+  `cnpj` varchar(45) DEFAULT NULL,
+  `rua` varchar(45) DEFAULT NULL,
+  `numero` varchar(45) DEFAULT NULL,
+  `bairro` varchar(45) DEFAULT NULL,
+  `cep` varchar(45) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Fazendo dump de dados para tabela `tb_convenio`
+--
+
+INSERT INTO `tb_convenio` (`idtb_convenio`, `nome`, `telefone`, `cnpj`, `rua`, `numero`, `bairro`, `cep`) VALUES
+(1, 'Convenio Teste', '(44)44444-4444', '22.22-2-22', 'Top', '12', 'aaa', '22222-222'),
+(2, 'Unimed', '(55)55555-5555', '22.22-2-22', '2222222222222222222', '23', 'Rua das Flores', '33333-333');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `tb_diagnostico`
+--
+
+CREATE TABLE `tb_diagnostico` (
+  `idtb_diagnostico` int(11) NOT NULL,
+  `tb_paciente_idtb_paciente` int(11) NOT NULL,
+  `diagnostico` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Fazendo dump de dados para tabela `tb_diagnostico`
+--
+
+INSERT INTO `tb_diagnostico` (`idtb_diagnostico`, `tb_paciente_idtb_paciente`, `diagnostico`) VALUES
+(2, 1, 'A01.0	Febre tifóide'),
+(3, 1, 'B54	  Malária não especificada'),
+(4, 1, 'A01.0	Febre tifóide');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `tb_documentos`
+--
+
+CREATE TABLE `tb_documentos` (
+  `idtb_documentos` int(11) NOT NULL,
+  `tb_medico_idtb_medico` int(11) NOT NULL,
+  `tipo` varchar(45) DEFAULT NULL,
+  `descricao` varchar(255) DEFAULT NULL,
+  `tb_clinica_idtb_clinica` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `tb_fichamedica`
+--
+
+CREATE TABLE `tb_fichamedica` (
+  `idtb_` int(11) NOT NULL,
+  `tb_paciente_idtb_paciente` int(11) NOT NULL,
+  `data` varchar(45) DEFAULT NULL,
+  `descricao` varchar(45) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `tb_medico`
+--
+
+CREATE TABLE `tb_medico` (
+  `idtb_medico` int(11) NOT NULL,
+  `cpf` varchar(45) DEFAULT NULL,
+  `nome` varchar(45) DEFAULT NULL,
+  `rg` varchar(45) DEFAULT NULL,
+  `crm` varchar(45) DEFAULT NULL,
+  `telefone` varchar(45) DEFAULT NULL,
+  `sexo` varchar(20) DEFAULT NULL,
+  `rua` varchar(45) DEFAULT NULL,
+  `numero` varchar(45) DEFAULT NULL,
+  `bairro` varchar(45) DEFAULT NULL,
+  `cep` varchar(45) DEFAULT NULL,
+  `login` varchar(45) DEFAULT NULL,
+  `senha` varchar(45) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Fazendo dump de dados para tabela `tb_medico`
+--
+
+INSERT INTO `tb_medico` (`idtb_medico`, `cpf`, `nome`, `rg`, `crm`, `telefone`, `sexo`, `rua`, `numero`, `bairro`, `cep`, `login`, `senha`) VALUES
+(1, '222.222.222-22', 'Matheus Almeida', '1111111111-1', '2222AB2C', '(22)22222-2222', 'M', 'aaa', '22', 'aaa', '22222-222', 'almeida', '123'),
+(2, '222.222.222-22', 'Teste 2 ', '2222222222-2', '6454B2X2', '(22)22222-2222', 'M', 'aaaaa', '22', 'aaaaa', '44444-444', 'teste2', 'teste2');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `tb_paciente`
+--
+
+CREATE TABLE `tb_paciente` (
+  `idtb_paciente` int(11) NOT NULL,
+  `nome` varchar(45) DEFAULT NULL,
+  `telefone` varchar(45) DEFAULT NULL,
+  `cpf` varchar(45) DEFAULT NULL,
+  `rg` varchar(45) DEFAULT NULL,
+  `sexo` varchar(45) DEFAULT NULL,
+  `ficha_medica` varchar(45) DEFAULT NULL,
+  `rua` varchar(45) DEFAULT NULL,
+  `numero` varchar(45) DEFAULT NULL,
+  `bairro` varchar(45) DEFAULT NULL,
+  `cep` varchar(45) DEFAULT NULL,
+  `tb_planos_idtb_planos` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Fazendo dump de dados para tabela `tb_paciente`
+--
+
+INSERT INTO `tb_paciente` (`idtb_paciente`, `nome`, `telefone`, `cpf`, `rg`, `sexo`, `ficha_medica`, `rua`, `numero`, `bairro`, `cep`, `tb_planos_idtb_planos`) VALUES
+(1, 'João Carlos', '(22)22222-2222', '222.222.222-22', '1111111111-1', 'M', '0', '222', '22', 'aaaa', '62670-000', 1),
+(2, 'Tailson', '(66)66666-6666', '222.222.222-22', '2222222222-2', 'M', '0', 'Cágado', '00', 'Cágado', '62670-000', 5);
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `tb_planos`
+--
+
+CREATE TABLE `tb_planos` (
+  `idtb_planos` int(11) NOT NULL,
+  `tb_convenio_idtb_convenio` int(11) NOT NULL,
+  `nome` varchar(45) DEFAULT NULL,
+  `descricao` varchar(45) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Fazendo dump de dados para tabela `tb_planos`
+--
+
+INSERT INTO `tb_planos` (`idtb_planos`, `tb_convenio_idtb_convenio`, `nome`, `descricao`) VALUES
+(1, 1, 'a', '1'),
+(2, 1, 'b', '2'),
+(3, 1, 'c', '3'),
+(4, 2, 'Plano comum', 'Acesso Básico'),
+(5, 2, 'Plano VIP', 'Acesso Total');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `tb_secretaria`
+--
+
+CREATE TABLE `tb_secretaria` (
+  `idtb_secretaria` int(11) NOT NULL,
+  `nome` varchar(45) DEFAULT NULL,
+  `cpf` varchar(45) DEFAULT NULL,
+  `rg` varchar(45) DEFAULT NULL,
+  `telefone` varchar(45) DEFAULT NULL,
+  `sexo` varchar(45) DEFAULT NULL,
+  `login` varchar(45) DEFAULT NULL,
+  `senha` varchar(45) DEFAULT NULL,
+  `rua` varchar(45) DEFAULT NULL,
+  `numero` varchar(45) DEFAULT NULL,
+  `bairro` varchar(45) DEFAULT NULL,
+  `cep` varchar(45) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Fazendo dump de dados para tabela `tb_secretaria`
+--
+
+INSERT INTO `tb_secretaria` (`idtb_secretaria`, `nome`, `cpf`, `rg`, `telefone`, `sexo`, `login`, `senha`, `rua`, `numero`, `bairro`, `cep`) VALUES
+(1, 'Matheus Vinícius', '222.222.222-22', '2222222222-2', '(22)22222-2222', 'M', 'vini', 'vini', 'aaa', '22', 'aaa', '62670-000');
+
+--
+-- Índices de tabelas apagadas
+--
+
+--
+-- Índices de tabela `tb_administrador`
+--
+ALTER TABLE `tb_administrador`
+  ADD PRIMARY KEY (`idtb_administrador`);
+
+--
+-- Índices de tabela `tb_clinica`
+--
+ALTER TABLE `tb_clinica`
+  ADD PRIMARY KEY (`idtb_clinica`);
+
+--
+-- Índices de tabela `tb_compromissos`
+--
+ALTER TABLE `tb_compromissos`
+  ADD PRIMARY KEY (`idtb_compromissos`),
+  ADD KEY `fk_tb_compromissos_tb_medico_idx` (`tb_medico_idtb_medico`),
+  ADD KEY `fk_tb_compromissos_tb_paciente1_idx` (`tb_paciente_idtb_paciente`);
+
+--
+-- Índices de tabela `tb_convenio`
+--
+ALTER TABLE `tb_convenio`
+  ADD PRIMARY KEY (`idtb_convenio`);
+
+--
+-- Índices de tabela `tb_diagnostico`
+--
+ALTER TABLE `tb_diagnostico`
+  ADD PRIMARY KEY (`idtb_diagnostico`),
+  ADD KEY `fk_tb_diagnostico_tb_paciente1_idx` (`tb_paciente_idtb_paciente`);
+
+--
+-- Índices de tabela `tb_documentos`
+--
+ALTER TABLE `tb_documentos`
+  ADD PRIMARY KEY (`idtb_documentos`),
+  ADD KEY `fk_tb_documentos_tb_medico1_idx` (`tb_medico_idtb_medico`),
+  ADD KEY `fk_tb_documentos_tb_clinica1_idx` (`tb_clinica_idtb_clinica`);
+
+--
+-- Índices de tabela `tb_fichamedica`
+--
+ALTER TABLE `tb_fichamedica`
+  ADD PRIMARY KEY (`idtb_`),
+  ADD KEY `fk_tb_fichamedica_tb_paciente1_idx` (`tb_paciente_idtb_paciente`);
+
+--
+-- Índices de tabela `tb_medico`
+--
+ALTER TABLE `tb_medico`
+  ADD PRIMARY KEY (`idtb_medico`);
+
+--
+-- Índices de tabela `tb_paciente`
+--
+ALTER TABLE `tb_paciente`
+  ADD PRIMARY KEY (`idtb_paciente`),
+  ADD KEY `fk_tb_paciente_tb_planos1_idx` (`tb_planos_idtb_planos`);
+
+--
+-- Índices de tabela `tb_planos`
+--
+ALTER TABLE `tb_planos`
+  ADD PRIMARY KEY (`idtb_planos`),
+  ADD KEY `fk_tb_planos_tb_convenio1_idx` (`tb_convenio_idtb_convenio`);
+
+--
+-- Índices de tabela `tb_secretaria`
+--
+ALTER TABLE `tb_secretaria`
+  ADD PRIMARY KEY (`idtb_secretaria`);
+
+--
+-- AUTO_INCREMENT de tabelas apagadas
+--
+
+--
+-- AUTO_INCREMENT de tabela `tb_administrador`
+--
+ALTER TABLE `tb_administrador`
+  MODIFY `idtb_administrador` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT de tabela `tb_clinica`
+--
+ALTER TABLE `tb_clinica`
+  MODIFY `idtb_clinica` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT de tabela `tb_compromissos`
+--
+ALTER TABLE `tb_compromissos`
+  MODIFY `idtb_compromissos` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT de tabela `tb_convenio`
+--
+ALTER TABLE `tb_convenio`
+  MODIFY `idtb_convenio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de tabela `tb_diagnostico`
+--
+ALTER TABLE `tb_diagnostico`
+  MODIFY `idtb_diagnostico` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT de tabela `tb_documentos`
+--
+ALTER TABLE `tb_documentos`
+  MODIFY `idtb_documentos` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `tb_fichamedica`
+--
+ALTER TABLE `tb_fichamedica`
+  MODIFY `idtb_` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `tb_medico`
+--
+ALTER TABLE `tb_medico`
+  MODIFY `idtb_medico` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de tabela `tb_paciente`
+--
+ALTER TABLE `tb_paciente`
+  MODIFY `idtb_paciente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de tabela `tb_planos`
+--
+ALTER TABLE `tb_planos`
+  MODIFY `idtb_planos` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT de tabela `tb_secretaria`
+--
+ALTER TABLE `tb_secretaria`
+  MODIFY `idtb_secretaria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- Restrições para dumps de tabelas
+--
+
+--
+-- Restrições para tabelas `tb_compromissos`
+--
+ALTER TABLE `tb_compromissos`
+  ADD CONSTRAINT `fk_tb_compromissos_tb_medico` FOREIGN KEY (`tb_medico_idtb_medico`) REFERENCES `tb_medico` (`idtb_medico`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_tb_compromissos_tb_paciente1` FOREIGN KEY (`tb_paciente_idtb_paciente`) REFERENCES `tb_paciente` (`idtb_paciente`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Restrições para tabelas `tb_diagnostico`
+--
+ALTER TABLE `tb_diagnostico`
+  ADD CONSTRAINT `fk_tb_diagnostico_tb_paciente1` FOREIGN KEY (`tb_paciente_idtb_paciente`) REFERENCES `tb_paciente` (`idtb_paciente`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Restrições para tabelas `tb_documentos`
+--
+ALTER TABLE `tb_documentos`
+  ADD CONSTRAINT `fk_tb_documentos_tb_clinica1` FOREIGN KEY (`tb_clinica_idtb_clinica`) REFERENCES `tb_clinica` (`idtb_clinica`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_tb_documentos_tb_medico1` FOREIGN KEY (`tb_medico_idtb_medico`) REFERENCES `tb_medico` (`idtb_medico`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Restrições para tabelas `tb_fichamedica`
+--
+ALTER TABLE `tb_fichamedica`
+  ADD CONSTRAINT `fk_tb_fichamedica_tb_paciente1` FOREIGN KEY (`tb_paciente_idtb_paciente`) REFERENCES `tb_paciente` (`idtb_paciente`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Restrições para tabelas `tb_paciente`
+--
+ALTER TABLE `tb_paciente`
+  ADD CONSTRAINT `fk_tb_paciente_tb_planos1` FOREIGN KEY (`tb_planos_idtb_planos`) REFERENCES `tb_planos` (`idtb_planos`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Restrições para tabelas `tb_planos`
+--
+ALTER TABLE `tb_planos`
+  ADD CONSTRAINT `fk_tb_planos_tb_convenio1` FOREIGN KEY (`tb_convenio_idtb_convenio`) REFERENCES `tb_convenio` (`idtb_convenio`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
